@@ -1,0 +1,29 @@
+<p>dupa</p>
+<!-- form card login with validation feedback -->
+<div class="card card-outline-secondary">
+  <div class="card-header">
+    <h3 class="mb-0">Login</h3>
+  </div>
+  <div class="card-body">
+    <form class="form" autocomplete="off" novalidate="" [formGroup]="loginForm" (ngSubmit)="Login()">
+      <div class="form-group">
+        <label for="uname1">Username</label>
+        <input type="text" class="form-control" id="uname1" formControlName="email"  required="">
+        <div class="invalid-feedback">Please enter your username</div>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" id="pwd1" required="" autocomplete="new-password">
+        <div class="invalid-feedback">Please enter a password</div>
+      </div>
+      <div class="form-check small">
+        <label class="form-check-label">
+          <input type="checkbox" class="form-check-input"> <span>Remember me on this computer</span>
+        </label>
+      </div>
+      <button class="btn btn-success btn-lg float-right" id="btnLogin">Login</button>
+    </form>
+  </div>
+  <!--/card-body-->
+</div>
+<!-- /form card login -->
