@@ -1,0 +1,18 @@
+//TODO: Move colors to the main stylesheet
+// Colors
+$primary-color: #1F1F1F;
+$secondary-color: #E5E5E5;
+
+$success-color: #65DE62;
+
+
+.wrapper{
+  padding: 10%;
+  min-height: 100vh;
+  background-color: $primary-color;
+  color: $secondary-color;
+
+  a{
+    color: $secondary-color;
+  }
+}

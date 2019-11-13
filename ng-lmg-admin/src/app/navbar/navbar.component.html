@@ -1,8 +1,18 @@
-<p>navbar works!</p>
-
-<a class="nav-item nav-link" routerLink="/">Home</a>
-<a class="nav-item nav-link" (click)="logout()">Logout</a>
-
-<a [routerLink]="'/nav'">Nav</a>
-<a [routerLink]="'/login'">Login</a>
-
+<div class="wrapper">
+  <div class="row">
+    <h1>LMG</h1>
+    <h2>Let Me Guide</h2>
+  </div>
+  <div class="row">
+    <ul>
+      <a class="nav-item nav-link" [routerLink]="'/'">Summary</a>
+      <a class="nav-item nav-link" [routerLink]="'/'">Points</a>
+      <a class="nav-item nav-link" [routerLink]="'/'">Routes</a>
+    </ul>
+  </div>
+  <hr>
+  <div class="row">
+    <a class="nav-item nav-link" [routerLink]="'/login'">Login</a>
+    <a class="nav-item nav-link" (click)="logout()">Logout</a>
+  </div>
+</div>
