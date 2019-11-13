@@ -7,6 +7,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {TooltipModule} from "ngx-bootstrap";
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {HttpClientModule} from "@angular/common/http";
+import {AuthenticationService} from "./_services";
 
 @NgModule({
   declarations: [
@@ -19,9 +21,10 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
     AppRoutingModule,
     TooltipModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
