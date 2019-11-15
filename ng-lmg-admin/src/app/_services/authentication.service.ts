@@ -9,7 +9,8 @@ export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<any>;
   public currentUser: Observable<any>;
 
-  endpoint = "http://54.38.52.218:2137/v1//login/admin";
+  endpoint = "http://54.38.52.218:2137/v1/login/admin";
+  //endpoint = "http://localhost:3000/films/";
 
 
   constructor(
@@ -33,11 +34,13 @@ export class AuthenticationService {
 
   login(email: string, password: string):Observable<any> {
     // Set the headers
-    const headers = new HttpHeaders()
-      .append("Admin-Email", email)
-      .append("Admin-Password", password)
-    return this.http.get(this.endpoint, {headers: headers})
-      .pipe(map(this.extractData));
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Admin-Email": "test@admin",
+        "Admin-Password": "test1234",
+      })
+    };
+    return this.http.get(this.endpoint, httpOptions);
 
     /*this.http.post(this.endpoint, {email: email, password: password})
       .subscribe((resp: any) => {

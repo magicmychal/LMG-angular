@@ -10,6 +10,7 @@ $success-color: #65DE62;
   width: 100%;
   align-items: stretch;
 }
+
 #sidebar {
   min-width: 250px;
   max-width: 250px;
@@ -18,4 +19,9 @@ $success-color: #65DE62;
 
 #sidebar.active {
   margin-left: -250px;
+}
+
+#content {
+  padding-left: 15px;
+  padding-top: 15px;
 }
