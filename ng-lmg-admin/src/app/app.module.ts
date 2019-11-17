@@ -7,16 +7,21 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {TooltipModule} from "ngx-bootstrap";
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthenticationService} from "./_services";
 import { GetComponent } from './test/get/get.component';
+import {JwtInterceptor} from "@app/_helpers/jwt.interceptor";
+import {ErrorInterceptor} from "@app/_helpers/error.interceptor";
+import {fakeBackendProvider} from "@app/_helpers/fake-backend";
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     LoginComponent,
-    GetComponent
+    GetComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +31,14 @@ import { GetComponent } from './test/get/get.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthenticationService],
+  providers: [
+
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+    fakeBackendProvider
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

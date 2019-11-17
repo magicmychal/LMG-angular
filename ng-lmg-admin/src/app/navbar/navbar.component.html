@@ -3,7 +3,7 @@
     <h1>LMG</h1>
     <h2>Let Me Guide</h2>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="currentUser">
     <ul>
       <a class="nav-item nav-link" [routerLink]="'/'">Summary</a>
       <a class="nav-item nav-link" [routerLink]="'/'">Points</a>
@@ -13,6 +13,8 @@
   <hr>
   <div class="row">
     <a class="nav-item nav-link" [routerLink]="'/login'">Login</a>
+  </div>
+  <div class="row" *ngIf="currentUser">
     <a class="nav-item nav-link" (click)="logout()">Logout</a>
   </div>
 </div>
