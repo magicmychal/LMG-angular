@@ -8,8 +8,9 @@ import {map} from 'rxjs/operators';
 })
 export class RequestService {
 
-  endpoint = "https://jsonplaceholder.typicode.com/todos/1";
-  //endpoint = "http://54.38.52.218:2137/v1/login/admin"
+  endpoint = "https://jsonplaceholder.typicode.com/users/1";
+  //endpoint = "/api/v1/login/admin";
+  //endpoint = "http://www.api.kompas.omteam.pl/v1/login/admin";
 
   constructor(
     private http: HttpClient
@@ -17,10 +18,7 @@ export class RequestService {
 
   getSomething(){
     const httpOptions = {
-      headers: new HttpHeaders({
-        "Admin-Email": "test@admin",
-        "Admin-Password": "test1234",
-      })
+      headers: new HttpHeaders().append("Admin-Password", "test1234")
     };
     return this.http.get(this.endpoint, httpOptions).pipe(
       map(this.extractData));

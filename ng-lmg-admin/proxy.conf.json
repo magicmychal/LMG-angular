@@ -1,6 +1,9 @@
 {
-  "/api": {
-    "target": "http://54.38.52.218:2137",
-    "secure": false
+  "/sss/*": {
+    "target": "http://54.38.52.218:2137/v1/login/admin",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {"^/api" : ""}
   }
 }
