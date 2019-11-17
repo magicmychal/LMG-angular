@@ -14,6 +14,7 @@ import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from "./_helpers/error.interceptor";
 import {fakeBackendProvider} from "./_helpers/fake-backend";
 import { HomeComponent } from './home/home.component';
+import { PointsDashboardComponent } from './points-dashboard/points-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HomeComponent } from './home/home.component';
     NavbarComponent,
     LoginComponent,
     GetComponent,
-    HomeComponent
+    HomeComponent,
+    PointsDashboardComponent
   ],
   imports: [
     BrowserModule,
