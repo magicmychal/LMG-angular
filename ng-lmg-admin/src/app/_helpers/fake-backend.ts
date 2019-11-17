@@ -24,9 +24,9 @@ import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor, HTT
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
 
-import { User } from '@app/_models';
+import {User} from "../_models/user";
 
-const users: User[] = [{username: 'test', password: 'test'}];
+const users: User[] = [{username: 'michal2@michal.pl', password: 'dupa123'}];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {

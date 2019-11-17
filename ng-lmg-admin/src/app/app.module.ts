@@ -10,9 +10,9 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {AuthenticationService} from "./_services";
 import { GetComponent } from './test/get/get.component';
-import {JwtInterceptor} from "@app/_helpers/jwt.interceptor";
-import {ErrorInterceptor} from "@app/_helpers/error.interceptor";
-import {fakeBackendProvider} from "@app/_helpers/fake-backend";
+import {JwtInterceptor} from "./_helpers/jwt.interceptor";
+import {ErrorInterceptor} from "./_helpers/error.interceptor";
+import {fakeBackendProvider} from "./_helpers/fake-backend";
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
