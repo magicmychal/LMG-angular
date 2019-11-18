@@ -19,11 +19,14 @@
     "@angular/platform-browser": "~8.2.13",
     "@angular/platform-browser-dynamic": "~8.2.13",
     "@angular/router": "~8.2.13",
+    "@ng-bootstrap/ng-bootstrap": "^5.1.4",
+    "angular-bootstrap-md": "^8.6.0",
     "ngx-bootstrap": "^5.2.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "webpack": "^4.41.2",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "ng-uikit-pro-standard": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.18",

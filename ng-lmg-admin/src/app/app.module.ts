@@ -15,6 +15,8 @@ import {ErrorInterceptor} from "./_helpers/error.interceptor";
 import {fakeBackendProvider} from "./_helpers/fake-backend";
 import { HomeComponent } from './home/home.component';
 import { PointsDashboardComponent } from './points-dashboard/points-dashboard.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {MDBBootstrapModule} from "angular-bootstrap-md";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { PointsDashboardComponent } from './points-dashboard/points-dashboard.co
     TooltipModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule,
+    MDBBootstrapModule.forRoot()
   ],
   providers: [
 

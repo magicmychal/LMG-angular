@@ -4,6 +4,7 @@ $secondary-color: #E5E5E5;
 
 $success-color: #65DE62;
 
+$side-bar-width: 250px;
 
 .wrapper {
   display: flex;
@@ -12,9 +13,20 @@ $success-color: #65DE62;
 }
 
 #sidebar {
-  min-width: 250px;
-  max-width: 250px;
-  min-height: 100vh;
+  //position: fixed;
+  //min-width: 250px;
+  //max-width: 250px;
+  //min-height: 100vh;
+
+  width: $side-bar-width;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 999;
+  background: #7386D5;
+  color: #fff;
+  transition: all 0.3s;
 }
 
 #sidebar.active {
@@ -24,4 +36,5 @@ $success-color: #65DE62;
 #content {
   padding-left: 15px;
   padding-top: 15px;
+  margin-left: $side-bar-width;
 }
