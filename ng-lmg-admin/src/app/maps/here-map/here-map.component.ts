@@ -3,6 +3,7 @@ import {Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
 declare var H: any;
 
 
+
 let viewChild = ViewChild("map");
 
 @Component({
@@ -11,6 +12,8 @@ let viewChild = ViewChild("map");
   styleUrls: ['./here-map.component.scss']
 })
 export class HereMapComponent implements OnInit {
+  private ui: any;
+  private search: any;
 
   @viewChild
   public mapElement: ElementRef;
@@ -37,6 +40,8 @@ export class HereMapComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
+
   }
 
   public ngAfterViewInit() {
