@@ -1,3 +1,6 @@
+/*
+Check out tutorial here https://developer.here.com/blog/displaying-places-on-a-here-map-in-an-angular-web-application
+ */
 import {Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit} from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 
