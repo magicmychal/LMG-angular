@@ -1,2 +1,6 @@
 <span>map component loads</span>
+<div style="padding: 10px 0">
+  <input type="text" placeholder="Search places..." [(ngModel)]="query" />
+  <button (click)="places(query)">Search</button>
+</div>
 <div #map [style.width]="width" [style.height]="height"></div>
