@@ -14,9 +14,12 @@ import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from "./_helpers/error.interceptor";
 import {fakeBackendProvider} from "./_helpers/fake-backend";
 import { HomeComponent } from './home/home.component';
-import { PointsDashboardComponent } from './points-dashboard/points-dashboard.component';
+import { PointsDashboardComponent } from './points/points-dashboard/points-dashboard.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {MDBBootstrapModule} from "angular-bootstrap-md";
+import { PointsAddComponent } from './points/points-add/points-add.component';
+import { MapSearchComponent } from './maps/map-search/map-search.component';
+import { HereMapComponent } from './maps/here-map/here-map.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
     LoginComponent,
     GetComponent,
     HomeComponent,
-    PointsDashboardComponent
+    PointsDashboardComponent,
+    PointsAddComponent,
+    MapSearchComponent,
+    HereMapComponent
   ],
   imports: [
     BrowserModule,
