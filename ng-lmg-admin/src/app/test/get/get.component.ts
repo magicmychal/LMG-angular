@@ -18,7 +18,10 @@ export class GetComponent implements OnInit {
 
   clickme(){
     console.log('clicked');
-      this.request.getSomething().subscribe((response)=>console.log('response', response));
+      this.request.getSomething()
+        .subscribe({
+          next: response => console.log(response),
+          error: err => console.log("The error is ", err)})//.subscribe((response)=>console.log('response', response));
   }
 
 }
