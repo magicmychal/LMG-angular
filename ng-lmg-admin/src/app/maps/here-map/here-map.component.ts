@@ -2,7 +2,7 @@
 Check out tutorial here https://developer.here.com/blog/displaying-places-on-a-here-map-in-an-angular-web-application
 TODO: Adjust the initial scale of the map
  */
-import {Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit, Output, EventEmitter} from '@angular/core';
 import {map, tap} from 'rxjs/operators';
 import {log} from "util";
 
@@ -34,6 +34,8 @@ export class HereMapComponent implements OnInit, AfterViewInit {
   private platform: any;
 
   public markerLocation: any;
+
+  @Output() getMarkerLocation = new EventEmitter();
 
   constructor() {
   }
@@ -83,7 +85,8 @@ export class HereMapComponent implements OnInit, AfterViewInit {
         content: event.target.getData()
       });
       this.markerLocation = event.target.getPosition()
-      console.log(this.markerLocation)
+      //console.log(this.getMarkerLocation)
+      this.getMarkerLocation.emit(event.target.getPosition())
       this.ui.addBubble(bubble);
     }, false);
     this.map.addObject(marker);

@@ -34,10 +34,10 @@ export class PointsAddComponent implements OnInit {
     this.addNewPointForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(250)]],
       // description is technically not required for the database
-      description: ['', Validators.required, Validators.maxLength(250)],
-      // latitude: ['', Validators.required],
-      // longitude: ['', Validators.required],
-      // locationName: ['', Validators.required]
+      description: ['', [Validators.required, Validators.maxLength(250)]],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
+      locationName: ['']
     })
   }
 
@@ -55,9 +55,18 @@ export class PointsAddComponent implements OnInit {
     }
 
     this.loading = true;
-    console.log(JSON.stringify(this.f));
+    console.log("name", this.f.name.value);
+    console.log("description", this.f.description.value);
+    console.log("lat", this.f.latitude.value);
+    console.log("lng", this.f.longitude.value);
+    console.log("locationname", this.f.locationName.value);
 
     return;
+  }
+
+  clickOnMarker(location){
+    this.f.latitude.setValue(location["lat"]);
+    this.f.longitude.setValue(location["lng"]);
   }
 
 }
