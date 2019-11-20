@@ -6,20 +6,26 @@
         red star) for the best results</p>
     </div>
   </div>
-  <div class="row">
-    <label for="name">Name</label>
-    <div class="input-group input-group-lg">
-      <input type="text" id="name" name="name" class="form-control" aria-label="Sizing example input"
-             aria-describedby="inputGroup-sizing-lg">
+  <form [formGroup]="addNewPointForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <label for="name">Name</label>
+      <div class="input-group input-group-lg">
+        <input type="text" id="name" formControlName="name" class="form-control" aria-label="Sizing example input"
+               aria-describedby="inputGroup-sizing-lg">
+      </div>
+      <label for="description">Description</label>
+      <div class="input-group">
+        <textarea class="form-control" id="description" formControlName="description" aria-label="With textarea"></textarea>
+      </div>
+      <div class="input-group">
+        <app-here-map appId="Rj8r5qt8shjuXdZpGDuI" appCode="1WBZ2WJaa5YZzhg_GbT5hw" lat="50.279278" lng="19.176333"
+                      width="500px" height="500px"></app-here-map>
+        <input type="hidden" formControlName="latitude">
+        <input type="hidden" formControlName="longitude">
+        <input type="hidden" formControlName="locationName">
+      </div>
     </div>
-    <label for="description">Description</label>
-    <div class="input-group">
-      <textarea class="form-control" id="description" name="description" aria-label="With textarea"></textarea>
-    </div>
-    <div class="input-group">
-      <app-here-map appId="Rj8r5qt8shjuXdZpGDuI" appCode="1WBZ2WJaa5YZzhg_GbT5hw" lat="50.279278" lng="19.176333"
-                    width="500px" height="500px"></app-here-map>
-    </div>
-  </div>
-  <app-form-nav-buttons cancel="true" save="true"></app-form-nav-buttons>
+    <button [disabled]="loading" class="btn btn-outline-success">Save (only for testing)</button>
+    <!--  <app-form-nav-buttons cancel="true" save="true"></app-form-nav-buttons>-->
+  </form>
 </div>

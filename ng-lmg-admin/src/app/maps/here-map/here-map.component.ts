@@ -4,11 +4,9 @@ TODO: Adjust the initial scale of the map
  */
 import {Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit} from '@angular/core';
 import {map, tap} from 'rxjs/operators';
+import {log} from "util";
 
 declare var H: any;
-
-
-let viewChild = ViewChild("map");
 
 @Component({
   selector: 'app-here-map',
@@ -16,7 +14,8 @@ let viewChild = ViewChild("map");
   styleUrls: ['./here-map.component.scss']
 })
 export class HereMapComponent implements OnInit, AfterViewInit {
-  @viewChild
+  // @ts-ignore
+  @ViewChild("map")
   public mapElement: ElementRef;
   @Input()
   public appId: any;
@@ -34,6 +33,7 @@ export class HereMapComponent implements OnInit, AfterViewInit {
   private search: any;
   private platform: any;
 
+  public markerLocation: any;
 
   constructor() {
   }
@@ -82,6 +82,8 @@ export class HereMapComponent implements OnInit, AfterViewInit {
       let bubble = new H.ui.InfoBubble(event.target.getPosition(), {
         content: event.target.getData()
       });
+      this.markerLocation = event.target.getPosition()
+      console.log(this.markerLocation)
       this.ui.addBubble(bubble);
     }, false);
     this.map.addObject(marker);
