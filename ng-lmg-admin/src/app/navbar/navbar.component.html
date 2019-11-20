@@ -12,7 +12,7 @@
   </div>
   <hr>
   <div class="row">
-    <a class="nav-item nav-link" [routerLink]="'/login'">Login</a>
+    <a class="nav-item nav-link" [routerLink]="'/login'" *ngIf="!currentUser">Login</a>
   </div>
   <div class="row" *ngIf="currentUser">
     <a class="nav-item nav-link" (click)="logout()">Logout</a>

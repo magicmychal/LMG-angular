@@ -18,7 +18,7 @@ export class RequestService {
 
   getSomething(){
     const httpOptions = {
-      //headers: new HttpHeaders().set("Admin-Password", "test1234").set("Admin-Email", "admin@test")
+      headers: new HttpHeaders().set("Admin-Password", "test1234").set("Admin-Email", "admin@test.pl")
     };
     /*return this.http.get(this.endpoint, httpOptions).pipe(
       map(this.extractData));*/

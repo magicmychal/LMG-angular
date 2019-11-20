@@ -1,15 +1,12 @@
 <div class="wrapper">
 
   <!-- Sidebar -->
-  <nav id="sidebar">
+  <nav id="sidebar" *ngIf="currentUser">
     <app-navbar></app-navbar>
   </nav>
 
   <!-- Page Content -->
   <div id="content">
-    <h1>Get example</h1>
-    <app-get></app-get>
-    <hr>
     <router-outlet></router-outlet>
   </div>
 
