@@ -1,11 +1,11 @@
 /*
 Check out tutorial here https://developer.here.com/blog/displaying-places-on-a-here-map-in-an-angular-web-application
+TODO: Adjust the initial scale of the map
  */
 import {Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit} from '@angular/core';
-import { map, tap } from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 
 declare var H: any;
-
 
 
 let viewChild = ViewChild("map");
@@ -16,33 +16,27 @@ let viewChild = ViewChild("map");
   styleUrls: ['./here-map.component.scss']
 })
 export class HereMapComponent implements OnInit, AfterViewInit {
-  private ui: any;
-  private search: any;
-
   @viewChild
   public mapElement: ElementRef;
-
   @Input()
   public appId: any;
-
   @Input()
   public appCode: any;
-
   @Input()
   public lat: any;
-
   @Input()
   public lng: any;
-
   @Input()
   public width: any;
-
   @Input()
   public height: any;
+  private ui: any;
+  private search: any;
   private platform: any;
 
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
 
@@ -60,7 +54,7 @@ export class HereMapComponent implements OnInit, AfterViewInit {
       defaultLayers.normal.map,
       {
         zoom: 10,
-        center: { lat: this.lat, lng: this.lng }
+        center: {lat: this.lat, lng: this.lng}
       }
     );
     let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
@@ -69,9 +63,12 @@ export class HereMapComponent implements OnInit, AfterViewInit {
 
   public places(query: string) {
     this.map.removeObjects(this.map.getObjects());
-    this.search.request({ "q": query, "at": this.lat + "," + this.lng }, {}, data => {
-      for(let i = 0; i < data.results.items.length; i++) {
-        this.dropMarker({ "lat": data.results.items[i].position[0], "lng": data.results.items[i].position[1] }, data.results.items[i]);
+    this.search.request({"q": query, "at": this.lat + "," + this.lng}, {}, data => {
+      for (let i = 0; i < data.results.items.length; i++) {
+        this.dropMarker({
+          "lat": data.results.items[i].position[0],
+          "lng": data.results.items[i].position[1]
+        }, data.results.items[i]);
       }
     }, error => {
       console.error(error);
@@ -82,7 +79,7 @@ export class HereMapComponent implements OnInit, AfterViewInit {
     let marker = new H.map.Marker(coordinates);
     marker.setData("<p>" + data.title + "<br>" + data.vicinity + "</p>");
     marker.addEventListener('tap', event => {
-      let bubble =  new H.ui.InfoBubble(event.target.getPosition(), {
+      let bubble = new H.ui.InfoBubble(event.target.getPosition(), {
         content: event.target.getData()
       });
       this.ui.addBubble(bubble);

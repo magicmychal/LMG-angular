@@ -20,6 +20,7 @@ import {MDBBootstrapModule} from "angular-bootstrap-md";
 import { PointsAddComponent } from './points/points-add/points-add.component';
 import { MapSearchComponent } from './maps/map-search/map-search.component';
 import { HereMapComponent } from './maps/here-map/here-map.component';
+import { FormNavButtonsComponent } from './addons/form-nav-buttons/form-nav-buttons.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HereMapComponent } from './maps/here-map/here-map.component';
     PointsDashboardComponent,
     PointsAddComponent,
     MapSearchComponent,
-    HereMapComponent
+    HereMapComponent,
+    FormNavButtonsComponent
   ],
   imports: [
     BrowserModule,
