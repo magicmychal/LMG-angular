@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
+          //TODO: Give user some time to read the message
           this.error = "Something went wrong";
           this.loading = false;
         });
