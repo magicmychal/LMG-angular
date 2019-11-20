@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+/*
+TODO: Add error handling
+TODO: Redirect to the points summary after successful request
+ */
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AddPointService} from "../../_services/points/add-point.service";
+import {PointsService} from "../../_services/points/points.service";
 
 @Component({
   selector: 'app-points-add',
@@ -22,7 +26,7 @@ export class PointsAddComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private pointsService: AddPointService) {
+              private pointsService: PointsService) {
     this.query = "Krakow";
   }
 
@@ -42,13 +46,13 @@ export class PointsAddComponent implements OnInit {
     })
   }
 
-  onSubmit(){
+  onSubmit() {
 
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.addNewPointForm.invalid){
-      console.warn('form is invalid')
+    if (this.addNewPointForm.invalid) {
+      console.warn('form is invalid');
       return;
     }
 
@@ -61,12 +65,13 @@ export class PointsAddComponent implements OnInit {
 
     this.pointsService.addNewPoint(name, desc, lat, lng, locationname).subscribe({
       next: response => console.log(response),
-      error: err => console.log("The error is ", err)})
+      error: err => console.log("The error is ", err)
+    });
 
     return;
   }
 
-  clickOnMarker(location){
+  clickOnMarker(location) {
     this.f.latitude.setValue(location["lat"]);
     this.f.longitude.setValue(location["lng"]);
   }

@@ -1,6 +1,7 @@
 import {Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
+import {PointsService} from "../../_services/points/points.service";
 // import { MdbTableDirective, MdbTablePaginationComponent } from 'ng-uikit-pro-standard';
 
 @Component({
@@ -18,7 +19,7 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
     {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
     {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
   ];
-  headElements = ['No.', 'Name', 'Short description', 'Action'];
+  headElements = ['Name', 'Location', 'Short description', 'Action'];
 
   searchText: string = '';
   previous: string;
@@ -27,7 +28,8 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
 
   constructor(
     private titleService: Title,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private pointsService: PointsService
   ) { }
 
   @HostListener('input') oninput() {
@@ -36,10 +38,6 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle("Your Points");
-
-    for (let i = 1; i <= 25; i++) {
-      this.elements.push({id: i.toString(), first: 'Wpis ' + i, last: 'Last ' + i, handle: 'Handle ' + i});
-    }
 
     this.mdbTable.setDataSource(this.elements);
     this.elements = this.mdbTable.getDataSource();
@@ -53,6 +51,12 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
     this.cdRef.detectChanges();
+
+    // the data will be fetched after the view is created
+    this.pointsService.getPoints().subscribe({
+      next: response => this.elements = response,
+      error: err => console.log("The error is ", err)})
+
   }
 
   addNewRow() {

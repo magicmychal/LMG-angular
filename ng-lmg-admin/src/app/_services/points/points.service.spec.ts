@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AddPointService } from './add-point.service';
+import { PointsService } from './points.service';
 
 describe('AddPointService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: AddPointService = TestBed.get(AddPointService);
+    const service: PointsService = TestBed.get(PointsService);
     expect(service).toBeTruthy();
   });
 });
