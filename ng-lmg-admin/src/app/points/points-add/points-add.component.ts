@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
-import {HereMapComponent} from "../../maps/here-map/here-map.component";
+import {AddPointService} from "../../_services/points/add-point.service";
 
 @Component({
   selector: 'app-points-add',
@@ -21,7 +21,8 @@ export class PointsAddComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
-              private router: Router,) {
+              private router: Router,
+              private pointsService: AddPointService) {
     this.query = "Krakow";
   }
 
@@ -42,24 +43,25 @@ export class PointsAddComponent implements OnInit {
   }
 
   onSubmit(){
-    // get the location from the marker
-    //console.log('location is ', HereMapComponent.returnSelectedPlace());
 
-    console.log('submitted')
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.addNewPointForm.invalid){
       console.warn('form is invalid')
-      //return;
+      return;
     }
 
     this.loading = true;
-    console.log("name", this.f.name.value);
-    console.log("description", this.f.description.value);
-    console.log("lat", this.f.latitude.value);
-    console.log("lng", this.f.longitude.value);
-    console.log("locationname", this.f.locationName.value);
+    const name = this.f.name.value;
+    const desc = this.f.description.value;
+    const lat = this.f.latitude.value;
+    const lng = this.f.longitude.value;
+    const locationname = "location";
+
+    this.pointsService.addNewPoint(name, desc, lat, lng, locationname).subscribe({
+      next: response => console.log(response),
+      error: err => console.log("The error is ", err)})
 
     return;
   }

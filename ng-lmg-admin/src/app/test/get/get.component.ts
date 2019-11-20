@@ -21,7 +21,7 @@ export class GetComponent implements OnInit {
       this.request.getSomething()
         .subscribe({
           next: response => console.log(response),
-          error: err => console.log("The error is ", err)})//.subscribe((response)=>console.log('response', response));
+          error: err => console.log("The error is ", err)})
   }
 
 }
