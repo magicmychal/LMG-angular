@@ -21,6 +21,7 @@ import { PointsAddComponent } from './points/points-add/points-add.component';
 import { MapSearchComponent } from './maps/map-search/map-search.component';
 import { HereMapComponent } from './maps/here-map/here-map.component';
 import { FormNavButtonsComponent } from './addons/form-nav-buttons/form-nav-buttons.component';
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { FormNavButtonsComponent } from './addons/form-nav-buttons/form-nav-butt
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [
 

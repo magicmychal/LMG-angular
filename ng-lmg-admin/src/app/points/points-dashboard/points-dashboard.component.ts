@@ -3,6 +3,7 @@ import {Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, C
 import {Title} from "@angular/platform-browser";
 import {MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
 import {PointsService} from "../../_services/points/points.service";
+import {NgxSpinnerService} from "ngx-spinner";
 // import { MdbTableDirective, MdbTablePaginationComponent } from 'ng-uikit-pro-standard';
 
 @Component({
@@ -27,7 +28,8 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   constructor(
     private titleService: Title,
     private cdRef: ChangeDetectorRef,
-    private pointsService: PointsService
+    private pointsService: PointsService,
+    private spinner: NgxSpinnerService
   ) { }
 
   @HostListener('input') oninput() {
@@ -36,7 +38,7 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle("Your Points");
-
+    this.spinner.show();
     // the data will be fetched after the view is created
     this.pointsService.getPoints().subscribe({
       next: response => {this.elements = response; this.setTheTable()},
@@ -62,6 +64,8 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
     this.cdRef.detectChanges();
+
+    this.spinner.hide();
     //this.addNewRowAfter();
 
   }

@@ -38,7 +38,10 @@
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
             class="red-text">{{el.location}}</td>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.description}}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.handle}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <button type="button" class="btn btn-outline-secondary">Show on map</button>
+          <button type="button" class="btn btn-outline-secondary" disabled>Edit</button>
+        </td>
       </tr>
       </tbody>
       <tfoot class="grey lighten-5 w-100">
@@ -51,4 +54,7 @@
       </tfoot>
     </table>
   </div>
+  <ngx-spinner [fullScreen]="true" type="cube-transition" size="medium">
+    <p class="loading">Loading points, hold on a moment please...</p>
+  </ngx-spinner>
 </div>
