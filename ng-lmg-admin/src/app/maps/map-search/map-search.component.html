@@ -2,7 +2,12 @@
 <div class="input-group input-group-lg">
   <input [formControl]="queryField" type="text" id="location" name="location" class="form-control" placeholder="Start typing to search...">
 </div>
-<ul class="filter-select">
-  <li class="filter-select-list"><img src="" alt="" width="50" height="50">
-    <p class="location-name"></p><span class="tags"></span>
-</ul>
+<div class="list-group">
+  <a *ngFor="let result of results | keyvalue" href="#" class="list-group-item list-group-item-action">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{result.value.title}}</h5>
+      <small>{{result.value.category.title}}</small>
+    </div>
+    <small>{{result.value.vicinity}}</small>
+  </a>
+</div>

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {SearchService} from "../../_services/map/search.service";
+import {type} from "os";
 
 
 @Component({
@@ -19,8 +20,22 @@ export class MapSearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.queryField.valueChanges
-      .subscribe(queryField =>this._searchService.search(queryField)
-        .subscribe(response => console.log(response)));
+      .subscribe(queryField => this._searchService.search(queryField)
+        .subscribe(response => {
+          if (response.status === 400) {
+            return;
+          } else {
+            this.showResults(response)
+            //this.results = response.json().artists.items;
+          }
+        }));
   }
 
+  showResults(results) {
+    console.log(results)
+    this.results['results'] = results.results['items'];
+    this.results = this.results['results']
+    console.warn('results only, ', this.results)
+    console.log('1 result: ', this.results[0])
+  }
 }

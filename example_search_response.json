@@ -1,0 +1,205 @@
+{
+  "results": {
+    "items": [
+      {
+        "position": [
+          51.78001,
+          19.44884
+        ],
+        "distance": 72479,
+        "title": "Starbucks",
+        "averageRating": 0.0,
+        "category": {
+          "id": "coffee-tea",
+          "title": "Coffee/Tea",
+          "href": "https://places.demo.api.here.com/places/v1/categories/places/coffee-tea?app_id=Rj8r5qt8shjuXdZpGDuI&app_code=1WBZ2WJaa5YZzhg_GbT5hw",
+          "type": "urn:nlp-types:category",
+          "system": "places"
+        },
+        "icon": "https://download.vcdn.cit.data.here.com/p/d/places2_stg/icons/categories/23.icon",
+        "vicinity": "91-002 Lodz",
+        "having": [],
+        "type": "urn:nlp-types:place",
+        "href": "https://places.demo.api.here.com/places/v1/places/616u3jyd-8d03f4e8f033433eb91738e866b8480c;context=Zmxvdy1pZD1hNTE1ZDBlZS1lNDg1LTU4N2QtOWRhMy1jZTcwZGI2OTk0OWJfMTU3NDQzMDAyMDc1OV83MjU1XzI3MDUmcmFuaz0w?app_id=Rj8r5qt8shjuXdZpGDuI&app_code=1WBZ2WJaa5YZzhg_GbT5hw",
+        "id": "616u3jyd-8d03f4e8f033433eb91738e866b8480c",
+        "chainIds": [
+          "1396"
+        ]
+      },
+      {
+        "position": [
+          51.750528,
+          19.449519
+        ],
+        "distance": 74927,
+        "title": "Starbucks",
+        "averageRating": 0.0,
+        "category": {
+          "id": "coffee-tea",
+          "title": "Coffee/Tea",
+          "href": "https://places.demo.api.here.com/places/v1/categories/places/coffee-tea?app_id=Rj8r5qt8shjuXdZpGDuI&app_code=1WBZ2WJaa5YZzhg_GbT5hw",
+          "type": "urn:nlp-types:category",
+          "system": "places"
+        },
+        "icon": "https://download.vcdn.cit.data.here.com/p/d/places2_stg/icons/categories/23.icon",
+        "vicinity": "aleja Politechniki 1<br/>93-589 Lodz",
+        "having": [],
+        "type": "urn:nlp-types:place",
+        "href": "https://places.demo.api.here.com/places/v1/places/6168lxx5-32e96f68805b0461621316709e2c3321;context=Zmxvdy1pZD1hNTE1ZDBlZS1lNDg1LTU4N2QtOWRhMy1jZTcwZGI2OTk0OWJfMTU3NDQzMDAyMDc1OV83MjU1XzI3MDUmcmFuaz0x?app_id=Rj8r5qt8shjuXdZpGDuI&app_code=1WBZ2WJaa5YZzhg_GbT5hw",
+        "id": "6168lxx5-32e96f68805b0461621316709e2c3321",
+        "openingHours": {
+          "text": "Mon-Sat: 08:00 - 21:00<br/>Sun: 10:00 - 21:00",
+          "label": "Opening hours",
+          "isOpen": true,
+          "structured": [
+            {
+              "start": "T080000",
+              "duration": "PT13H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:MO,TU,WE,TH,FR,SA"
+            },
+            {
+              "start": "T100000",
+              "duration": "PT11H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:SU"
+            }
+          ]
+        },
+        "chainIds": [
+          "1396"
+        ]
+      },
+      {
+        "position": [
+          52.4026,
+          16.91229
+        ],
+        "distance": 123831,
+        "title": "Starbucks",
+        "averageRating": 0.0,
+        "category": {
+          "id": "coffee-tea",
+          "title": "Coffee/Tea",
+          "href": "https://places.demo.api.here.com/places/v1/categories/places/coffee-tea?app_id=Rj8r5qt8shjuXdZpGDuI&app_code=1WBZ2WJaa5YZzhg_GbT5hw",
+          "type": "urn:nlp-types:category",
+          "system": "places"
+        },
+        "icon": "https://download.vcdn.cit.data.here.com/p/d/places2_stg/icons/categories/23.icon",
+        "vicinity": "ulica Dworcowa<br/>61-801 Poznan",
+        "having": [],
+        "type": "urn:nlp-types:place",
+        "href": "https://places.demo.api.here.com/places/v1/places/616httek-76520d2499210fa3e6e22d29c6dc1372;context=Zmxvdy1pZD1hNTE1ZDBlZS1lNDg1LTU4N2QtOWRhMy1jZTcwZGI2OTk0OWJfMTU3NDQzMDAyMDc1OV83MjU1XzI3MDUmcmFuaz0y?app_id=Rj8r5qt8shjuXdZpGDuI&app_code=1WBZ2WJaa5YZzhg_GbT5hw",
+        "tags": [
+          {
+            "id": "international",
+            "title": "International",
+            "group": "cuisine"
+          },
+          {
+            "id": "italian",
+            "title": "Italian",
+            "group": "cuisine"
+          }
+        ],
+        "id": "616httek-76520d2499210fa3e6e22d29c6dc1372",
+        "openingHours": {
+          "text": "Mon-Sun: 05:00 - 22:00",
+          "label": "Opening hours",
+          "isOpen": true,
+          "structured": [
+            {
+              "start": "T050000",
+              "duration": "PT17H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:MO,TU,WE,TH,FR,SA,SU"
+            }
+          ]
+        },
+        "chainIds": [
+          "1396"
+        ]
+      },
+      {
+        "position": [
+          52.236,
+          21.01845
+        ],
+        "distance": 156650,
+        "title": "Starbucks",
+        "averageRating": 0.0,
+        "category": {
+          "id": "coffee-tea",
+          "title": "Coffee/Tea",
+          "href": "https://places.demo.api.here.com/places/v1/categories/places/coffee-tea?app_id=Rj8r5qt8shjuXdZpGDuI&app_code=1WBZ2WJaa5YZzhg_GbT5hw",
+          "type": "urn:nlp-types:category",
+          "system": "places"
+        },
+        "icon": "https://download.vcdn.cit.data.here.com/p/d/places2_stg/icons/categories/23.icon",
+        "vicinity": "ulica Nowy Swiat 62<br/>00-357 Warszawa",
+        "having": [],
+        "type": "urn:nlp-types:place",
+        "href": "https://places.demo.api.here.com/places/v1/places/616u3qcn-64dde353647441599a08b6012f416a90;context=Zmxvdy1pZD1hNTE1ZDBlZS1lNDg1LTU4N2QtOWRhMy1jZTcwZGI2OTk0OWJfMTU3NDQzMDAyMDc1OV83MjU1XzI3MDUmcmFuaz0z?app_id=Rj8r5qt8shjuXdZpGDuI&app_code=1WBZ2WJaa5YZzhg_GbT5hw",
+        "tags": [
+          {
+            "id": "international",
+            "title": "International",
+            "group": "cuisine"
+          }
+        ],
+        "id": "616u3qcn-64dde353647441599a08b6012f416a90",
+        "openingHours": {
+          "text": "Mon-Thu: 07:30 - 21:30<br/>Fri: 07:30 - 22:30<br/>Sat: 08:00 - 22:30<br/>Sun: 09:00 - 21:00",
+          "label": "Opening hours",
+          "isOpen": true,
+          "structured": [
+            {
+              "start": "T073000",
+              "duration": "PT14H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:MO,TU,WE,TH"
+            },
+            {
+              "start": "T073000",
+              "duration": "PT15H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:FR"
+            },
+            {
+              "start": "T080000",
+              "duration": "PT14H30M",
+              "recurrence": "FREQ:DAILY;BYDAY:SA"
+            },
+            {
+              "start": "T090000",
+              "duration": "PT12H00M",
+              "recurrence": "FREQ:DAILY;BYDAY:SU"
+            }
+          ]
+        },
+        "chainIds": [
+          "1396"
+        ]
+      }
+    ]
+  },
+  "search": {
+    "context": {
+      "location": {
+        "position": [
+          52.2516,
+          18.7177
+        ],
+        "address": {
+          "text": "Wandynów<br/>62-600 Koło (Gmina)<br/>Poland",
+          "street": "Wandynów",
+          "postalCode": "62-600",
+          "district": "Wandynów",
+          "city": "Koło (Gmina)",
+          "county": "Powiat Kolski",
+          "stateCode": "Woj. Wielkopolskie",
+          "country": "Poland",
+          "countryCode": "POL"
+        }
+      },
+      "type": "urn:nlp-types:place",
+      "href": "https://places.demo.api.here.com/places/v1/places/loc-dmVyc2lvbj0xO3RpdGxlPVdhbmR5biVDMyVCM3c7bGF0PTUyLjI1MTY7bG9uPTE4LjcxNzc7c3RyZWV0PVdhbmR5biVDMyVCM3c7Y2l0eT1LbyVDNSU4Mm8rJTI4R21pbmElMjk7cG9zdGFsQ29kZT02Mi02MDA7Y291bnRyeT1QT0w7ZGlzdHJpY3Q9V2FuZHluJUMzJUIzdztzdGF0ZUNvZGU9V29qLitXaWVsa29wb2xza2llO2NvdW50eT1Qb3dpYXQrS29sc2tpO2NhdGVnb3J5SWQ9c3RyZWV0LXNxdWFyZTtzb3VyY2VTeXN0ZW09aW50ZXJuYWw;context=c2VhcmNoQ29udGV4dD0x?app_id=Rj8r5qt8shjuXdZpGDuI&app_code=1WBZ2WJaa5YZzhg_GbT5hw"
+    },
+    "ranking": "default"
+  }
+}

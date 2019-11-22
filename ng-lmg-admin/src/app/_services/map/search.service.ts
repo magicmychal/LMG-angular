@@ -7,7 +7,6 @@ import {map} from "rxjs/operators";
   providedIn: 'root'
 })
 export class SearchService {
-  clientID: string = 'PAST YOUR CLIENT ID';
   baseUrl: string = `https://places.demo.api.here.com/places/v1/discover/search?app_id=${environment.mappAppId}&app_code=${environment.mapAppCode}&at=52.2516%2C18.7177&q=`;
 
   constructor(private http: HttpClient) {
