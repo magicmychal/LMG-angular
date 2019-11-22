@@ -1,3 +1,4 @@
+// https://mdbootstrap.com/docs/angular/tables/basic/
 import {Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, ChangeDetectorRef} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
@@ -15,10 +16,7 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   @ViewChild('row', { static: true }) row: ElementRef;
 
   // variables for the table
-  elements: any = [ {id: 1, first: 'Mark', last: 'Otto', handle: '@mdo'},
-    {id: 2, first: 'Jacob', last: 'Thornton', handle: '@fat'},
-    {id: 3, first: 'Larry', last: 'the Bird', handle: '@twitter'},
-  ];
+  elements: any = [  ];
   headElements = ['Name', 'Location', 'Short description', 'Action'];
 
   searchText: string = '';
@@ -39,23 +37,32 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle("Your Points");
 
-    this.mdbTable.setDataSource(this.elements);
-    this.elements = this.mdbTable.getDataSource();
-    this.previous = this.mdbTable.getDataSource();
+    // the data will be fetched after the view is created
+    this.pointsService.getPoints().subscribe({
+      next: response => {this.elements = response; this.setTheTable()},
+      error: err => console.log("The error is ", err)})
 
   }
 
   ngAfterViewInit() {
+
+    console.log('sometetghing')
+    console.log('location, ', JSON.stringify(this.elements[0]))
+
+  }
+
+  setTheTable(){
+
+    this.mdbTable.setDataSource(this.elements);
+    this.elements = this.mdbTable.getDataSource();
+    this.previous = this.mdbTable.getDataSource();
+
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
 
     this.mdbTablePagination.calculateFirstItemIndex();
     this.mdbTablePagination.calculateLastItemIndex();
     this.cdRef.detectChanges();
-
-    // the data will be fetched after the view is created
-    this.pointsService.getPoints().subscribe({
-      next: response => this.elements = response,
-      error: err => console.log("The error is ", err)})
+    //this.addNewRowAfter();
 
   }
 
