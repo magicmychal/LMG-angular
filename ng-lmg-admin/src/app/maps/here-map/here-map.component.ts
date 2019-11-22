@@ -4,7 +4,7 @@ TODO: Adjust the initial scale of the map
  */
 import {Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit, Output, EventEmitter} from '@angular/core';
 import {map, tap} from 'rxjs/operators';
-import {log} from "util";
+import {environment} from "@environments/environment";
 
 declare var H: any;
 
@@ -18,10 +18,6 @@ export class HereMapComponent implements OnInit, AfterViewInit {
   @ViewChild("map")
   public mapElement: ElementRef;
   @Input()
-  public appId: any;
-  @Input()
-  public appCode: any;
-  @Input()
   public lat: any;
   @Input()
   public lng: any;
@@ -34,6 +30,10 @@ export class HereMapComponent implements OnInit, AfterViewInit {
   private platform: any;
 
   public markerLocation: any;
+
+  private appId = environment.mappAppId;
+  private appCode = environment.mapAppCode;
+
 
   @Output() getMarkerLocation = new EventEmitter();
 

@@ -6,6 +6,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PointsService} from "../../_services/points/points.service";
+import {NgxSpinnerService} from "ngx-spinner";
 
 @Component({
   selector: 'app-points-add',
@@ -26,7 +27,8 @@ export class PointsAddComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private pointsService: PointsService) {
+              private pointsService: PointsService,
+              private spinner: NgxSpinnerService) {
     this.query = "Krakow";
   }
 
@@ -48,6 +50,7 @@ export class PointsAddComponent implements OnInit {
 
   onSubmit() {
 
+
     this.submitted = true;
 
     // stop here if form is invalid
@@ -63,8 +66,10 @@ export class PointsAddComponent implements OnInit {
     const lng = this.f.longitude.value;
     const locationname = "location";
 
+    this.spinner.show();
+
     this.pointsService.addNewPoint(name, desc, lat, lng, locationname).subscribe({
-      next: response => console.log(response),
+      next: response => this.onSuccessfulSubmit(response),
       error: err => console.log("The error is ", err)
     });
 
@@ -74,6 +79,12 @@ export class PointsAddComponent implements OnInit {
   clickOnMarker(location) {
     this.f.latitude.setValue(location["lat"]);
     this.f.longitude.setValue(location["lng"]);
+  }
+
+  onSuccessfulSubmit(response){
+    console.log(response);
+    this.router.navigate(['/points']);
+    this.spinner.hide();
   }
 
 }

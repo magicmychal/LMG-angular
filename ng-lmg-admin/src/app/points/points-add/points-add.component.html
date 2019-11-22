@@ -18,7 +18,7 @@
         <textarea class="form-control" id="description" formControlName="description" aria-label="With textarea"></textarea>
       </div>
       <div class="input-group">
-        <app-here-map appId="Rj8r5qt8shjuXdZpGDuI" appCode="1WBZ2WJaa5YZzhg_GbT5hw" lat="50.279278" lng="19.176333"
+        <app-here-map lat="50.279278" lng="19.176333"
                       width="500px" height="500px" (getMarkerLocation)="clickOnMarker($event)" ></app-here-map>
         <input type="hidden" formControlName="latitude">
         <input type="hidden" formControlName="longitude">
@@ -28,4 +28,7 @@
     <button [disabled]="loading" class="btn btn-outline-success">Save (only for testing)</button>
     <!--  <app-form-nav-buttons cancel="true" save="true"></app-form-nav-buttons>-->
   </form>
+  <ngx-spinner [fullScreen]="true" type="cube-transition" size="medium">
+    <p class="loading">Adding a new point. You will be redirected in a moment</p>
+  </ngx-spinner>
 </div>
