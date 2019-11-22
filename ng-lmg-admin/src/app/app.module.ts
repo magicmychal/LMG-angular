@@ -22,6 +22,7 @@ import { MapSearchComponent } from './maps/map-search/map-search.component';
 import { HereMapComponent } from './maps/here-map/here-map.component';
 import { FormNavButtonsComponent } from './addons/form-nav-buttons/form-nav-buttons.component';
 import {NgxSpinnerModule} from "ngx-spinner";
+import {SearchService} from "./_services/map/search.service";
 
 @NgModule({
   declarations: [
@@ -53,7 +54,9 @@ import {NgxSpinnerModule} from "ngx-spinner";
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
     // provider used to create fake backend
-    fakeBackendProvider
+    //TODO: Remove fake backend provider
+    fakeBackendProvider,
+    SearchService
   ],
   bootstrap: [AppComponent]
 })

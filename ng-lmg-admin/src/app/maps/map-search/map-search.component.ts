@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from "@angular/forms";
+import {SearchService} from "../../_services/map/search.service";
+
 
 @Component({
   selector: 'app-map-search',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MapSearchComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
+  results: any[] = [];
+  queryField: FormControl = new FormControl();
+
+  constructor(private _searchService: SearchService) {
+  }
+
+  ngOnInit(): void {
+    this.queryField.valueChanges
+      .subscribe(queryField =>this._searchService.search(queryField)
+        .subscribe(response => console.log(response)));
   }
 
 }
