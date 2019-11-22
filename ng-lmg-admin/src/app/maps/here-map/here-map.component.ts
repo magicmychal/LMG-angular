@@ -29,6 +29,7 @@ export class HereMapComponent implements OnInit, AfterViewInit {
   private ui: any;
   private search: any;
   private platform: any;
+  private map: any;
 
   public markerLocation: any;
 

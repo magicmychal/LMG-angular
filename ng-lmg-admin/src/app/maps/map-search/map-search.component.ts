@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {SearchService} from "../../_services/map/search.service";
-import {type} from "os";
 
 
 @Component({
