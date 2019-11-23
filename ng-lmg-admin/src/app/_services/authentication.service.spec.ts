@@ -3,8 +3,9 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from './authentication.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {Test} from "tslint";
+import { environment } from '../../environments/environment';
 
-fdescribe('AuthenticationService', () => {
+describe('AuthenticationService', () => {
   let injector: TestBed;
   let service: AuthenticationService;
   let httpMock: HttpTestingController;
@@ -39,7 +40,7 @@ fdescribe('AuthenticationService', () => {
       expect(response).toEqual(loginResponse);
     });
 
-    const request = httpMock.expectOne(`http://www.api.kompas.omteam.pl/v1/login/admin`);
+    const request = httpMock.expectOne(`${environment.apiUrl}/login/admin`);
     expect(request.request.method).toBe('GET');
     request.flush(loginResponse);
 
