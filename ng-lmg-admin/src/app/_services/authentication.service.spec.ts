@@ -39,7 +39,7 @@ fdescribe('AuthenticationService', () => {
       expect(response).toEqual(loginResponse);
     });
 
-    const request = httpMock.expectOne(`http://api.kompas.omteam.pl/v1/login/admin`);
+    const request = httpMock.expectOne(`http://www.api.kompas.omteam.pl/v1/login/admin`);
     expect(request.request.method).toBe('GET');
     request.flush(loginResponse);
 
