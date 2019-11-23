@@ -1,7 +1,7 @@
 import {async, getTestBed, TestBed} from '@angular/core/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from './authentication.service';
-import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
+import {HttpTestingController} from "@angular/common/http/testing";
 import {Test} from "tslint";
 
 fdescribe('AuthenticationService', () => {
@@ -13,7 +13,7 @@ fdescribe('AuthenticationService', () => {
 
   beforeEach(async (() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientModule, HttpTestingController],
       providers: [AuthenticationService]
     });
     service = TestBed.get(AuthenticationService);
