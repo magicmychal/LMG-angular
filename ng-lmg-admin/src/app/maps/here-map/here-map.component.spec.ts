@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientModule } from '@angular/common/http';
 import { HereMapComponent } from './here-map.component';
 
 describe('HereMapComponent', () => {
@@ -8,6 +8,7 @@ describe('HereMapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       declarations: [ HereMapComponent ]
     })
     .compileComponents();

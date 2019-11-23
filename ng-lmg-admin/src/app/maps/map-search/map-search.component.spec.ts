@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientModule } from '@angular/common/http';
 import { MapSearchComponent } from './map-search.component';
 
 describe('MapSearchComponent', () => {
@@ -8,6 +8,7 @@ describe('MapSearchComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [HttpClientModule],
       declarations: [ MapSearchComponent ]
     })
     .compileComponents();

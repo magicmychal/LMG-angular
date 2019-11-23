@@ -21,7 +21,8 @@ export class MapSearchComponent implements OnInit {
     this.queryField.valueChanges
       .subscribe(queryField => this._searchService.search(queryField)
         .subscribe(response => {
-          if (response.status === 400) {
+          // TODO: Response status not working properly.
+          if (response === 400) {
             return;
           } else {
             this.showResults(response)
