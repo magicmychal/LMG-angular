@@ -1,12 +1,10 @@
 import {async, getTestBed, TestBed} from '@angular/core/testing';
-import {HttpClientModule} from '@angular/common/http';
 import {AuthenticationService} from './authentication.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 import {Test} from "tslint";
 import { environment } from '../../environments/environment';
 
 describe('AuthenticationService', () => {
-  let injector: TestBed;
   let service: AuthenticationService;
   let httpMock: HttpTestingController;
   let loginResponse: any;
@@ -20,7 +18,6 @@ describe('AuthenticationService', () => {
     service = TestBed.get(AuthenticationService);
     httpMock = TestBed.get(HttpTestingController);
   }));
-
 
   afterEach(() => {
     httpMock.verify();
@@ -36,7 +33,8 @@ describe('AuthenticationService', () => {
       "auth_token": "1640bd56-000d-46cc-8e41-8f31672116d0"
     }
 
-    service.login('admin@test.pl', 'test1234').subscribe((response) => {
+    service.login('admin@test.pl', 'test1234')
+      .subscribe((response) => {
       expect(response).toEqual(loginResponse);
     });
 
