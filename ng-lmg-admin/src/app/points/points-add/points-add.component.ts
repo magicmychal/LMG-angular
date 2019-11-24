@@ -87,4 +87,14 @@ export class PointsAddComponent implements OnInit {
     this.spinner.hide();
   }
 
+  onNotifyClicked(message: string):void{
+    console.log('Wiadomosc do panstwa, ',message);
+  }
+
+  onResultClick(position){
+    // set the map in the right position and show the marker
+    console.log(position);
+
+  }
+
 }

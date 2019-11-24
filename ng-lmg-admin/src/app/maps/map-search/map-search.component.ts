@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {SearchService} from "../../_services/map/search.service";
 
@@ -10,6 +10,8 @@ import {SearchService} from "../../_services/map/search.service";
 })
 export class MapSearchComponent implements OnInit {
 
+  // send the position on the result click
+  @Output() notifyPosition: EventEmitter<any>=new EventEmitter<any>();
 
   results: any[] = [];
   queryField: FormControl = new FormControl();
@@ -37,5 +39,11 @@ export class MapSearchComponent implements OnInit {
     this.results = this.results['results']
     console.warn('results only, ', this.results)
     console.log('1 result: ', this.results[0])
+  }
+
+  onResultClick(position: number | Float32Array | "auto" | string){
+    const lat = position[0];
+    const lng = position[1];
+    this.notifyPosition.emit(position);
   }
 }

@@ -1,9 +1,11 @@
 <label for="location">Location</label>
 <div class="input-group input-group-lg">
-  <input [formControl]="queryField" type="text" id="location" name="location" class="form-control" placeholder="Start typing to search...">
+  <input [formControl]="queryField" type="text" id="location" name="location" class="form-control"
+         placeholder="Start typing to search...">
 </div>
 <div class="list-group">
-  <a *ngFor="let result of results | keyvalue" href="#" class="list-group-item list-group-item-action">
+  <a *ngFor="let result of results | keyvalue" (click)="onResultClick(result.value.position)"
+     class="list-group-item list-group-item-action">
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{result.value.title}}</h5>
       <small>{{result.value.category.title}}</small>
