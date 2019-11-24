@@ -89,7 +89,7 @@ fdescribe('AddPointService', () => {
 
   it('should send a request to add a new point', function () {
     addPointResponse = {
-      //"id": "3e1fe4af-617f-4758-a457-32033fce2cc9",
+      "id": "3e1fe4af-617f-4758-a457-32033fce2cc9",
       "name": "Location name",
       "description": "Location description",
       "code": "403150",
@@ -100,15 +100,16 @@ fdescribe('AddPointService', () => {
       }
     }
 
-    service.addNewPoint("Location name", "Location description",
-      "50.28889", "19.11215", "Katowice")
+    service.addNewPoint('Location name', 'Location description',
+      50.28889, 19.11215, 'Katowice')
       .subscribe((response) => {
-        expect(response).toContain(addPointResponse);
+        console.log('to jest response, ', response);
+        expect(response).toEqual(addPointResponse);
       });
 
     const request = httpMock.expectOne(`${environment.apiUrl}/point`);
-    request.event(new HttpResponse(addPointResponse));
-    expect(request.request.method).toBe('POST');
-    request.flush(pointsResponse);
+    expect(request.request.method).toBe('POST')
+    request.flush(addPointResponse);
+
   });
 });

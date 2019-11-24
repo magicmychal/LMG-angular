@@ -1,71 +1,8 @@
-[
-  Object(
-  {
-    id: 'bff66d65-1ba1-48ea-856a-5d530c3c68a1',
-    name: 'dupa',
-    description: 'description',
-    code: 'dupa',
-    location: Object(
-  {
-    latitude: 123.123,
-    longitude: 321.321,
-    name: 'location.name'
-  }
-  )
-  }
-  ),
-  Object(
-  {
-    id: '8702bef7-b409-4083-a931-bfd3f1fab947',
-    name: 'dupa',
-    description: 'description',
-    code: '845936',
-    location: Object(
-  {
-    latitude: 123.123,
-    longitude: 321.321,
-    name: 'location.name'
-  }
-  )
-  }
-  ),
-  Object(
-  {
-    id: '6f0f08ea-8ef0-4b5d-acab-44781dc79f68',
-    name: 'Katowice',
-    description: 'Katowice sa super',
-    code: '873816',
-    location: Object(
-  {
-    latitude: 50.28889,
-    longitude: 19.11215,
-    name: 'location'
-  }
-  )
-  }
-  ),
-  Object(
-  {
-    id: '4aa4623f-4b98-459c-812e-b4121467b38c',
-    name: 'śWIDNICA',
-    description: 'Świdnica zajebista jest',
-    code: '913309',
-    location: Object(
-  {
-    latitude: 50.8409,
-    longitude: 16.48466,
-    name: 'location'
-  }
-  )
-  }
-  )
-] to equal Object({
-  id: '3e1fe4af-617f-4758-a457-32033fce2cc9',
-  name: 'Location name',
-  description: 'Location description',
-  code: '403150',
-  location: Object({
-  latitude: 50.28889,
-  longitude: 19.11215,
-  name: 'Katowice'
-}) }).
+code: "403150"
+description: "Location description"
+id: "3e1fe4af-617f-4758-a457-32033fce2cc9"
+location:
+latitude: 50.28889
+longitude: 19.11215
+name: "Katowice"
+name: "Location name"
