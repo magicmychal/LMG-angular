@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {AuthenticationService} from "../_services";
+import {NgxSpinnerService} from "ngx-spinner";
 
 
 
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private authenticationService: AuthenticationService) {
+              private authenticationService: AuthenticationService,
+              private spinner: NgxSpinnerService) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -55,17 +57,23 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    this.spinner.show();
     this.loading = true;
     this.authenticationService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
+          //TODO: the navigation links are broken
          this.router.navigate([this.returnUrl]);
+         //location.reload(true);
         },
         error => {
-          //TODO: Give user some time to read the message
           this.error = "Please check your credentials";
           this.loading = false;
+          this.spinner.hide();
+        },
+        () => {
+          this.spinner.hide();
         });
   }
 

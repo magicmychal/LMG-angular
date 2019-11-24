@@ -4,7 +4,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterTestingModule} from "@angular/router/testing";
 
-fdescribe('LoginComponent', () => {
+describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
@@ -16,7 +16,6 @@ fdescribe('LoginComponent', () => {
         RouterTestingModule],
       declarations: [LoginComponent]
     })
-      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -27,10 +26,6 @@ fdescribe('LoginComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should ', function () {
-    
   });
 
 });
