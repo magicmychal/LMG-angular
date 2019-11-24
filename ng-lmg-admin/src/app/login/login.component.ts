@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
         },
         error => {
           //TODO: Give user some time to read the message
-          this.error = "Something went wrong";
+          this.error = "Please check your credentials";
           this.loading = false;
         });
   }
