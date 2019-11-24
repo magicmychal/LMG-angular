@@ -4,7 +4,7 @@ import {HttpClientTestingModule, HttpTestingController} from "@angular/common/ht
 import { environment } from '@environments/environment';
 import {HttpResponse} from "@angular/common/http";
 
-fdescribe('AddPointService', () => {
+describe('AddPointService', () => {
   let service: PointsService;
   let httpMock: HttpTestingController;
   let pointsResponse: object;
