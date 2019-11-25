@@ -23,6 +23,8 @@ import { HereMapComponent } from './maps/here-map/here-map.component';
 import { FormNavButtonsComponent } from './addons/form-nav-buttons/form-nav-buttons.component';
 import {NgxSpinnerModule} from "ngx-spinner";
 import {SearchService} from "./_services/map/search.service";
+import { RoutesDashboardComponent } from './routes/routes-dashboard/routes-dashboard.component';
+import { RoutesAddComponent } from './routes/routes-add/routes-add.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import {SearchService} from "./_services/map/search.service";
     PointsAddComponent,
     MapSearchComponent,
     HereMapComponent,
-    FormNavButtonsComponent
+    FormNavButtonsComponent,
+    RoutesDashboardComponent,
+    RoutesAddComponent
   ],
   imports: [
     BrowserModule,

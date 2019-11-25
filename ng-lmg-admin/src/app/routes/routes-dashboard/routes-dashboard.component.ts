@@ -1,24 +1,21 @@
-// https://mdbootstrap.com/docs/angular/tables/basic/
-import {Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, ChangeDetectorRef} from '@angular/core';
-import {Title} from "@angular/platform-browser";
+import {ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild} from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
+import {Title} from "@angular/platform-browser";
 import {PointsService} from "../../_services/points/points.service";
 import {NgxSpinnerService} from "ngx-spinner";
 
-// import { MdbTableDirective, MdbTablePaginationComponent } from 'ng-uikit-pro-standard';
-
 @Component({
-  selector: 'app-points-dashboard',
-  templateUrl: './points-dashboard.component.html',
-  styleUrls: ['./points-dashboard.component.scss']
+  selector: 'app-routes-dashboard',
+  templateUrl: './routes-dashboard.component.html',
+  styleUrls: ['./routes-dashboard.component.scss']
 })
-export class PointsDashboardComponent implements OnInit, AfterViewInit {
-  @ViewChild(MdbTableDirective, {static: true}) mdbTable: MdbTableDirective;
-  @ViewChild(MdbTablePaginationComponent, {static: true}) mdbTablePagination: MdbTablePaginationComponent;
-  @ViewChild('row', {static: true}) row: ElementRef;
+export class RoutesDashboardComponent implements OnInit {
+  @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
+  @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
+  @ViewChild('row', { static: true }) row: ElementRef;
 
   // variables for the table
-  elements: any = [];
+  elements: any = [  ];
   headElements = ['Name', 'Location', 'Short description', 'Action'];
 
   searchText: string = '';
@@ -31,8 +28,7 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
     private cdRef: ChangeDetectorRef,
     private pointsService: PointsService,
     private spinner: NgxSpinnerService
-  ) {
-  }
+  ) { }
 
   @HostListener('input') oninput() {
     this.mdbTablePagination.searchText = this.searchText;
@@ -40,19 +36,6 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle("Your Points");
-    this.spinner.show();
-    // the data will be fetched after the view is created
-    this.pointsService.getPoints().subscribe({
-      next: response => {
-        this.elements = response;
-        this.setTheTable()
-      },
-      error: err => console.log("The error is ", err)
-    })
-
-  }
-
-  ngAfterViewInit() {
   }
 
   setTheTable() {
