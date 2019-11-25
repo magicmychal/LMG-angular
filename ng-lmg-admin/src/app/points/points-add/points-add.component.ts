@@ -70,7 +70,7 @@ export class PointsAddComponent implements OnInit {
     const desc = this.f.description.value;
     const lat = this.f.latitude.value;
     const lng = this.f.longitude.value;
-    const locationname = "location";
+    const locationname = this.f.locationName.value;
 
     this.spinner.show();
 
@@ -83,8 +83,9 @@ export class PointsAddComponent implements OnInit {
   }
 
   clickOnMarker(location) {
-    this.f.latitude.setValue(location["lat"]);
-    this.f.longitude.setValue(location["lng"]);
+    this.f.latitude.setValue(location[0]["lat"]);
+    this.f.longitude.setValue(location[0]["lng"]);
+    this.f.locationName.setValue(location[1]);
   }
 
   onSuccessfulSubmit(response){

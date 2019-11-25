@@ -8,25 +8,30 @@
   </div>
   <form [formGroup]="addNewPointForm" (ngSubmit)="onSubmit()">
     <div class="row">
-      <label for="name">Name</label>
-      <div class="input-group input-group-lg">
-        <input type="text" id="name" formControlName="name" class="form-control" aria-label="Sizing example input"
-               aria-describedby="inputGroup-sizing-lg">
+      <div class="col-8">
+        <label for="name">Name</label>
+        <div class="input-group input-group-lg">
+          <input type="text" id="name" formControlName="name" class="form-control" aria-label="Sizing example input"
+                 aria-describedby="inputGroup-sizing-lg">
+        </div>
+        <label for="description">Description</label>
+        <div class="input-group">
+        <textarea class="form-control" id="description" formControlName="description"
+                  aria-label="With textarea"></textarea>
+        </div>
+        <div class="input-group">
+          <!-- <app-map-search id="map-search" (notifyPosition)="onResultClick($event)" (notifyResults)="passTheResults($event)"></app-map-search>-->
+          <app-here-map lat="50.279278" lng="19.176333"
+                        width="500px" height="500px" (getMarkerLocation)="clickOnMarker($event)"></app-here-map>
+          <input type="hidden" formControlName="latitude">
+          <input type="hidden" formControlName="longitude">
+          <input type="hidden" formControlName="locationName">
+        </div>
       </div>
-      <label for="description">Description</label>
-      <div class="input-group">
-        <textarea class="form-control" id="description" formControlName="description" aria-label="With textarea"></textarea>
-      </div>
-      <div class="input-group">
-       <!-- <app-map-search id="map-search" (notifyPosition)="onResultClick($event)" (notifyResults)="passTheResults($event)"></app-map-search>-->
-        <app-here-map lat="50.279278" lng="19.176333"
-                      width="500px" height="500px" (getMarkerLocation)="clickOnMarker($event)" ></app-here-map>
-        <input type="hidden" formControlName="latitude">
-        <input type="hidden" formControlName="longitude">
-        <input type="hidden" formControlName="locationName">
+      <div class="col-md-auto px-lg-2">
+        <button [disabled]="loading" class="btn btn-outline-success">Save (only for testing)</button>
       </div>
     </div>
-    <button [disabled]="loading" class="btn btn-outline-success">Save (only for testing)</button>
     <!--  <app-form-nav-buttons cancel="true" save="true"></app-form-nav-buttons>-->
   </form>
   <ngx-spinner [fullScreen]="true" type="cube-transition" size="medium">

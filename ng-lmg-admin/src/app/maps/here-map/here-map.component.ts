@@ -100,7 +100,8 @@ export class HereMapComponent implements OnInit, AfterViewInit {
       });
       this.markerLocation = event.target.getPosition()
       //console.log(this.getMarkerLocation)
-      this.getMarkerLocation.emit(event.target.getPosition())
+      let selectedPosition = [event.target.getPosition(), data.title]
+      this.getMarkerLocation.emit(selectedPosition)
       this.ui.addBubble(bubble);
     }, false);
     this.map.addObject(marker);
