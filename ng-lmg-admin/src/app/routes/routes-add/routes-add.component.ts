@@ -35,7 +35,9 @@ export class RoutesAddComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
+      name: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(250)]],
+      points: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]

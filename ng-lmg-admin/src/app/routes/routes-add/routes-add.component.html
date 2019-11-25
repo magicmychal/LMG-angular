@@ -16,20 +16,22 @@
           <div>
             <mat-form-field appearance="outline">
               <mat-label>Name</mat-label>
-              <input matInput placeholder="Name of the route">
+              <input matInput placeholder="Name of the route" formControlName="name">
               <mat-hint>eg. 'Magical Cracow discovery'</mat-hint>
             </mat-form-field>
           </div>
           <div>
             <mat-form-field appearance="outline">
               <mat-label>Description</mat-label>
-              <textarea matInput placeholder="Textarea"></textarea>
+              <textarea #description matInput placeholder="Textarea" formControlName="description"></textarea>
+              <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
               <mat-hint>Description is what should encourage tourist to take the selected route.
               </mat-hint>
             </mat-form-field>
           </div>
           <div>
             <span>Points</span>
+            <input type="hidden" formControlName="points">
             <p>Select the points you want to include in the rout. At this step, the order <b>does not matter.</b></p>
           </div>
           <div class="mat-elevation-z8">
@@ -74,6 +76,7 @@
       </mat-step>
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Details for - SOMETHING</ng-template>
           ...
 
         </form>
