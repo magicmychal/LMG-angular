@@ -8,8 +8,6 @@ import {PointsDashboardComponent} from "./points/points-dashboard/points-dashboa
 import {PointsAddComponent} from "./points/points-add/points-add.component";
 import {RoutesDashboardComponent} from "./routes/routes-dashboard/routes-dashboard.component";
 import {RoutesAddComponent} from "./routes/routes-add/routes-add.component";
-import {TableComponent} from "./test/material/table/table.component";
-import {NewtableComponent} from "./test/material/newtable/newtable.component";
 
 
 const routes: Routes = [
@@ -46,14 +44,6 @@ const routes: Routes = [
       {path: 'add', component: RoutesAddComponent}
     ]
   },
-  {
-    path: 'test',
-    component: TableComponent
-  },
-  {
-    path: 'table',
-    component: NewtableComponent
-  }
 ];
 
 @NgModule({

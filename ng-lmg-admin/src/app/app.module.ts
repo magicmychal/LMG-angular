@@ -29,13 +29,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
-import { TableComponent } from './test/material/table/table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
-import { NewtableComponent } from './test/material/newtable/newtable.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
@@ -52,8 +50,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     FormNavButtonsComponent,
     RoutesDashboardComponent,
     RoutesAddComponent,
-    TableComponent,
-    NewtableComponent
+
   ],
   imports: [
     BrowserModule,
