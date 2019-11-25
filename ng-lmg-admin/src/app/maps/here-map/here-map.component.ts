@@ -58,7 +58,7 @@ export class HereMapComponent implements OnInit, AfterViewInit {
       this.mapElement.nativeElement,
       defaultLayers.normal.map,
       {
-        zoom: 10,
+        zoom: 6,
         center: {lat: this.lat, lng: this.lng}
       }
     );
@@ -80,6 +80,17 @@ export class HereMapComponent implements OnInit, AfterViewInit {
     });
   }
 
+  public passPlaces(results){
+    console.log('passed, ', results.items.length)
+    for (let i = 0; i < results.items.length; i++){
+      console.log(results.items[i].position[0])
+      this.dropMarker({
+        "lat": results.items[i].position[0],
+        "lng": results.items[i].position[1]
+      }, results.items[i]);
+    }
+  }
+
   private dropMarker(coordinates: any, data: any) {
     let marker = new H.map.Marker(coordinates);
     marker.setData("<p>" + data.title + "<br>" + data.vicinity + "</p>");
@@ -95,4 +106,9 @@ export class HereMapComponent implements OnInit, AfterViewInit {
     this.map.addObject(marker);
   }
 
+  // this function apparently is not working
+  public changeMapPosition(){
+    H.map.geoToScreen(52.5159, 13.3777);
+    console.log(H.map.ViewPort)
+  }
 }

@@ -13,6 +13,9 @@ export class MapSearchComponent implements OnInit {
   // send the position on the result click
   @Output() notifyPosition: EventEmitter<any>=new EventEmitter<any>();
 
+  // pass all the results
+  @Output() notifyResults = new EventEmitter();
+
   results: any[] = [];
   queryField: FormControl = new FormControl();
 
@@ -37,8 +40,7 @@ export class MapSearchComponent implements OnInit {
     console.log(results)
     this.results['results'] = results.results['items'];
     this.results = this.results['results']
-    console.warn('results only, ', this.results)
-    console.log('1 result: ', this.results[0])
+    this.notifyResults.emit(results);
   }
 
   onResultClick(position: number | Float32Array | "auto" | string){

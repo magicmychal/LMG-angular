@@ -7,11 +7,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PointsService} from "../../_services/points/points.service";
 import {NgxSpinnerService} from "ngx-spinner";
+import {HereMapComponent} from "../../maps/here-map/here-map.component";
 
 @Component({
   selector: 'app-points-add',
   templateUrl: './points-add.component.html',
-  styleUrls: ['./points-add.component.scss']
+  styleUrls: ['./points-add.component.scss'],
+  providers: [HereMapComponent]
 })
 export class PointsAddComponent implements OnInit {
 
@@ -21,6 +23,9 @@ export class PointsAddComponent implements OnInit {
   returnUrl: string;
   error = '';
 
+  lat: number;
+  lng: number;
+
 
   public query: string;
 
@@ -28,7 +33,8 @@ export class PointsAddComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private pointsService: PointsService,
-              private spinner: NgxSpinnerService) {
+              private spinner: NgxSpinnerService,
+              private map: HereMapComponent) {
     this.query = "Krakow";
   }
 
@@ -94,7 +100,15 @@ export class PointsAddComponent implements OnInit {
   onResultClick(position){
     // set the map in the right position and show the marker
     console.log(position);
+    this.lat = position[0];
+    this.lng = position[1];
+    this.map.changeMapPosition();
 
+  }
+
+  passTheResults(results){
+  console.log('wyniki,', results.results);
+  this.map.passPlaces(results.results);
   }
 
 }

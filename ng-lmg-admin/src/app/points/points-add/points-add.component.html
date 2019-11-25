@@ -18,7 +18,7 @@
         <textarea class="form-control" id="description" formControlName="description" aria-label="With textarea"></textarea>
       </div>
       <div class="input-group">
-        <app-map-search id="map-search" (notifyPosition)="onResultClick($event)"></app-map-search>
+       <!-- <app-map-search id="map-search" (notifyPosition)="onResultClick($event)" (notifyResults)="passTheResults($event)"></app-map-search>-->
         <app-here-map lat="50.279278" lng="19.176333"
                       width="500px" height="500px" (getMarkerLocation)="clickOnMarker($event)" ></app-here-map>
         <input type="hidden" formControlName="latitude">
