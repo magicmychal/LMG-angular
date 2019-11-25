@@ -8,7 +8,8 @@
     </div>
   </div>
   <div class="row">
-    <mat-vertical-stepper linear>
+    <div class="col-12">
+    <mat-horizontal-stepper linear>
       <mat-step [stepControl]="firstFormGroup">
         <form [formGroup]="firstFormGroup">
           <ng-template matStepLabel>Fill out basic details</ng-template>
@@ -23,26 +24,32 @@
             <mat-form-field appearance="outline">
               <mat-label>Description</mat-label>
               <textarea matInput placeholder="Textarea"></textarea>
-              <mat-hint>Description is what should encourage tourist to take the selected route. Here are some tips you
-                can use:
-                - lorem
-                - ipsum
-                - dogs are awesome
-                - but cats are everything
+              <mat-hint>Description is what should encourage tourist to take the selected route.
               </mat-hint>
             </mat-form-field>
           </div>
           <div>
-            <mat-label>Points</mat-label>
+            <span>Points</span>
+            <p>Select the points you want to include in the rout. At this step, the order <b>does not matter.</b></p>
           </div>
+
         </form>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
       </mat-step>
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
           ...
-        </form>
-      </mat-step>
-    </mat-vertical-stepper>
 
+        </form>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+    </div>
   </div>
 </div>
