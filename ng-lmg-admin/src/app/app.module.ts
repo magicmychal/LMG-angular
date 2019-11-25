@@ -36,6 +36,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import { NewtableComponent } from './test/material/newtable/newtable.component';
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { NewtableComponent } from './test/material/newtable/newtable.component';
     MatButtonModule,
     MatIconModule,
     MatTableModule,
+    MatCheckboxModule,
   ],
   providers: [
 
