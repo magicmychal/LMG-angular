@@ -25,6 +25,17 @@ import {NgxSpinnerModule} from "ngx-spinner";
 import {SearchService} from "./_services/map/search.service";
 import { RoutesDashboardComponent } from './routes/routes-dashboard/routes-dashboard.component';
 import { RoutesAddComponent } from './routes/routes-add/routes-add.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import { TableComponent } from './test/material/table/table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import { NewtableComponent } from './test/material/newtable/newtable.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +50,9 @@ import { RoutesAddComponent } from './routes/routes-add/routes-add.component';
     HereMapComponent,
     FormNavButtonsComponent,
     RoutesDashboardComponent,
-    RoutesAddComponent
+    RoutesAddComponent,
+    TableComponent,
+    NewtableComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +63,17 @@ import { RoutesAddComponent } from './routes/routes-add/routes-add.component';
     HttpClientModule,
     NgbModule,
     MDBBootstrapModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    BrowserAnimationsModule,
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTableModule,
   ],
   providers: [
 

@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { SearchService } from './search.service';
 import {HttpClientTestingModule, HttpTestingController} from "@angular/common/http/testing";
 
-fdescribe('SearchService', () => {
+describe('SearchService', () => {
   let service: SearchService;
   let httpMock: HttpTestingController;
   let searchResponse: object;
