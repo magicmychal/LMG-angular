@@ -15,6 +15,8 @@ export class RoutesAddComponent implements OnInit {
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  lastFormGroup: FormGroup;
+  pointsFormGroup: FormGroup;
 
   // for the table
   points: any;
@@ -26,6 +28,12 @@ export class RoutesAddComponent implements OnInit {
   allowMultiSelect = true;
   selection = new SelectionModel(this.allowMultiSelect, this.initialSelection);
 
+  /*
+  Selection is the type of set, which is hard to operate on.
+  Converting it to array will simplify further operations
+   */
+  selectedArray: object;
+
   constructor(
   private _formBuilder: FormBuilder,
   private pointsService:PointsService
@@ -34,13 +42,20 @@ export class RoutesAddComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
+    this.selectedArray = [{id: "bff66d65-1ba1-48ea-856a-5d530c3c68a1", name: "dupa", description: "description", code: "dupa"}];
+
     this.firstFormGroup = this._formBuilder.group({
       name: ['', Validators.required],
-      description: ['', [Validators.required, Validators.maxLength(250)]],
+      description: ['', [Validators.required, Validators.maxLength(250)]]
+    });
+    this.pointsFormGroup = this._formBuilder.group({
       points: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
+    });
+    this.lastFormGroup = this._formBuilder.group({
+
     });
 
     this.pointsService.getPoints()
@@ -67,6 +82,13 @@ export class RoutesAddComponent implements OnInit {
     this.isAllSelected() ?
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  convertSelected(){
+    // @ts-ignore
+    let selectedArray = Array.from(this.selection._selection);
+    console.log('selected ', selectedArray[0]);
+    return selectedArray;
   }
 
 }

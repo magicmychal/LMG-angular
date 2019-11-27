@@ -1,10 +1,10 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-3">Add a new point</h1>
-      <p class="lead">Punkty, inaczej lokalizajce, to miejsca turystyczne.
-        Sit at vulputate maecenas tortor in
-        urna vestibulum.</p>
+      <h1 class="display-3">Add a new route</h1>
+      <p class="lead">Route is a collection of points, which are presented as a trip for the tourist.
+        Make sure that you created points beforehand.
+        Please follow the three-step process of adding a new route.</p>
     </div>
   </div>
   <div class="row">
@@ -29,6 +29,15 @@
               </mat-hint>
             </mat-form-field>
           </div>
+        </form>
+        <div class="mt-2">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </mat-step>
+      <mat-step [stepControl]="pointsFormGroup">
+        <form [formGroup]="pointsFormGroup">
+          <ng-template matStepLabel>Choose points</ng-template>
           <div>
             <span>Points</span>
             <input type="hidden" formControlName="points">
@@ -67,24 +76,34 @@
             </table>
             <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
           </div>
-
         </form>
-        <div>
+        <div class="mt-2">
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext (click)="convertSelected()">Next</button>
+        </div>
+      </mat-step>
+      <mat-step *ngFor="let selected of selectedArray; let i = index" [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Details for - SOMETHING</ng-template>
+          {{selected}}
+        </form>
+        <div class="mt-2">
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
-      <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-          <ng-template matStepLabel>Details for - SOMETHING</ng-template>
+      <mat-step [stepControl]="lastFormGroup">
+        <form [formGroup]="lastFormGroup">
+          <ng-template matStepLabel>Summary</ng-template>
           ...
 
         </form>
-        <div>
+        <div class="mt-2">
           <button mat-button matStepperPrevious>Back</button>
           <button mat-button matStepperNext>Next</button>
         </div>
       </mat-step>
+
     </mat-horizontal-stepper>
     </div>
   </div>
