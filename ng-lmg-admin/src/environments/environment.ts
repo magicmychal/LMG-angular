@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://www.api.kompas.omteam.pl/v1',
-  mappAppId: 'Rj8r5qt8shjuXdZpGDuI',
+  mapAppId: 'Rj8r5qt8shjuXdZpGDuI',
   mapAppCode: '1WBZ2WJaa5YZzhg_GbT5hw'
 };
 

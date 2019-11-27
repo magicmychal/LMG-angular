@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SelectionModel} from "@angular/cdk/collections";
 import {PointsService} from "../../_services/points/points.service";
 import {MatPaginator} from "@angular/material/paginator";
@@ -32,7 +32,7 @@ export class RoutesAddComponent implements OnInit {
   Selection is the type of set, which is hard to operate on.
   Converting it to array will simplify further operations
    */
-  selectedArray: object;
+  selectedArray: object = [];
 
   constructor(
   private _formBuilder: FormBuilder,
@@ -42,8 +42,6 @@ export class RoutesAddComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
-    this.selectedArray = [{id: "bff66d65-1ba1-48ea-856a-5d530c3c68a1", name: "dupa", description: "description", code: "dupa"}];
-
     this.firstFormGroup = this._formBuilder.group({
       name: ['', Validators.required],
       description: ['', [Validators.required, Validators.maxLength(250)]]
@@ -67,7 +65,7 @@ export class RoutesAddComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
         },
         error => {console.error(error)},
-      )
+      );
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -86,9 +84,8 @@ export class RoutesAddComponent implements OnInit {
 
   convertSelected(){
     // @ts-ignore
-    let selectedArray = Array.from(this.selection._selection);
-    console.log('selected ', selectedArray[0]);
-    return selectedArray;
+    this.selectedArray = Array.from(this.selection._selection);
+    console.log('array is ', this.selectedArray)
   }
 
 }

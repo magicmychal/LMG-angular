@@ -33,7 +33,7 @@ export class HereMapComponent implements OnInit, AfterViewInit {
 
   public markerLocation: any;
 
-  private appId = environment.mappAppId;
+  private appId = environment.mapAppId;
   private appCode = environment.mapAppCode;
 
 
