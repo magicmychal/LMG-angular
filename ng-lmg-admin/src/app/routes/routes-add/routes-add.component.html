@@ -9,103 +9,105 @@
   </div>
   <div class="row">
     <div class="col-12">
-    <mat-horizontal-stepper linear>
-      <mat-step [stepControl]="firstFormGroup">
-        <form [formGroup]="firstFormGroup">
-          <ng-template matStepLabel>Fill out basic details</ng-template>
-          <div>
-            <mat-form-field appearance="outline">
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Name of the route" formControlName="name" autofocus>
-              <mat-hint>eg. 'Magical Cracow discovery'</mat-hint>
-            </mat-form-field>
+      <mat-horizontal-stepper linear>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Fill out basic details</ng-template>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input matInput placeholder="Name of the route" formControlName="name" autofocus>
+                <mat-hint>eg. 'Magical Cracow discovery'</mat-hint>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea #description matInput placeholder="Textarea" formControlName="description"></textarea>
+                <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
+                <mat-hint>Description is what should encourage tourist to take the selected route.
+                </mat-hint>
+              </mat-form-field>
+            </div>
+          </form>
+          <div class="mt-2">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
           </div>
-          <div>
-            <mat-form-field appearance="outline">
-              <mat-label>Description</mat-label>
-              <textarea #description matInput placeholder="Textarea" formControlName="description"></textarea>
-              <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
-              <mat-hint>Description is what should encourage tourist to take the selected route.
-              </mat-hint>
-            </mat-form-field>
+        </mat-step>
+        <mat-step [stepControl]="pointsFormGroup">
+          <form [formGroup]="pointsFormGroup">
+            <ng-template matStepLabel>Choose points</ng-template>
+            <div>
+              <span>Points</span>
+              <input type="hidden" formControlName="points">
+              <p>Select the points you want to include in the rout. At this step, the order <b>does not matter.</b></p>
+            </div>
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource">
+                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                <tr mat-row *matRowDef="let dataSource; columns: columnsToDisplay"></tr>
+                <ng-container matColumnDef="select">
+                  <th mat-header-cell *matHeaderCellDef>
+                    <mat-checkbox (change)="$event ? masterToggle() : null"
+                                  [checked]="selection.hasValue() && isAllSelected()"
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()">
+                    </mat-checkbox>
+                  </th>
+                  <td mat-cell *matCellDef="let row">
+                    <mat-checkbox (click)="$event.stopPropagation()"
+                                  (change)="$event ? selection.toggle(row) : null"
+                                  [checked]="selection.isSelected(row)">
+                    </mat-checkbox>
+                  </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> name</th>
+                  <td mat-cell *matCellDef="let point"> {{point.name}} </td>
+                </ng-container>
+                <ng-container matColumnDef="description">
+                  <th mat-header-cell *matHeaderCellDef> Description</th>
+                  <td mat-cell *matCellDef="let point"> {{point.description}} </td>
+                </ng-container>
+                <ng-container matColumnDef="code">
+                  <th mat-header-cell *matHeaderCellDef> Code</th>
+                  <td mat-cell *matCellDef="let point"> {{point.code}} </td>
+                </ng-container>
+              </table>
+              <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
+            </div>
+          </form>
+          <div class="mt-2">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext (click)="convertSelected()">Next</button>
           </div>
-        </form>
-        <div class="mt-2">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </mat-step>
-      <mat-step [stepControl]="pointsFormGroup">
-        <form [formGroup]="pointsFormGroup">
-          <ng-template matStepLabel>Choose points</ng-template>
-          <div>
-            <span>Points</span>
-            <input type="hidden" formControlName="points">
-            <p>Select the points you want to include in the rout. At this step, the order <b>does not matter.</b></p>
+        </mat-step>
+        <mat-step *ngFor="let selected of selectedArray; let i = index" [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>{{selected.name}}</ng-template>
+            <app-map-image width="100%" height="200px" lat="{{selected.location.latitude}}"
+                           lng="{{selected.location.longitude}}"></app-map-image>
+            {{selected.name}}
+            {{selected.location.longitude}}
+          </form>
+          <div class="mt-2">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
           </div>
-          <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource">
-              <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-              <tr mat-row *matRowDef="let dataSource; columns: columnsToDisplay"></tr>
-              <ng-container matColumnDef="select">
-                <th mat-header-cell *matHeaderCellDef>
-                  <mat-checkbox (change)="$event ? masterToggle() : null"
-                                [checked]="selection.hasValue() && isAllSelected()"
-                                [indeterminate]="selection.hasValue() && !isAllSelected()">
-                  </mat-checkbox>
-                </th>
-                <td mat-cell *matCellDef="let row">
-                  <mat-checkbox (click)="$event.stopPropagation()"
-                                (change)="$event ? selection.toggle(row) : null"
-                                [checked]="selection.isSelected(row)">
-                  </mat-checkbox>
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> name </th>
-                <td mat-cell *matCellDef="let point"> {{point.name}} </td>
-              </ng-container>
-              <ng-container matColumnDef="description">
-                <th mat-header-cell *matHeaderCellDef> Description </th>
-                <td mat-cell *matCellDef="let point"> {{point.description}} </td>
-              </ng-container>
-              <ng-container matColumnDef="code">
-                <th mat-header-cell *matHeaderCellDef> Code </th>
-                <td mat-cell *matCellDef="let point"> {{point.code}} </td>
-              </ng-container>
-            </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
-          </div>
-        </form>
-        <div class="mt-2">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext (click)="convertSelected()">Next</button>
-        </div>
-      </mat-step>
-      <mat-step *ngFor="let selected of selectedArray; let i = index" [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
-          <ng-template matStepLabel>Details for - SOMETHING</ng-template>
-          {{selected.name}}
-          {{selected.location.longitude}}
-        </form>
-        <div class="mt-2">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </mat-step>
-      <mat-step [stepControl]="lastFormGroup">
-        <form [formGroup]="lastFormGroup">
-          <ng-template matStepLabel>Summary</ng-template>
-          ...
+        </mat-step>
+        <mat-step [stepControl]="lastFormGroup">
+          <form [formGroup]="lastFormGroup">
+            <ng-template matStepLabel>Summary</ng-template>
+            ...
 
-        </form>
-        <div class="mt-2">
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
-        </div>
-      </mat-step>
+          </form>
+          <div class="mt-2">
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext>Next</button>
+          </div>
+        </mat-step>
 
-    </mat-horizontal-stepper>
+      </mat-horizontal-stepper>
     </div>
   </div>
 </div>

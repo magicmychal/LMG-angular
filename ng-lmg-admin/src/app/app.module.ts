@@ -35,6 +35,7 @@ import { MatSortModule } from '@angular/material/sort';
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import { MapImageComponent } from './maps/map-image/map-image.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     FormNavButtonsComponent,
     RoutesDashboardComponent,
     RoutesAddComponent,
+    MapImageComponent,
 
   ],
   imports: [
