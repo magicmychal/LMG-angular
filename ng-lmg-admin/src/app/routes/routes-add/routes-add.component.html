@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <mat-horizontal-stepper linear>
+      <mat-vertical-stepper linear>
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
             <ng-template matStepLabel>Fill out basic details</ng-template>
@@ -38,6 +38,7 @@
         <mat-step [stepControl]="pointsFormGroup">
           <form [formGroup]="pointsFormGroup">
             <ng-template matStepLabel>Choose points</ng-template>
+            <app-map-image width="100%" height="200px"></app-map-image>
             <div>
               <span>Points</span>
               <input type="hidden" formControlName="points">
@@ -82,17 +83,45 @@
             <button mat-button matStepperNext (click)="convertSelected()">Next</button>
           </div>
         </mat-step>
-        <mat-step *ngFor="let selected of selectedArray; let i = index" [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup">
+        <mat-step *ngFor="let selected of selectedArray; let i = index" [stepControl]="pointFormGroup">
+          <form [formGroup]="pointFormGroup" id="description-row">
             <ng-template matStepLabel>{{selected.name}}</ng-template>
-            <app-map-image width="100%" height="200px" lat="{{selected.location.latitude}}"
-                           lng="{{selected.location.longitude}}"></app-map-image>
-            {{selected.name}}
-            {{selected.location.longitude}}
+<!--            <app-map-image width="100%" height="200px" lat="{{selected.location.latitude}}"-->
+<!--                           lng="{{selected.location.longitude}}"></app-map-image>-->
+            <app-map-image width="100%" height="200px"></app-map-image>
+            <h2>{{selected.name}}</h2>
+            <p>{{selected.description}}</p>
+            <p>Code: {{selected.code}}</p>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Description for the sightseeing mode</mat-label>
+                  <textarea #sightseeing matInput placeholder="Textarea" formControlName="sightseeing"></textarea>
+                  <mat-hint align="end">{{sightseeing.value?.length || 0}}/250</mat-hint>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <mat-hint>Description is what should encourage tourist to take the selected route.
+                </mat-hint>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Description for the challenge mode</mat-label>
+                  <textarea #challenge matInput placeholder="Textarea" formControlName="challenge"></textarea>
+                  <mat-hint align="end">{{challenge.value?.length || 0}}/250</mat-hint>
+                </mat-form-field>
+              </div>
+              <div class="col-6">
+                <mat-hint>Description is what should encourage tourist to take the selected route.
+                </mat-hint>
+              </div>
+            </div>
           </form>
           <div class="mt-2">
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button matStepperNext (click)="onNextClick(i, selected.name)">Next</button>
           </div>
         </mat-step>
         <mat-step [stepControl]="lastFormGroup">
@@ -107,7 +136,7 @@
           </div>
         </mat-step>
 
-      </mat-horizontal-stepper>
+      </mat-vertical-stepper>
     </div>
   </div>
 </div>

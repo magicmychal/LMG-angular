@@ -3,9 +3,8 @@ Check out tutorial here https://developer.here.com/blog/displaying-places-on-a-h
 TODO: Adjust the initial scale of the map
  */
 import {Component, OnInit, ViewChild, ElementRef, Input, AfterViewInit, Output, EventEmitter} from '@angular/core';
-import {map, tap} from 'rxjs/operators';
+import {tap} from 'rxjs/operators';
 import {environment} from "@environments/environment";
-import {fromEvent} from "rxjs";
 
 declare var H: any;
 

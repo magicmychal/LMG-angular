@@ -21,38 +21,32 @@ export class MapImageComponent implements OnInit, AfterViewInit {
   @Input()
   public height: any;
   private platform: any;
-  private ui: any;
-  private search: any;
   private map: any;
 
   private appId = environment.mapAppId;
   private appCode = environment.mapAppCode;
 
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
     this.platform = new H.service.Platform({
       "app_id": this.appId,
       "app_code": this.appCode
     });
+  }
 
-    this.lat = 50.857448;
-    this.lng = 16.487394;
+  ngOnInit() {
   }
 
   public ngAfterViewInit() {
     let defaultLayers = this.platform.createDefaultLayers();
-    this.map = new H.Map(
+    let map = new H.Map(
       this.mapElement.nativeElement,
       defaultLayers.normal.map,
       {
-        zoom: 6,
-        center: {lat: this.lat, lng: this.lng}
+        zoom: 10,
+        center: { lat: 37.7397, lng: -121.4252 }
       }
     );
-    let behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(this.map));
-    this.ui = H.ui.UI.createDefault(this.map, defaultLayers);
   }
 
 

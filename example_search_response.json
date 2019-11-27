@@ -1,8 +1,17 @@
-code: "403150"
-description: "Location description"
-id: "3e1fe4af-617f-4758-a457-32033fce2cc9"
-location:
-latitude: 50.28889
-longitude: 19.11215
-name: "Katowice"
-name: "Location name"
+[
+  {
+    "name": "name of the point",
+    "sightseeing": "dddd",
+    "challenge": "dddd"
+  },
+  {
+    "name": "name of the point",
+    "sightseeing": "dddd",
+    "challenge": "dddd"
+  },
+  {
+    "name": "name of the point",
+    "sightseeing": "dddd",
+    "challenge": "dddd"
+  }
+]

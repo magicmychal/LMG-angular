@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {SelectionModel} from "@angular/cdk/collections";
 import {PointsService} from "../../_services/points/points.service";
@@ -10,13 +10,14 @@ import {MatTableDataSource} from "@angular/material/table";
   templateUrl: './routes-add.component.html',
   styleUrls: ['./routes-add.component.scss']
 })
-export class RoutesAddComponent implements OnInit {
+export class RoutesAddComponent implements OnInit, OnDestroy {
   // for the stepper
   isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   lastFormGroup: FormGroup;
   pointsFormGroup: FormGroup;
+  pointFormGroup: FormGroup;
 
   // for the table
   points: any;
@@ -34,6 +35,10 @@ export class RoutesAddComponent implements OnInit {
    */
   selectedArray: object = [];
 
+  // for the local storage
+  pointsDetails: object = [];
+
+
   constructor(
   private _formBuilder: FormBuilder,
   private pointsService:PointsService
@@ -42,6 +47,9 @@ export class RoutesAddComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
+    // TODO: check if array exist and ask to continue the last
+
+
     this.firstFormGroup = this._formBuilder.group({
       name: ['', Validators.required],
       description: ['', [Validators.required, Validators.maxLength(250)]]
@@ -53,7 +61,10 @@ export class RoutesAddComponent implements OnInit {
       secondCtrl: ['', Validators.required]
     });
     this.lastFormGroup = this._formBuilder.group({
-
+    });
+    this.pointFormGroup = this._formBuilder.group({
+      sightseeing: ['', [Validators.required, Validators.maxLength(250)]],
+      challenge: ['', [Validators.required, Validators.maxLength(250)]],
     });
 
     this.pointsService.getPoints()
@@ -66,6 +77,10 @@ export class RoutesAddComponent implements OnInit {
         },
         error => {console.error(error)},
       );
+  }
+
+  ngOnDestroy() {
+    localStorage.removeItem('currentPoints')
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -88,4 +103,33 @@ export class RoutesAddComponent implements OnInit {
     console.log('array is ', this.selectedArray)
   }
 
+  onNextClick(position, name){
+    console.log('position to check, ', position);
+    // gather variables
+    let challengeDescription = this.pointFormGroup.controls.challenge.value;
+    let sightseeingDescription = this.pointFormGroup.controls.sightseeing.value;
+    console.log(this.pointFormGroup.controls.challenge.value);
+    let point = {
+      "name": name,
+      "challenge": challengeDescription,
+      "sightseeing": sightseeingDescription
+    }
+    // check if the position exists
+    if(this.pointsDetails[position]){
+      console.log('istnieje')
+      this.pointsDetails[position] = point;
+    } else {
+      // add to array
+      this.pointsDetails.push(point);
+    }
+    localStorage.setItem('currentPoints', JSON.stringify(this.pointsDetails))
+    console.log('our array', this.pointsDetails)
+    // clear the form
+    this.pointFormGroup.controls.challenge.setValue(' ');
+    this.pointFormGroup.controls.sightseeing.setValue(' ');
+  }
+
+  onBackClick(){
+
+  }
 }

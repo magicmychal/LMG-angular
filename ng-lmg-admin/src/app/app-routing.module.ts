@@ -8,6 +8,7 @@ import {PointsDashboardComponent} from "./points/points-dashboard/points-dashboa
 import {PointsAddComponent} from "./points/points-add/points-add.component";
 import {RoutesDashboardComponent} from "./routes/routes-dashboard/routes-dashboard.component";
 import {RoutesAddComponent} from "./routes/routes-add/routes-add.component";
+import {MapImageComponent} from "./maps/map-image/map-image.component";
 
 
 const routes: Routes = [
@@ -44,6 +45,10 @@ const routes: Routes = [
       {path: 'add', component: RoutesAddComponent}
     ]
   },
+  {
+    path: 'map',
+    component: MapImageComponent
+  }
 ];
 
 @NgModule({
