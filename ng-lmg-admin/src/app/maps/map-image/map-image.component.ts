@@ -28,13 +28,17 @@ export class MapImageComponent implements OnInit, AfterViewInit {
 
 
   constructor() {
+/*    this.platform = new H.service.Platform({
+      "app_id": this.appId,
+      "app_code": this.appCode
+    });*/
+  }
+
+  ngOnInit() {
     this.platform = new H.service.Platform({
       "app_id": this.appId,
       "app_code": this.appCode
     });
-  }
-
-  ngOnInit() {
   }
 
   public ngAfterViewInit() {
