@@ -48,7 +48,12 @@ const routes: Routes = [
   {
     path: 'map',
     component: MapImageComponent
-  }
+  },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full'
+  },
 ];
 
 @NgModule({
