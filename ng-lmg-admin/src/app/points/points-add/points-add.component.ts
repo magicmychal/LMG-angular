@@ -8,6 +8,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PointsService} from "../../_services/points/points.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {HereMapComponent} from "../../maps/here-map/here-map.component";
+import { environment } from '@environments/environment';
 
 
 @Component({
@@ -24,10 +25,10 @@ export class PointsAddComponent implements OnInit {
   returnUrl: string;
   error = '';
 
-  lat: number;
-  lng: number;
-
   public query: string;
+
+  leafMap: any;
+  leafMarker: any;
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
@@ -52,6 +53,8 @@ export class PointsAddComponent implements OnInit {
       longitude: ['', Validators.required],
       locationName: ['', Validators.required]
     })
+
+    this.setLeafMap();
   }
 
   onSubmit() {
@@ -81,20 +84,10 @@ export class PointsAddComponent implements OnInit {
     return;
   }
 
-  clickOnMarker(location) {
-    this.f.latitude.setValue(location[0]["lat"]);
-    this.f.longitude.setValue(location[0]["lng"]);
-    this.f.locationName.setValue(location[1]);
-  }
-
   onSuccessfulSubmit(response) {
     console.log(response);
     this.router.navigate(['/points']);
     this.spinner.hide();
-  }
-
-  onNotifyClicked(message: string): void {
-    console.log('Wiadomosc do panstwa, ', message);
   }
 
   onResultClick(position) {
@@ -104,9 +97,43 @@ export class PointsAddComponent implements OnInit {
     this.f.longitude.setValue(position[1]);
     this.f.locationName.setValue(position[2]);
 
+    if (this.leafMarker) {
+      this.leafMarker.remove();
+    }
+    this.leafMap.setView(L.latLng(position[0], position[1]), 10)
+    this.leafMarker= L.marker([position[0], position[1]]).addTo(this.leafMap);
+
   }
 
   passTheResults(results) {
+  }
+
+  setLeafMap() {
+    const here = {
+      id: environment.mapAppId,
+      code: environment.mapAppCode
+    }
+    const style = 'reduced.day';
+    /*
+    Styles available:
+    normal.day
+    normal.day.grey
+    normal.day.transit
+    reduced.day
+    normal.night
+    reduced.night
+    pedestrian.day
+
+     */
+
+    const hereTileUrl = `https://2.base.maps.api.here.com/maptile/2.1/maptile/newest/${style}/{z}/{x}/{y}/512/png8?app_id=${here.id}&app_code=${here.code}&ppi=320`;
+
+    this.leafMap = L.map('mapid', {
+      center: [52.491646, 19.230499],
+      zoom: 6,
+      layers: [L.tileLayer(hereTileUrl)]
+    });
+    this.leafMap.attributionControl.addAttribution('&copy; HERE 2019');
   }
 
 }
