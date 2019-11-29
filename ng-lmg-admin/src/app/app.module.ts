@@ -36,6 +36,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import { MapImageComponent } from './maps/map-image/map-image.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,7 @@ import { MapImageComponent } from './maps/map-image/map-image.component';
     MatIconModule,
     MatTableModule,
     MatCheckboxModule,
+    MatSidenavModule
   ],
   providers: [
 

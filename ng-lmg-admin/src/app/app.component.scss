@@ -6,6 +6,16 @@ $success-color: #65DE62;
 
 $side-bar-width: 250px;
 
+.mainContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #eee;
+}
+
+
 .wrapper {
   display: flex;
   width: 100%;
