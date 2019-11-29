@@ -86,8 +86,8 @@
           </div>
         </mat-step>
 <!--        Stepper for each point-->
-        <mat-step *ngFor="let ticket of t.controls; let i = index">
-          <div [formGroup]="ticket" class="form-row">
+        <mat-step *ngFor="let point of t.controls; let i = index">
+          <div [formGroup]="point" class="form-row">
           <ng-template matStepLabel>Details for {{this.selectedArray[i].name}}</ng-template>
           <mat-form-field appearance="outline" class="width-max">
             <mat-label>Description for sightseeing</mat-label>

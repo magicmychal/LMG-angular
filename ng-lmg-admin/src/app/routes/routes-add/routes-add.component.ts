@@ -36,7 +36,6 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
 
   // dynamic form testing
   dynamicForm: FormGroup;
-  submitted = false;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -60,7 +59,7 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
     });
     this.lastFormGroup = this._formBuilder.group({});
     this.dynamicForm = this._formBuilder.group({
-      tickets: new FormArray([])
+      points: new FormArray([])
     });
 
     this.pointsService.getPoints()
@@ -81,10 +80,9 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
     localStorage.removeItem('currentPoints')
   }
 
-  // dynamic form testing
   // convenience getters for easy access to form fields
   get f() { return this.dynamicForm.controls; }
-  get t() { return this.f.tickets as FormArray; }
+  get t() { return this.f.points as FormArray; }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -110,14 +108,11 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
     this.t.clear();
 
     for (let repeat in this.selectedArray){
-      // dynamic form testing
       this.t.push(this._formBuilder.group({
         sightseeing: ['', Validators.required],
         challenge: ['', Validators.required]
       }));
     }
-
-
   }
 
   onNextClick(position, name, id) {
