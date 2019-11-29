@@ -23,6 +23,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Your Ass");
+    this.titleService.setTitle("Let Me Guide");
   }
 }

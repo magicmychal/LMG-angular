@@ -2,12 +2,13 @@
 TODO: Add error handling
 TODO: Redirect to the points summary after successful request
  */
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PointsService} from "../../_services/points/points.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {HereMapComponent} from "../../maps/here-map/here-map.component";
+
 
 @Component({
   selector: 'app-points-add',
@@ -25,7 +26,6 @@ export class PointsAddComponent implements OnInit {
 
   lat: number;
   lng: number;
-
 
   public query: string;
 

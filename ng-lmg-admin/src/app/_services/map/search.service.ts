@@ -26,13 +26,14 @@ export class SearchService {
 
   getImage(){
     // f - type of the map. 5 = svg
-    let f:number = 5;
+    let f = '1';
     // width and height is in pixels
-    let width = 500;
-    let height = 500;
-    let lat = 52.5159;
-    let lng = 13.3777;
-    let URL = `https://image.maps.api.here.com/mia/1.6/mapview?c=${{lat}}%2C${{lng}}&z=14&w=${{width}}&h=${{height}}&f=${{f}}&app_id=${environment.mapAppId}&app_code=${environment.mapAppCode}`
+    let width = '500';
+    let height = '500';
+    let lat = '52.5159';
+    let lng = '13.3777';
+    //let URL = `https://image.maps.api.here.com/mia/1.6/mapview?c=${{lat}}%2C${{lng}}&z=14&w=${{width}}&h=${{height}}&f=${{f}}&app_id=${environment.mapAppId}&app_code=${environment.mapAppCode}`
+    let URL = `https://image.maps.api.here.com/mia/1.6/mapview?c=52.5159%2C13.3777&z=14&w=500&h=400&f=1&app_id=${environment.mapAppId}&app_code=${environment.mapAppCode}`
 
     return this.http.get(URL).pipe(
       map(this.extractData)

@@ -4,8 +4,9 @@ import {Title} from "@angular/platform-browser";
 import {MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
 import {PointsService} from "../../_services/points/points.service";
 import {NgxSpinnerService} from "ngx-spinner";
-
-// import { MdbTableDirective, MdbTablePaginationComponent } from 'ng-uikit-pro-standard';
+// table
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-points-dashboard',
@@ -26,6 +27,11 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
 
   maxVisibleItems: number = 8;
 
+  // for the material table
+  points: any;
+  columnsToDisplay = ['name', 'location', 'description', 'action'];
+  dataSource: any;
+
   constructor(
     private titleService: Title,
     private cdRef: ChangeDetectorRef,
@@ -34,6 +40,9 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   ) {
   }
 
+  // paginator for the material table
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
   @HostListener('input') oninput() {
     this.mdbTablePagination.searchText = this.searchText;
   }
@@ -41,100 +50,22 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.titleService.setTitle("Your Points");
     this.spinner.show();
-    // the data will be fetched after the view is created
-    this.pointsService.getPoints().subscribe({
-      next: response => {
-        this.elements = response;
-        this.setTheTable()
-      },
-      error: err => console.log("The error is ", err)
-    })
+    // for the material table
+    this.pointsService.getPoints()
+      .subscribe(
+        results => {
+          this.points = results;
+          console.log(results);
+          this.dataSource = new MatTableDataSource(this.points);
+          this.dataSource.paginator = this.paginator;
+          this.spinner.hide();
+        },
+        error => {console.error(error)},
+      );
 
   }
 
   ngAfterViewInit() {
-  }
-
-  setTheTable() {
-
-    this.mdbTable.setDataSource(this.elements);
-    this.elements = this.mdbTable.getDataSource();
-    this.previous = this.mdbTable.getDataSource();
-
-    this.mdbTablePagination.setMaxVisibleItemsNumberTo(this.maxVisibleItems);
-
-    this.mdbTablePagination.calculateFirstItemIndex();
-    this.mdbTablePagination.calculateLastItemIndex();
-    this.cdRef.detectChanges();
-
-    this.spinner.hide();
-    //this.addNewRowAfter();
-
-  }
-
-  addNewRow() {
-    this.mdbTable.addRow({
-      id: this.elements.length.toString(),
-      first: 'Wpis ' + this.elements.length,
-      last: 'Last ' + this.elements.length,
-      handle: 'Handle ' + this.elements.length
-    });
-    this.emitDataSourceChange();
-  }
-
-  addNewRowAfter() {
-    this.mdbTable.addRowAfter(1, {id: '2', first: 'Nowy', last: 'Row', handle: 'Kopytkowy'});
-    this.mdbTable.getDataSource().forEach((el: any, index: any) => {
-      el.id = (index + 1).toString();
-    });
-    this.emitDataSourceChange();
-  }
-
-  removeLastRow() {
-    this.mdbTable.removeLastRow();
-    this.emitDataSourceChange();
-    this.mdbTable.rowRemoved().subscribe((data: any) => {
-      console.log(data);
-    });
-  }
-
-  removeRow() {
-    this.mdbTable.removeRow(1);
-    this.mdbTable.getDataSource().forEach((el: any, index: any) => {
-      el.id = (index + 1).toString();
-    });
-    this.emitDataSourceChange();
-    this.mdbTable.rowRemoved().subscribe((data: any) => {
-      console.log(data);
-    });
-  }
-
-  emitDataSourceChange() {
-    this.mdbTable.dataSourceChange().subscribe((data: any) => {
-      console.log(data);
-    });
-  }
-
-  searchItems() {
-    const prev = this.mdbTable.getDataSource();
-
-    if (!this.searchText) {
-      this.mdbTable.setDataSource(this.previous);
-      this.elements = this.mdbTable.getDataSource();
-    }
-
-    if (this.searchText) {
-      this.elements = this.mdbTable.searchLocalDataBy(this.searchText);
-      this.mdbTable.setDataSource(prev);
-    }
-
-    this.mdbTablePagination.calculateFirstItemIndex();
-    this.mdbTablePagination.calculateLastItemIndex();
-
-    this.mdbTable.searchDataObservable(this.searchText).subscribe(() => {
-      this.mdbTablePagination.calculateFirstItemIndex();
-      this.mdbTablePagination.calculateLastItemIndex();
-    });
   }
 
 }

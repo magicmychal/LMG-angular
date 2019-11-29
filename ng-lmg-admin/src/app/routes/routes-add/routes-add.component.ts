@@ -5,7 +5,6 @@ import {PointsService} from "../../_services/points/points.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {environment} from "@environments/environment";
-import {kebabToCamelCase} from "codelyzer/util/utils";
 import {SearchService} from "../../_services/map/search.service";
 
 declare var H: any;
