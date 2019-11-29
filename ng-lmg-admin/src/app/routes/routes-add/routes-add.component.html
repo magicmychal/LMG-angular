@@ -9,10 +9,10 @@
   </div>
   <div class="row">
     <div class="col-12">
+      <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
       <mat-vertical-stepper linear>
 <!--        First stepper to fill the basic info-->
-        <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
+        <mat-step [stepControl]="dynamicForm">
             <ng-template matStepLabel>Fill out basic details</ng-template>
             <div>
               <mat-form-field appearance="outline">
@@ -30,15 +30,13 @@
                 </mat-hint>
               </mat-form-field>
             </div>
-          </form>
           <div class="mt-2">
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
           </div>
         </mat-step>
 <!--        Choose points -->
-        <mat-step [stepControl]="pointsFormGroup">
-          <form [formGroup]="pointsFormGroup">
+        <mat-step [stepControl]="dynamicForm">
             <ng-template matStepLabel>Choose points</ng-template>
             <div>
               <span>Points</span>
@@ -79,7 +77,6 @@
               </table>
               <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
             </div>
-          </form>
           <div class="mt-2">
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext (click)="initiatePoints()">Next</button>
@@ -91,15 +88,15 @@
           <ng-template matStepLabel>Details for {{this.selectedArray[i].name}}</ng-template>
           <mat-form-field appearance="outline" class="width-max">
             <mat-label>Description for sightseeing</mat-label>
-            <textarea #description formControlName="sightseeing" matInput placeholder="Textarea"></textarea>
-            <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
+            <textarea #sightseeing formControlName="sightseeing" matInput placeholder="Textarea"></textarea>
+            <mat-hint align="end">{{sightseeing.value?.length || 0}}/250</mat-hint>
             <mat-hint>Description is what should encourage tourist to take the selected route.
             </mat-hint>
           </mat-form-field>
           <mat-form-field appearance="outline" class="width-max">
             <mat-label>Description for challenge</mat-label>
-            <textarea #description formControlName="challenge" matInput placeholder="Textarea"></textarea>
-            <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
+            <textarea #challenge formControlName="challenge" matInput placeholder="Textarea"></textarea>
+            <mat-hint align="end">{{challenge.value?.length || 0}}/250</mat-hint>
             <mat-hint>Description is what should encourage tourist to take the selected route.
             </mat-hint>
           </mat-form-field>
@@ -110,18 +107,17 @@
           </div>
         </mat-step>
 <!--        Summary stepper-->
-        <mat-step [stepControl]="lastFormGroup">
-          <form [formGroup]="lastFormGroup">
+        <mat-step [stepControl]="dynamicForm">
             <ng-template matStepLabel>Summary</ng-template>
             ...
 
-          </form>
           <div class="mt-2">
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
           </div>
         </mat-step>
       </mat-vertical-stepper>
+      </form>
     </div>
   </div>
 </div>

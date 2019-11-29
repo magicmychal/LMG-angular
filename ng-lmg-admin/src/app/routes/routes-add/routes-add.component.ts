@@ -12,10 +12,6 @@ import {MatTableDataSource} from "@angular/material/table";
   styleUrls: ['./routes-add.component.scss']
 })
 export class RoutesAddComponent implements OnInit, OnDestroy {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  lastFormGroup: FormGroup;
-  pointsFormGroup: FormGroup;
 
   // for the table
   points: any;
@@ -47,18 +43,9 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
     // TODO: check if array exist and ask to continue the last
 
 
-    this.firstFormGroup = this._formBuilder.group({
-      name: ['', Validators.required],
-      description: ['', [Validators.required, Validators.maxLength(250)]]
-    });
-    this.pointsFormGroup = this._formBuilder.group({
-      points: ['']
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
-    this.lastFormGroup = this._formBuilder.group({});
     this.dynamicForm = this._formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(250)]],
       points: new FormArray([])
     });
 
@@ -115,6 +102,9 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
     }
   }
 
+  onSubmit(){
+
+  }
   onNextClick(position, name, id) {
 
   }
