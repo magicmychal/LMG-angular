@@ -1,9 +1,21 @@
-<label for="location">Location</label>
+<!--<label for="location">Location</label>
 <div class="input-group input-group-lg">
   <input [formControl]="queryField" type="text" id="location" name="location" class="form-control"
-         placeholder="Start typing to search...">
-</div>
-<div class="list-group">
+         placeholder="Start typing to search..." autocomplete="off">
+</div>-->
+<mat-form-field appearance="outline" class="width-max">
+  <mat-label>Location search</mat-label>
+  <input [formControl]="queryField" [matAutocomplete]="auto" matInput placeholder="Name of the route" name="location"
+         autocomplete="off">
+  <mat-autocomplete #auto="matAutocomplete">
+    <mat-option *ngFor="let result of results | keyvalue" [value]="result.value.title">
+      <span>{{result.value.title}}</span> |
+      <small>{{result.value.category.title}}</small>
+      <small>{{result.value.vicinity}}</small>
+    </mat-option>
+  </mat-autocomplete>
+</mat-form-field>
+<!--<div class="list-group">
   <a *ngFor="let result of results | keyvalue" (click)="onResultClick(result.value.position)"
      class="list-group-item list-group-item-action">
     <div class="d-flex w-100 justify-content-between">
@@ -12,4 +24,4 @@
     </div>
     <small>{{result.value.vicinity}}</small>
   </a>
-</div>
+</div>-->

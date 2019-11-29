@@ -9,20 +9,27 @@
   <form [formGroup]="addNewPointForm" (ngSubmit)="onSubmit()">
     <div class="row">
       <div class="col-8">
-        <label for="name">Name</label>
-        <div class="input-group input-group-lg">
-          <input type="text" id="name" formControlName="name" class="form-control" aria-label="Sizing example input"
-                 aria-describedby="inputGroup-sizing-lg">
+        <div>
+          <mat-form-field appearance="outline" class="width-max">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name of the route" formControlName="name" autofocus>
+            <mat-hint>eg. 'Magical Cracow discovery'</mat-hint>
+          </mat-form-field>
         </div>
-        <label for="description">Description</label>
-        <div class="input-group">
-        <textarea class="form-control" id="description" formControlName="description"
-                  aria-label="With textarea"></textarea>
+        <div>
+          <mat-form-field appearance="outline" class="width-max">
+            <mat-label>Description</mat-label>
+            <textarea #description matInput placeholder="Textarea" formControlName="description"></textarea>
+            <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
+            <mat-hint>Description is what should encourage tourist to take the selected route.
+            </mat-hint>
+          </mat-form-field>
         </div>
+        <hr>
+        <app-map-search class="width-max" id="map-search" (notifyPosition)="onResultClick($event)" (notifyResults)="passTheResults($event)"></app-map-search>
         <div class="input-group">
-          <!-- <app-map-search id="map-search" (notifyPosition)="onResultClick($event)" (notifyResults)="passTheResults($event)"></app-map-search>-->
-          <app-here-map lat="50.279278" lng="19.176333"
-                        width="500px" height="500px" (getMarkerLocation)="clickOnMarker($event)"></app-here-map>
+          <!--<app-here-map lat="50.279278" lng="19.176333"
+                        width="500px" height="500px" (getMarkerLocation)="clickOnMarker($event)"></app-here-map>-->
           <input type="hidden" formControlName="latitude">
           <input type="hidden" formControlName="longitude">
           <input type="hidden" formControlName="locationName">
