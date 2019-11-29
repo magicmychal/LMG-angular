@@ -5,12 +5,13 @@
 </div>-->
 <mat-form-field appearance="outline" class="width-max">
   <mat-label>Location search</mat-label>
-  <input [formControl]="queryField" [matAutocomplete]="auto" matInput placeholder="Name of the route" name="location"
-         autocomplete="off">
+  <input [formControl]="queryField" [matAutocomplete]="auto" autocomplete="off" matInput name="location"
+         placeholder="Name of the route">
   <mat-autocomplete #auto="matAutocomplete">
-    <mat-option *ngFor="let result of results | keyvalue" [value]="result.value.title">
+    <mat-option (onSelectionChange)="onResultClick(result.value.position,result.value.title)" *ngFor="let result of results | keyvalue"
+                [value]="result.value.title">
       <span>{{result.value.title}}</span> |
-      <small>{{result.value.category.title}}</small>
+      <small>{{result.value.category.title}}</small> |<br>
       <small>{{result.value.vicinity}}</small>
     </mat-option>
   </mat-autocomplete>

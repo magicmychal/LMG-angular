@@ -2,7 +2,7 @@
 TODO: Add error handling
 TODO: Redirect to the points summary after successful request
  */
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PointsService} from "../../_services/points/points.service";
@@ -50,12 +50,11 @@ export class PointsAddComponent implements OnInit {
       description: ['', [Validators.required, Validators.maxLength(250)]],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
-      locationName: ['']
+      locationName: ['', Validators.required]
     })
   }
 
   onSubmit() {
-
 
     this.submitted = true;
 
@@ -88,28 +87,26 @@ export class PointsAddComponent implements OnInit {
     this.f.locationName.setValue(location[1]);
   }
 
-  onSuccessfulSubmit(response){
+  onSuccessfulSubmit(response) {
     console.log(response);
     this.router.navigate(['/points']);
     this.spinner.hide();
   }
 
-  onNotifyClicked(message: string):void{
-    console.log('Wiadomosc do panstwa, ',message);
+  onNotifyClicked(message: string): void {
+    console.log('Wiadomosc do panstwa, ', message);
   }
 
-  onResultClick(position){
+  onResultClick(position) {
     // set the map in the right position and show the marker
-    console.log(position);
-    this.lat = position[0];
-    this.lng = position[1];
-    this.map.changeMapPosition();
+
+    this.f.latitude.setValue(position[0]);
+    this.f.longitude.setValue(position[1]);
+    this.f.locationName.setValue(position[2]);
 
   }
 
-  passTheResults(results){
-  console.log('wyniki,', results.results);
-  this.map.passPlaces(results.results);
+  passTheResults(results) {
   }
 
 }

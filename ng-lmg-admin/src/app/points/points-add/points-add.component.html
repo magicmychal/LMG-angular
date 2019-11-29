@@ -6,33 +6,34 @@
         red star) for the best results</p>
     </div>
   </div>
-  <form [formGroup]="addNewPointForm" (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" [formGroup]="addNewPointForm">
     <div class="row">
       <div class="col-8">
         <div>
           <mat-form-field appearance="outline" class="width-max">
             <mat-label>Name</mat-label>
-            <input matInput placeholder="Name of the route" formControlName="name" autofocus>
+            <input autofocus formControlName="name" matInput placeholder="Name of the route">
             <mat-hint>eg. 'Magical Cracow discovery'</mat-hint>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="outline" class="width-max">
             <mat-label>Description</mat-label>
-            <textarea #description matInput placeholder="Textarea" formControlName="description"></textarea>
+            <textarea #description formControlName="description" matInput placeholder="Textarea"></textarea>
             <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
             <mat-hint>Description is what should encourage tourist to take the selected route.
             </mat-hint>
           </mat-form-field>
         </div>
         <hr>
-        <app-map-search class="width-max" id="map-search" (notifyPosition)="onResultClick($event)" (notifyResults)="passTheResults($event)"></app-map-search>
+        <app-map-search (notifyPosition)="onResultClick($event)" (notifyResults)="passTheResults($event)" class="width-max"
+                        id="map-search"></app-map-search>
         <div class="input-group">
           <!--<app-here-map lat="50.279278" lng="19.176333"
                         width="500px" height="500px" (getMarkerLocation)="clickOnMarker($event)"></app-here-map>-->
-          <input type="hidden" formControlName="latitude">
-          <input type="hidden" formControlName="longitude">
-          <input type="hidden" formControlName="locationName">
+          <input formControlName="latitude" type="hidden">
+          <input formControlName="longitude" type="hidden">
+          <input formControlName="locationName" type="hidden">
         </div>
       </div>
       <div class="col-md-auto px-lg-2">
@@ -41,7 +42,7 @@
     </div>
     <!--  <app-form-nav-buttons cancel="true" save="true"></app-form-nav-buttons>-->
   </form>
-  <ngx-spinner [fullScreen]="true" type="cube-transition" size="medium">
+  <ngx-spinner [fullScreen]="true" size="medium" type="cube-transition">
     <p class="loading">Adding a new point. You will be redirected in a moment</p>
   </ngx-spinner>
 </div>

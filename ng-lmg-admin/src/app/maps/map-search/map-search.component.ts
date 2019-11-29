@@ -43,9 +43,9 @@ export class MapSearchComponent implements OnInit {
     this.notifyResults.emit(results);
   }
 
-  onResultClick(position: number | Float32Array | "auto" | string){
-    const lat = position[0];
-    const lng = position[1];
+  onResultClick(position, locationName){
+    // @ts-ignore
+    position.push(locationName)
     this.notifyPosition.emit(position);
   }
 }
