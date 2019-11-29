@@ -29,6 +29,7 @@ export class PointsAddComponent implements OnInit {
 
   leafMap: any;
   leafMarker: any;
+  private L: any;
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
@@ -132,7 +133,7 @@ export class PointsAddComponent implements OnInit {
     this.leafMap = L.map('mapid', {
       center: [52.491646, 19.230499],
       zoom: 6,
-      layers: [L.tileLayer(hereTileUrl)]
+      layers: [this.L.tileLayer(hereTileUrl)]
     });
     this.leafMap.attributionControl.addAttribution('&copy; HERE 2019');
   }
