@@ -22,6 +22,7 @@ export class MapSearchComponent implements OnInit {
   constructor(private _searchService: SearchService) {
   }
 
+
   ngOnInit(): void {
     this.queryField.valueChanges
       .subscribe(queryField => this._searchService.search(queryField)

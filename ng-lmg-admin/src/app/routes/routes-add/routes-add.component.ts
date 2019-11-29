@@ -42,16 +42,10 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
   // for the local storage
   pointsDetails: object = [];
 
-  // for the map
-  // @ts-ignore
-  @ViewChild("map")
-  public mapElement: ElementRef;
-  private platform: any;
-  private map: any;
-  private mapImage;
 
-  private appId = environment.mapAppId;
-  private appCode = environment.mapAppCode;
+  // for the map
+  leafMap: any;
+  leafMarker: any;
 
   constructor(
   private _formBuilder: FormBuilder,
@@ -92,12 +86,6 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
         },
         error => {console.error(error)},
       );
-
-    // for the map
-    this.platform = new H.service.Platform({
-      "app_id": this.appId,
-      "app_code": this.appCode
-    });
   }
 
   ngOnDestroy() {
@@ -123,19 +111,9 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
     // @ts-ignore
     this.selectedArray = Array.from(this.selection._selection);
     console.log('array is ', this.selectedArray)
-    // initiate map
-    //this.displayMap();
   }
 
-  onNextClick(position, name){
-    // get the map
-    this.mapService.getImage()
-      .subscribe(
-        (response) => {
-          this.mapImage = response;
-          console.log(response)
-        });
-
+  onNextClick(position, name, id){
     console.log('position to check, ', position);
     // gather variables
     let challengeDescription = this.pointFormGroup.controls.challenge.value;
@@ -161,28 +139,40 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
     this.pointFormGroup.controls.challenge.setValue(' ');
     this.pointFormGroup.controls.sightseeing.setValue(' ');
 
-    this.displayMap();
+    //  this.displayMap(id);
   }
 
   onBackClick(){
 
   }
 
-  displayMap(){
-    // make sure that the previous map is destroyed
+  displayMap(id){
+    console.log('displaying the map for ', id)
+    const here = {
+      id: environment.mapAppId,
+      code: environment.mapAppCode
+    }
+    const style = 'reduced.day';
+    /*
+    Styles available:
+    normal.day
+    normal.day.grey
+    normal.day.transit
+    reduced.day
+    normal.night
+    reduced.night
+    pedestrian.day
+     */
 
-    // initiate map
-    console.log('create map')
-    let defaultLayers = this.platform.createDefaultLayers();
-    console.log('layers', defaultLayers)
-    let map = new H.Map(
-      this.mapElement.nativeElement,
-      defaultLayers.normal.map,
-      {
-        zoom: 10,
-        center: { lat: 37.7397, lng: -121.4252 }
-      }
-    );
-    console.log('map', map)
+    const hereTileUrl = `https://2.base.maps.api.here.com/maptile/2.1/maptile/newest/${style}/{z}/{x}/{y}/512/png8?app_id=${here.id}&app_code=${here.code}&ppi=320`;
+
+    // @ts-ignore
+    // @ts-ignore
+    let map = L.map('map'+id, {
+      center: [52.491646, 19.230499],
+      zoom: 6,
+      layers: [L.tileLayer(hereTileUrl)]
+    });
+    //this.leafMap.attributionControl.addAttribution('&copy; HERE 2019');
   }
 }

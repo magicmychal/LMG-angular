@@ -58,15 +58,12 @@ export class PointsAddComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.addNewPointForm.invalid) {
       console.warn('form is invalid');
       return;
     }
-
     this.loading = true;
     const name = this.f.name.value;
     const desc = this.f.description.value;
@@ -86,8 +83,8 @@ export class PointsAddComponent implements OnInit {
 
   onSuccessfulSubmit(response) {
     console.log(response);
-    this.router.navigate(['/points']);
     this.spinner.hide();
+    this.router.navigate(['/points']);
   }
 
   onResultClick(position) {
@@ -100,7 +97,9 @@ export class PointsAddComponent implements OnInit {
     if (this.leafMarker) {
       this.leafMarker.remove();
     }
+    // @ts-ignore
     this.leafMap.setView(L.latLng(position[0], position[1]), 10)
+    // @ts-ignore
     this.leafMarker= L.marker([position[0], position[1]]).addTo(this.leafMap);
 
   }
@@ -128,6 +127,8 @@ export class PointsAddComponent implements OnInit {
 
     const hereTileUrl = `https://2.base.maps.api.here.com/maptile/2.1/maptile/newest/${style}/{z}/{x}/{y}/512/png8?app_id=${here.id}&app_code=${here.code}&ppi=320`;
 
+    // @ts-ignore
+    // @ts-ignore
     this.leafMap = L.map('mapid', {
       center: [52.491646, 19.230499],
       zoom: 6,

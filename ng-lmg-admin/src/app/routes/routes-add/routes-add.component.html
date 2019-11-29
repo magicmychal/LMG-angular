@@ -46,14 +46,15 @@
               <p>Select the points you want to include in the rout. At this step, the order <b>does not matter.</b></p>
             </div>
             <div class="mat-elevation-z8">
-              <table mat-table [dataSource]="dataSource">
+              <table mat-table [dataSource]="dataSource" class="full-width-table">
                 <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
                 <tr mat-row *matRowDef="let dataSource; columns: columnsToDisplay"></tr>
                 <ng-container matColumnDef="select">
                   <th mat-header-cell *matHeaderCellDef>
                     <mat-checkbox (change)="$event ? masterToggle() : null"
                                   [checked]="selection.hasValue() && isAllSelected()"
-                                  [indeterminate]="selection.hasValue() && !isAllSelected()">
+                                  [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    class="checkbox-column">
                     </mat-checkbox>
                   </th>
                   <td mat-cell *matCellDef="let row">
@@ -68,7 +69,7 @@
                   <td mat-cell *matCellDef="let point"> {{point.name}} </td>
                 </ng-container>
                 <ng-container matColumnDef="description">
-                  <th mat-header-cell *matHeaderCellDef> Description</th>
+                  <th mat-header-cell *matHeaderCellDef class="description-column"> Description</th>
                   <td mat-cell *matCellDef="let point"> {{point.description}} </td>
                 </ng-container>
                 <ng-container matColumnDef="code">
@@ -88,11 +89,8 @@
         <mat-step *ngFor="let selected of selectedArray; let i = index" [stepControl]="pointFormGroup">
           <form [formGroup]="pointFormGroup" id="description-row">
             <ng-template matStepLabel>{{selected.name}}</ng-template>
-            <div>{{mapImage}}</div>
             <h2>{{selected.name}}</h2>
             <p>{{selected.description}}</p>
-            <p>Code: {{selected.code}}</p>
-
             <div class="row">
               <div class="col-6">
                 <mat-form-field appearance="outline">
@@ -122,7 +120,7 @@
           </form>
           <div class="mt-2">
             <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext (click)="onNextClick(i, selected.name)">Next</button>
+            <button mat-button matStepperNext (click)="onNextClick(i, selected.name, selected.id)">Next</button>
           </div>
         </mat-step>
 <!--        Summary stepper-->
