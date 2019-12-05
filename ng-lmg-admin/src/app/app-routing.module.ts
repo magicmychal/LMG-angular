@@ -9,6 +9,7 @@ import {PointsAddComponent} from "./points/points-add/points-add.component";
 import {RoutesDashboardComponent} from "./routes/routes-dashboard/routes-dashboard.component";
 import {RoutesAddComponent} from "./routes/routes-add/routes-add.component";
 import {MapImageComponent} from "./maps/map-image/map-image.component";
+import {MapSearchComponent} from "./maps/map-search/map-search.component";
 
 
 const routes: Routes = [
@@ -47,7 +48,7 @@ const routes: Routes = [
   },
   {
     path: 'map',
-    component: MapImageComponent
+    component: MapSearchComponent
   },
   {
     path: '',

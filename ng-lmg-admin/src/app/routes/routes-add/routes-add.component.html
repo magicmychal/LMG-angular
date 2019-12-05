@@ -23,12 +23,28 @@
             </div>
             <div>
               <mat-form-field appearance="outline">
+                <mat-label>Decoy</mat-label>
+                <input autofocus formControlName="decoy" matInput placeholder="Decoy">
+                <mat-hint>Something that will attract tourist to click.</mat-hint>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field appearance="outline">
                 <mat-label>Description</mat-label>
                 <textarea #description formControlName="description" matInput placeholder="Textarea"></textarea>
                 <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
                 <mat-hint>Description is what should encourage tourist to take the selected route.
                 </mat-hint>
               </mat-form-field>
+            </div>
+            <!--map-->
+            <app-map-search (notifyPosition)="onResultClick($event)" class="width-max"
+                                      id="map-search"></app-map-search>
+            <div id="mapid"></div>
+            <div>
+              <input type="hidden" formControlName="lat">
+              <input type="hidden" formControlName="lng">
+              <input type="hidden" formControlName="locName">
             </div>
             <div class="mt-2">
               <button mat-button matStepperPrevious type="button">Back</button>
@@ -114,7 +130,8 @@
               <mat-card-content>
                 Points:
                 <mat-list>
-                  <mat-list-item *ngFor="let selectedPoint of this.selectedArray"> {{selectedPoint.name}} </mat-list-item>
+                  <mat-list-item
+                    *ngFor="let selectedPoint of this.selectedArray"> {{selectedPoint.name}} </mat-list-item>
                 </mat-list>
               </mat-card-content>
             </mat-card>

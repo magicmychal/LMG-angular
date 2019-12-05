@@ -1,9 +1,12 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SelectionModel} from "@angular/cdk/collections";
 import {PointsService} from "../../_services/points/points.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
+import {RoutesService} from "../../_services/routes/routes.service";
+import {environment} from "@environments/environment";
+import {map} from "rxjs/operators";
 
 
 @Component({
@@ -11,7 +14,7 @@ import {MatTableDataSource} from "@angular/material/table";
   templateUrl: './routes-add.component.html',
   styleUrls: ['./routes-add.component.scss']
 })
-export class RoutesAddComponent implements OnInit, OnDestroy {
+export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
 
   // for the table
   points: any;
@@ -22,6 +25,11 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
   initialSelection = [];
   allowMultiSelect = true;
   selection = new SelectionModel(this.allowMultiSelect, this.initialSelection);
+
+  // for the leaf map
+  leafMap: any;
+  leafMarker: any;
+  private L: any;
 
   /*
   Selection is the type of set, which is hard to operate on.
@@ -36,6 +44,7 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
   constructor(
     private _formBuilder: FormBuilder,
     private pointsService: PointsService,
+    private routeService: RoutesService
   ) {
   }
 
@@ -45,6 +54,10 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
 
     this.dynamicForm = this._formBuilder.group({
       name: ['', Validators.required],
+      decoy: ['', Validators.required],
+      lat: ['', Validators.required],
+      lng: ['', Validators.required],
+      locName: ['', Validators.required],
       description: ['', [Validators.required, Validators.maxLength(250)]],
       points: new FormArray([])
     });
@@ -61,6 +74,10 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
           console.error(error)
         },
       );
+  }
+
+  ngAfterViewInit() {
+    this.setLeafMap();
   }
 
   ngOnDestroy() {
@@ -105,7 +122,9 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(){
-  console.log('submited')
+  console.log('submited', this.f)
+    this.routeService.addNewRoute(this.f)
+
   }
   onNextClick(position, name, id) {
 
@@ -113,6 +132,42 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
 
   testClick(){
     console.log('this is what came from it,', this.dynamicForm)
+  }
+
+  onResultClick(position) {
+    // set the map in the right position and show the marker
+
+    this.f.lat.setValue(position[0]);
+    this.f.lng.setValue(position[1]);
+    this.f.locName.setValue(position[2]);
+
+    if (this.leafMarker) {
+      this.leafMarker.remove();
+    }
+    // @ts-ignore
+    this.leafMap.setView(L.latLng(position[0], position[1]), 10)
+    // @ts-ignore
+    this.leafMarker= L.marker([position[0], position[1]]).addTo(this.leafMap);
+
+  }
+
+  setLeafMap() {
+    const here = {
+      id: environment.mapAppId,
+      code: environment.mapAppCode
+    }
+    const style = 'reduced.day';
+
+    let map = new L.Map('mapid');
+
+    // create the tile layer with correct attribution
+    var osmUrl=`https://2.base.maps.api.here.com/maptile/2.1/maptile/newest/${style}/{z}/{x}/{y}/512/png8?app_id=${here.id}&app_code=${here.code}&ppi=320`;
+    var osmAttrib='&copy; HERE 2019';
+    this.leafMap = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 20, attribution: osmAttrib});
+
+    // start the map over Holland
+    map.setView(new L.LatLng(52.491646, 19.230499),6);
+    map.addLayer(this.leafMap);
   }
 
 }

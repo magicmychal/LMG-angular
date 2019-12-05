@@ -35,8 +35,7 @@ export class PointsAddComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private pointsService: PointsService,
-              private spinner: NgxSpinnerService,
-              private map: HereMapComponent) {
+              private spinner: NgxSpinnerService,) {
     this.query = "Krakow";
   }
 
