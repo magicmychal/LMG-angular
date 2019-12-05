@@ -57,7 +57,6 @@ export class PointsAddComponent implements OnInit {
     })
 
     this.leafMap = this.mapViewService.setLeafMap();
-    //this.setLeafMap();
   }
 
   onSubmit() {
@@ -110,34 +109,5 @@ export class PointsAddComponent implements OnInit {
   passTheResults(results) {
   }
 
-  setLeafMap() {
-    const here = {
-      id: environment.mapAppId,
-      code: environment.mapAppCode
-    }
-    const style = 'reduced.day';
-    /*
-    Styles available:
-    normal.day
-    normal.day.grey
-    normal.day.transit
-    reduced.day
-    normal.night
-    reduced.night
-    pedestrian.day
-
-     */
-
-    const hereTileUrl = `https://2.base.maps.api.here.com/maptile/2.1/maptile/newest/${style}/{z}/{x}/{y}/512/png8?app_id=${here.id}&app_code=${here.code}&ppi=320`;
-
-    // @ts-ignore
-    // @ts-ignore
-    this.leafMap = L.map('mapid', {
-      center: [52.491646, 19.230499],
-      zoom: 6,
-      layers: [L.tileLayer(hereTileUrl)]
-    });
-    this.leafMap.attributionControl.addAttribution('&copy; HERE 2019');
-  }
 
 }

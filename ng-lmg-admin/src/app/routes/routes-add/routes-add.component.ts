@@ -7,6 +7,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {RoutesService} from "../../_services/routes/routes.service";
 import {environment} from "@environments/environment";
 import {map} from "rxjs/operators";
+import {MapViewService} from "../../_services/map/map-view.service";
 
 
 @Component({
@@ -44,7 +45,8 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   constructor(
     private _formBuilder: FormBuilder,
     private pointsService: PointsService,
-    private routeService: RoutesService
+    private routeService: RoutesService,
+    private mapViewService: MapViewService
   ) {
   }
 
@@ -77,7 +79,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.setLeafMap();
+    this.leafMap = this.mapViewService.setLeafMap();
   }
 
   ngOnDestroy() {
@@ -149,25 +151,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     // @ts-ignore
     this.leafMarker= L.marker([position[0], position[1]]).addTo(this.leafMap);
 
-  }
-
-  setLeafMap() {
-    const here = {
-      id: environment.mapAppId,
-      code: environment.mapAppCode
-    }
-    const style = 'reduced.day';
-
-    let map = new L.Map('mapid');
-
-    // create the tile layer with correct attribution
-    var osmUrl=`https://2.base.maps.api.here.com/maptile/2.1/maptile/newest/${style}/{z}/{x}/{y}/512/png8?app_id=${here.id}&app_code=${here.code}&ppi=320`;
-    var osmAttrib='&copy; HERE 2019';
-    this.leafMap = new L.TileLayer(osmUrl, {minZoom: 8, maxZoom: 20, attribution: osmAttrib});
-
-    // start the map over Holland
-    map.setView(new L.LatLng(52.491646, 19.230499),6);
-    map.addLayer(this.leafMap);
   }
 
 }
