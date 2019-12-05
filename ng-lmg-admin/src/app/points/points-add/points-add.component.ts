@@ -10,6 +10,7 @@ import {PointsService} from "../../_services/points/points.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {HereMapComponent} from "../../maps/here-map/here-map.component";
 import { environment } from '@environments/environment';
+import {MapViewService} from "../../_services/map/map-view.service";
 
 
 @Component({
@@ -36,7 +37,7 @@ export class PointsAddComponent implements OnInit {
               private router: Router,
               private pointsService: PointsService,
               private spinner: NgxSpinnerService,
-              private map: HereMapComponent) {
+              private mapViewService: MapViewService) {
     this.query = "Krakow";
   }
 
@@ -55,7 +56,8 @@ export class PointsAddComponent implements OnInit {
       locationName: ['', Validators.required]
     })
 
-    this.setLeafMap();
+    this.leafMap = this.mapViewService.setLeafMap();
+    //this.setLeafMap();
   }
 
   onSubmit() {
