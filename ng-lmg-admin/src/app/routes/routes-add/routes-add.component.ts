@@ -113,8 +113,11 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
    // this.dynamicForm.reset();
    this.pointsArray.clear();
 
-    for (let repeat in this.selectedArray){
+    // @ts-ignore
+    for (let point of this.selectedArray){
+      let pointId = point.id
       this.pointsArray.push(this._formBuilder.group({
+        pointId: [pointId],
         sightseeing: [''],
         challenge: ['']
       }));
