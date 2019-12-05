@@ -1,4 +1,5 @@
 /*
+POINTS ADD COMPONENT TS
 TODO: Add error handling
 TODO: Redirect to the points summary after successful request
  */
@@ -29,13 +30,13 @@ export class PointsAddComponent implements OnInit {
 
   leafMap: any;
   leafMarker: any;
-  private L: any;
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
               private pointsService: PointsService,
-              private spinner: NgxSpinnerService,) {
+              private spinner: NgxSpinnerService,
+              private map: HereMapComponent) {
     this.query = "Krakow";
   }
 
@@ -132,7 +133,7 @@ export class PointsAddComponent implements OnInit {
     this.leafMap = L.map('mapid', {
       center: [52.491646, 19.230499],
       zoom: 6,
-      layers: [this.L.tileLayer(hereTileUrl)]
+      layers: [L.tileLayer(hereTileUrl)]
     });
     this.leafMap.attributionControl.addAttribution('&copy; HERE 2019');
   }
