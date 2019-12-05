@@ -69,7 +69,7 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
 
   // convenience getters for easy access to form fields
   get f() { return this.dynamicForm.controls; }
-  get t() { return this.f.points as FormArray; }
+  get pointsArray() { return this.f.points as FormArray; }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -91,22 +91,28 @@ export class RoutesAddComponent implements OnInit, OnDestroy {
     this.selectedArray = Array.from(this.selection._selection);
     console.log('array is ', this.selectedArray)
 
-    this.dynamicForm.reset();
-    this.t.clear();
+   // this.dynamicForm.reset();
+   this.pointsArray.clear();
 
     for (let repeat in this.selectedArray){
-      this.t.push(this._formBuilder.group({
-        sightseeing: ['', Validators.required],
-        challenge: ['', Validators.required]
+      this.pointsArray.push(this._formBuilder.group({
+        sightseeing: [''],
+        challenge: ['']
       }));
     }
+
+    console.log('the forms is', this.pointsArray)
   }
 
   onSubmit(){
-
+  console.log('submited')
   }
   onNextClick(position, name, id) {
 
+  }
+
+  testClick(){
+    console.log('this is what came from it,', this.dynamicForm)
   }
 
 }

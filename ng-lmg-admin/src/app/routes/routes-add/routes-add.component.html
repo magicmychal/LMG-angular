@@ -9,113 +9,122 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()">
-      <mat-vertical-stepper linear>
-<!--        First stepper to fill the basic info-->
-        <mat-step [stepControl]="dynamicForm">
+      <form (ngSubmit)="onSubmit()" [formGroup]="dynamicForm">
+        <mat-vertical-stepper linear>
+          <!--        First stepper to fill the basic info-->
+          <mat-step [stepControl]="dynamicForm">
             <ng-template matStepLabel>Fill out basic details</ng-template>
             <div>
               <mat-form-field appearance="outline">
                 <mat-label>Name</mat-label>
-                <input matInput placeholder="Name of the route" formControlName="name" autofocus>
+                <input autofocus formControlName="name" matInput placeholder="Name of the route">
                 <mat-hint>eg. 'Magical Cracow discovery'</mat-hint>
               </mat-form-field>
             </div>
             <div>
               <mat-form-field appearance="outline">
                 <mat-label>Description</mat-label>
-                <textarea #description matInput placeholder="Textarea" formControlName="description"></textarea>
+                <textarea #description formControlName="description" matInput placeholder="Textarea"></textarea>
                 <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
                 <mat-hint>Description is what should encourage tourist to take the selected route.
                 </mat-hint>
               </mat-form-field>
             </div>
-          <div class="mt-2">
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </mat-step>
-<!--        Choose points -->
-        <mat-step [stepControl]="dynamicForm">
+            <div class="mt-2">
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="button">Next</button>
+            </div>
+          </mat-step>
+          <!--        Choose points -->
+          <mat-step>
             <ng-template matStepLabel>Choose points</ng-template>
             <div>
               <span>Points</span>
               <p>Select the points you want to include in the rout. At this step, the order <b>does not matter.</b></p>
             </div>
             <div class="mat-elevation-z8">
-              <table mat-table [dataSource]="dataSource" class="full-width-table">
-                <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-                <tr mat-row *matRowDef="let dataSource; columns: columnsToDisplay"></tr>
+              <table [dataSource]="dataSource" class="full-width-table" mat-table>
+                <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+                <tr *matRowDef="let dataSource; columns: columnsToDisplay" mat-row></tr>
                 <ng-container matColumnDef="select">
-                  <th mat-header-cell *matHeaderCellDef>
+                  <th *matHeaderCellDef mat-header-cell>
                     <mat-checkbox (change)="$event ? masterToggle() : null"
                                   [checked]="selection.hasValue() && isAllSelected()"
                                   [indeterminate]="selection.hasValue() && !isAllSelected()"
-                    class="checkbox-column">
+                                  class="checkbox-column">
                     </mat-checkbox>
                   </th>
-                  <td mat-cell *matCellDef="let row">
-                    <mat-checkbox (click)="$event.stopPropagation()"
-                                  (change)="$event ? selection.toggle(row) : null"
+                  <td *matCellDef="let row" mat-cell>
+                    <mat-checkbox (change)="$event ? selection.toggle(row) : null"
+                                  (click)="$event.stopPropagation()"
                                   [checked]="selection.isSelected(row)">
                     </mat-checkbox>
                   </td>
                 </ng-container>
                 <ng-container matColumnDef="name">
-                  <th mat-header-cell *matHeaderCellDef> name</th>
-                  <td mat-cell *matCellDef="let point"> {{point.name}} </td>
+                  <th *matHeaderCellDef mat-header-cell> name</th>
+                  <td *matCellDef="let point" mat-cell> {{point.name}} </td>
                 </ng-container>
                 <ng-container matColumnDef="description">
-                  <th mat-header-cell *matHeaderCellDef class="description-column"> Description</th>
-                  <td mat-cell *matCellDef="let point"> {{point.description}} </td>
+                  <th *matHeaderCellDef class="description-column" mat-header-cell> Description</th>
+                  <td *matCellDef="let point" mat-cell> {{point.description}} </td>
                 </ng-container>
                 <ng-container matColumnDef="code">
-                  <th mat-header-cell *matHeaderCellDef> Code</th>
-                  <td mat-cell *matCellDef="let point"> {{point.code}} </td>
+                  <th *matHeaderCellDef mat-header-cell> Code</th>
+                  <td *matCellDef="let point" mat-cell> {{point.code}} </td>
                 </ng-container>
               </table>
               <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
             </div>
-          <div class="mt-2">
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext (click)="initiatePoints()">Next</button>
-          </div>
-        </mat-step>
-<!--        Stepper for each point-->
-        <mat-step *ngFor="let point of t.controls; let i = index">
-          <div [formGroup]="point" class="form-row">
-          <ng-template matStepLabel>Details for {{this.selectedArray[i].name}}</ng-template>
-          <mat-form-field appearance="outline" class="width-max">
-            <mat-label>Description for sightseeing</mat-label>
-            <textarea #sightseeing formControlName="sightseeing" matInput placeholder="Textarea"></textarea>
-            <mat-hint align="end">{{sightseeing.value?.length || 0}}/250</mat-hint>
-            <mat-hint>Description is what should encourage tourist to take the selected route.
-            </mat-hint>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="width-max">
-            <mat-label>Description for challenge</mat-label>
-            <textarea #challenge formControlName="challenge" matInput placeholder="Textarea"></textarea>
-            <mat-hint align="end">{{challenge.value?.length || 0}}/250</mat-hint>
-            <mat-hint>Description is what should encourage tourist to take the selected route.
-            </mat-hint>
-          </mat-form-field>
-          </div>
-          <div class="mt-2">
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </mat-step>
-<!--        Summary stepper-->
-        <mat-step [stepControl]="dynamicForm">
+            <div class="mt-2">
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button (click)="initiatePoints()" mat-button matStepperNext type="button">Next</button>
+            </div>
+          </mat-step>
+          <!--        Stepper for each point-->
+          <mat-step *ngFor="let point of pointsArray.controls; let i = index" [stepControl]="dynamicForm">
+            <div [formGroup]="point" class="form-row">
+              <ng-template matStepLabel>Details for {{this.selectedArray[i].name}}</ng-template>
+              <mat-form-field appearance="outline" class="width-max">
+                <mat-label>Description for sightseeing</mat-label>
+                <textarea #sightseeing formControlName="sightseeing" matInput placeholder="Textarea"></textarea>
+                <mat-hint align="end">{{sightseeing.value?.length || 0}}/250</mat-hint>
+                <mat-hint>Description is what should encourage tourist to take the selected route.
+                </mat-hint>
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="width-max">
+                <mat-label>Description for challenge</mat-label>
+                <textarea #challenge formControlName="challenge" matInput placeholder="Textarea"></textarea>
+                <mat-hint align="end">{{challenge.value?.length || 0}}/250</mat-hint>
+                <mat-hint>Description is what should encourage tourist to take the selected route.
+                </mat-hint>
+              </mat-form-field>
+              <div class="mt-2">
+                <button mat-button matStepperPrevious type="button">Back</button>
+                <button (click)="testClick()" mat-button matStepperNext>Next</button>
+              </div>
+            </div>
+          </mat-step>
+          <!--        Summary stepper-->
+          <mat-step [stepControl]="dynamicForm">
             <ng-template matStepLabel>Summary</ng-template>
-            ...
+            <mat-card>
+              <mat-card-title>Route: <b>{{this.f.name.value}}</b></mat-card-title>
+              <mat-card-content>Description <b>{{this.f.description.value}}</b></mat-card-content>
+              <mat-card-content>
+                Points:
+                <mat-list>
+                  <mat-list-item *ngFor="let selectedPoint of this.selectedArray"> {{selectedPoint.name}} </mat-list-item>
+                </mat-list>
+              </mat-card-content>
+            </mat-card>
 
-          <div class="mt-2">
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
-        </mat-step>
-      </mat-vertical-stepper>
+            <div class="mt-2">
+              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperNext type="submit">Submit</button>
+            </div>
+          </mat-step>
+        </mat-vertical-stepper>
       </form>
     </div>
   </div>

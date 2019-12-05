@@ -38,6 +38,10 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import { MapImageComponent } from './maps/map-image/map-image.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {FormlyModule} from "@ngx-formly/core";
+import {FormlyMaterialModule} from "@ngx-formly/material";
+import {MatListModule} from "@angular/material/list";
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -78,7 +82,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatTableModule,
     MatCheckboxModule,
     MatSidenavModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    FormlyModule.forRoot(),
+    FormlyMaterialModule,
+    MatListModule,
+    MatCardModule
   ],
   providers: [
 

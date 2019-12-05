@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {environment} from "@environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
+import {observableToBeFn} from "rxjs/internal/testing/TestScheduler";
+import {Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +32,10 @@ export class PointsService {
   getPoints() {
     return this.http.get<any>(`${environment.apiUrl}/point`).pipe(
       map(this.extractData));
+  }
+
+  getPointsArray(): Observable<any[]>{
+    return this.http.get<any>(`${environment.apiUrl}/point`);
   }
 
   private extractData(res: Response) {
