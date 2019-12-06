@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {environment} from "@environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoutesService {
+
+  routeId: any;
 
   constructor(private http: HttpClient) {
   }
@@ -35,42 +38,57 @@ export class RoutesService {
     };
 
     //add new route
-    /* this.http.post<any>(`${environment.apiUrl}/road`, body)
+     this.http.post<any>(`${environment.apiUrl}/road`, body)
        .subscribe(
          (response) => {
            let routeId = response.id;
+           console.log('new route', response)
+           // if everything goes well, add targets
+           console.log('id', routeId)
+           this.addTargets(points, routeId)
+
          },
        (error) => {
            // do something to stop
-         console.error(error);
+         console.error('new route', error);
          return;
        }
-         )*/
-    //add targets
-    /*
-    Every point that was passes will be
-    {
-      "challenge_tip":"challenge tip",
-      "explore_tip":"explore tip",
-      "point_id":"903d739c-7c24-4955-bfc1-d591dd8803d7",
-      "road_id":"457f359d-6671-46e7-b430-693f10f00735",
-      "next_target_id":"17d9054a-d85a-49f5-8d3a-ce80e56b6d31" (optional)
-    }
-   */
+         )
+  }
 
+  addTargets(points, routeId){
+// loop through the points
     for (let index in points) {
+      // set the next index; used to define if the next_target_id is possible
       let nextInLine = Number(index) + 1;
+      // @ts-ignore
       let body = {
         "challenge_tip": points[index].challenge,
         "explore_tip": points[index].sightseeing,
         "point_id": points[index].pointId,
-        "road_id": locName
+        "road_id": routeId
       };
 
       if (typeof points[nextInLine] !== 'undefined'){
+        // @ts-ignore
         body.next_target_id = points[nextInLine].pointId
       }
-      console.log(body)
+
+      console.log(index, 'point', body)
+
+      this.http.post<any>(`${environment.apiUrl}/target`, body)
+        .subscribe(
+          (response) => {
+            console.log('new target', response)
+          },
+          (error) => {
+            // do something to stop
+            console.error('new target', error);
+            return;
+          }
+        )
+
+
     }
   }
 
