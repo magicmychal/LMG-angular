@@ -1,53 +1,51 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "@environments/environment";
-import {map} from "rxjs/operators";
-import {type} from "os";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoutesService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
-  addNewRoute(form){
+  addNewRoute(form) {
     //deconstruct the form
     /*
     First, we need to get the name of the route and description, decoy, and location
      */
-    let name = form.name.value
-    let decoy = form.decoy.value
-    let description = form.description.value
-    let lat = form.lat.value
-    let lng = form.lng.value
-    let locName = form.locName.value
+    let name = form.name.value;
+    let decoy = form.decoy.value;
+    let description = form.description.value;
+    let lat = form.lat.value;
+    let lng = form.lng.value;
+    let locName = form.locName.value;
 
-    let points: [] = form.points.value
+    let points: [] = form.points.value;
 
     const body = {
       "name": name,
-      "decoy":decoy,
-      "description":description,
-      "location":{
-        "name":locName,
-        "longitude":lat,
-        "latitude":lng
+      "decoy": decoy,
+      "description": description,
+      "location": {
+        "name": locName,
+        "longitude": lat,
+        "latitude": lng
       }
-    }
+    };
 
     //add new route
-   /* this.http.post<any>(`${environment.apiUrl}/road`, body)
-      .subscribe(
-        (response) => {
-          let routeId = response.id;
-        },
-      (error) => {
-          // do something to stop
-        console.error(error);
-        return;
-      }
-        )*/
+    /* this.http.post<any>(`${environment.apiUrl}/road`, body)
+       .subscribe(
+         (response) => {
+           let routeId = response.id;
+         },
+       (error) => {
+           // do something to stop
+         console.error(error);
+         return;
+       }
+         )*/
     //add targets
     /*
     Every point that was passes will be
@@ -60,26 +58,19 @@ export class RoutesService {
     }
    */
 
-    for (let index in points){
-      let nextInLine = Number(index) + 1
-
+    for (let index in points) {
+      let nextInLine = Number(index) + 1;
       let body = {
         "challenge_tip": points[index].challenge,
         "explore_tip": points[index].sightseeing,
         "point_id": points[index].pointId,
         "road_id": locName
-      }
+      };
 
-      if (points[nextInLine].pointId !== undefined){
+      if (typeof points[nextInLine] !== 'undefined'){
         body.next_target_id = points[nextInLine].pointId
       }
-
       console.log(body)
-    }
-
-    for (let point of points){
-      console.log(point)
-
     }
   }
 
