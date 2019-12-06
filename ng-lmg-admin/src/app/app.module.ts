@@ -42,6 +42,7 @@ import {FormlyModule} from "@ngx-formly/core";
 import {FormlyMaterialModule} from "@ngx-formly/material";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import {MatCardModule} from "@angular/material/card";
     FormlyModule.forRoot(),
     FormlyMaterialModule,
     MatListModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [
 

@@ -8,6 +8,7 @@ import {RoutesService} from "../../_services/routes/routes.service";
 import {environment} from "@environments/environment";
 import {map} from "rxjs/operators";
 import {MapViewService} from "../../_services/map/map-view.service";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -46,7 +47,8 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     private _formBuilder: FormBuilder,
     private pointsService: PointsService,
     private routeService: RoutesService,
-    private mapViewService: MapViewService
+    private mapViewService: MapViewService,
+    private router: Router
   ) {
   }
 
@@ -127,12 +129,17 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   }
 
   onSubmit(){
-  console.log('submited', this.f)
-    this.routeService.addNewRoute(this.f)
-
+    // @ts-ignore
+    this.routeService.addNewRoute(this.f) == true ? this.onSuccessSubmit() : this.onFailSubmit()
   }
-  onNextClick(position, name, id) {
 
+  onSuccessSubmit(){
+    console.log('success')
+    this.router.navigate(['/routes']);
+  }
+
+  onFailSubmit(){
+    console.log('error')
   }
 
   testClick(){

@@ -37,14 +37,16 @@
                 </mat-hint>
               </mat-form-field>
             </div>
-            <!--map-->
-            <app-map-search (notifyPosition)="onResultClick($event)" class="width-max"
-                                      id="map-search"></app-map-search>
-            <div id="mapid"></div>
             <div>
-              <input type="hidden" formControlName="lat">
-              <input type="hidden" formControlName="lng">
-              <input type="hidden" formControlName="locName">
+              <!--map-->
+              <app-map-search (notifyPosition)="onResultClick($event)"
+                              id="map-search"></app-map-search>
+              <div id="mapid"></div>
+            </div>
+            <div>
+              <input formControlName="lat" type="hidden">
+              <input formControlName="lng" type="hidden">
+              <input formControlName="locName" type="hidden">
             </div>
             <div class="mt-2">
               <button mat-button matStepperPrevious type="button">Back</button>
@@ -101,7 +103,7 @@
           <mat-step *ngFor="let point of pointsArray.controls; let i = index" [stepControl]="dynamicForm">
             <div [formGroup]="point" class="form-row">
               <ng-template matStepLabel>Details for {{this.selectedArray[i].name}}</ng-template>
-              <input type="hidden" formControlName="pointId" value="{{this.selectedArray[i].id}}">
+              <input formControlName="pointId" type="hidden" value="{{this.selectedArray[i].id}}">
               <mat-form-field appearance="outline" class="width-max">
                 <mat-label>Description for sightseeing</mat-label>
                 <textarea #sightseeing formControlName="sightseeing" matInput placeholder="Textarea"></textarea>

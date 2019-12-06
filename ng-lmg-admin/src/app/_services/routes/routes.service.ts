@@ -13,7 +13,7 @@ export class RoutesService {
   }
 
   addNewRoute(form) {
-    //deconstruct the form
+
     /*
     First, we need to get the name of the route and description, decoy, and location
      */
@@ -45,13 +45,13 @@ export class RoutesService {
            console.log('new route', response)
            // if everything goes well, add targets
            console.log('id', routeId)
-           this.addTargets(points, routeId)
-
+           let addTargets = this.addTargets(points, routeId)
+           return addTargets == true ?  true :  false
          },
        (error) => {
            // do something to stop
          console.error('new route', error);
-         return;
+         return false;
        }
          )
   }
@@ -84,12 +84,13 @@ export class RoutesService {
           (error) => {
             // do something to stop
             console.error('new target', error);
-            return;
+            return false;
           }
         )
-
-
     }
+
+    // done, we can return
+    return true;
   }
 
 }
