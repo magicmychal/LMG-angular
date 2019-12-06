@@ -43,6 +43,9 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   // dynamic form testing
   dynamicForm: FormGroup;
 
+  // spinner
+  spinner = false;
+
   constructor(
     private _formBuilder: FormBuilder,
     private pointsService: PointsService,
@@ -129,6 +132,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   }
 
   onSubmit(){
+    this.spinner = true;
     // @ts-ignore
     this.routeService.addNewRoute(this.f) == true ? this.onSuccessSubmit() : this.onFailSubmit()
   }
@@ -139,13 +143,10 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   }
 
   onFailSubmit(){
-    console.log('error')
+    this.spinner = false;
+    console.log('error');
+    // give user feedback
   }
-
-  testClick(){
-    console.log('this is what came from it,', this.dynamicForm)
-  }
-
   onResultClick(position) {
     // set the map in the right position and show the marker
 

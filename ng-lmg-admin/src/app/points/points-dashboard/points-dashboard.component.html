@@ -40,7 +40,5 @@
     </div>
 
   </div>
-  <ngx-spinner [fullScreen]="true" type="cube-transition" size="medium">
-    <p class="loading">Loading points, hold on a moment please...</p>
-  </ngx-spinner>
+  <app-mat-spinner-overlay overlay="true" *ngIf="materialSpinner"></app-mat-spinner-overlay>
 </div>

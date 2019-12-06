@@ -32,6 +32,8 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   columnsToDisplay = ['name', 'location', 'description', 'action'];
   dataSource: any;
 
+  materialSpinner = false;
+
   constructor(
     private titleService: Title,
     private cdRef: ChangeDetectorRef,
@@ -49,7 +51,7 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.titleService.setTitle("Your Points");
-    this.spinner.show();
+    this.materialSpinner = true;
     // for the material table
     this.pointsService.getPoints()
       .subscribe(
@@ -58,7 +60,7 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
           console.log(results);
           this.dataSource = new MatTableDataSource(this.points);
           this.dataSource.paginator = this.paginator;
-          this.spinner.hide();
+          this.materialSpinner = false;
         },
         error => {console.error(error)},
       );

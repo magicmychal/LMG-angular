@@ -43,6 +43,7 @@ import {FormlyMaterialModule} from "@ngx-formly/material";
 import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import { MatSpinnerOverlayComponent } from './addons/mat-spinner-overlay/mat-spinner-overlay.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     RoutesDashboardComponent,
     RoutesAddComponent,
     MapImageComponent,
+    MatSpinnerOverlayComponent,
 
   ],
   imports: [
