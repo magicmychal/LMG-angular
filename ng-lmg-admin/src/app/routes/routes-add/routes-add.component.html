@@ -110,7 +110,7 @@
               <input formControlName="pointId" type="hidden" value="{{this.selectedArray[i].id}}">
               <mat-form-field appearance="outline" class="width-max">
                 <mat-label>Description for sightseeing</mat-label>
-                <textarea #sightseeing formControlName="sightseeing" matInput placeholder="Textarea"></textarea>
+                <textarea #sightseeing formControlName="sightseeing" matInput placeholder="Textarea" autofocus></textarea>
                 <mat-hint align="end">{{sightseeing.value?.length || 0}}/250</mat-hint>
                 <mat-hint>Description is what should encourage tourist to take the selected route.
                 </mat-hint>

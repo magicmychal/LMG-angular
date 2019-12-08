@@ -166,6 +166,9 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   onFailSubmit(){
     this.spinner = false;
     console.log('error');
+    this._snackbar.open('Error submitting the form, check the fields and try again.', 'Dismiss', {
+      duration: 3500
+    });
     // give user feedback
   }
   onResultClick(position) {
