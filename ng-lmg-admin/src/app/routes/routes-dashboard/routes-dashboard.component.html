@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-8">
       <h1 class="display-3">Your routes</h1>
-      <p class="lead">Routes are collections of points that together create a trip for the tourists. Routes have two
+      <p class="lead">Routes are collections of roads that together create a trip for the tourists. Routes have two
         distinct categories - sightseeing mode and a challenge mode. Please remember to provide additional description
         for both of the modes. </p>
     </div>
@@ -13,48 +13,30 @@
     </div>
   </div>
   <hr>
-  <div class="row">
-    <label for="search-input">Search</label>
-    <div class="col-md-6 mx-auto">
-      <div class="md-form">
-        <input type="text" class="form-control" [(ngModel)]="searchText" (keyup)="searchItems()" id="search-input"
-               mdbInput>
-      </div>
+  <div class="">
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource">
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let dataSource; columns: columnsToDisplay"></tr>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let road"> {{road.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef>Location</th>
+          <td mat-cell *matCellDef="let road"> {{road.location['name']}} </td>
+        </ng-container>
+        <ng-container matColumnDef="decoy" class="description-column">
+          <th mat-header-cell *matHeaderCellDef class="description-column">Decoy</th>
+          <td mat-cell *matCellDef="let road" > {{road.description | slice:0:140}}... </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let road"> Show on map </td>
+        </ng-container>
+      </table>
+      <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
     </div>
-    <table mdbTable #tableEl="mdbTable" stickyHeader="true" hover="true" striped="true" class="z-depth-1">
-      <thead class="sticky-top">
-      <tr>
-        <th *ngFor="let head of headElements; let i = index" [mdbTableSort]="elements" [sortBy]="headElements[i]"
-            scope="col">{{head | titlecase}}
-          <mdb-icon fas icon="sort"></mdb-icon>
-        </th>
-      </tr>
-      </thead>
-      <tbody #row>
-      <tr mdbTableCol (rowCreated)="onRowCreate($event)" (rowRemoved)="onRowRemove($event)"
-          *ngFor="let el of elements; let i = index">
-        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-            scope="row">{{el.name}}</th>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
-            class="red-text">{{el.location['name']}}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.description}}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          <button type="button" class="btn btn-outline-secondary">Show on map</button>
-          <button type="button" class="btn btn-outline-secondary" disabled>Edit</button>
-        </td>
-      </tr>
-      </tbody>
-      <tfoot class="grey lighten-5 w-100">
-      <tr>
-        <td colspan="4">
-          <mdb-table-pagination [tableEl]="tableEl" paginationAlign=""
-                                [searchDataSource]="elements"></mdb-table-pagination>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
   </div>
-  <ngx-spinner [fullScreen]="true" type="cube-transition" size="medium">
-    <p class="loading">Loading points, hold on a moment please...</p>
-  </ngx-spinner>
+  <app-mat-spinner-overlay overlay="true" diameter="30" strokeWidth="5" *ngIf="materialSpinner"></app-mat-spinner-overlay>
 </div>

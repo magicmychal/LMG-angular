@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "@environments/environment";
+import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,11 @@ export class RoutesService {
   routeId: any;
 
   constructor(private http: HttpClient) {
+  }
+
+  getRoads(){
+    return this.http.get<any>(`${environment.apiUrl}/road`).pipe(
+      map(this.extractData));
   }
 
   addNewRoute(form) {
@@ -91,6 +97,11 @@ export class RoutesService {
 
     // done, we can return
     return true;
+  }
+
+  private extractData(res: Response) {
+    let body = res;
+    return body || {};
   }
 
 }

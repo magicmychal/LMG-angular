@@ -14,18 +14,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./points-dashboard.component.scss']
 })
 export class PointsDashboardComponent implements OnInit, AfterViewInit {
-  @ViewChild(MdbTableDirective, {static: true}) mdbTable: MdbTableDirective;
-  @ViewChild(MdbTablePaginationComponent, {static: true}) mdbTablePagination: MdbTablePaginationComponent;
-  @ViewChild('row', {static: true}) row: ElementRef;
-
-  // variables for the table
-  elements: any = [];
-  headElements = ['Name', 'Location', 'Short description', 'Action'];
-
-  searchText: string = '';
-  previous: string;
-
-  maxVisibleItems: number = 8;
+   searchText: string = '';
 
   // for the material table
   points: any;
@@ -33,6 +22,9 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   dataSource: any;
 
   materialSpinner = false;
+
+  // paginator for the material table
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   constructor(
     private titleService: Title,
@@ -42,12 +34,7 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   ) {
   }
 
-  // paginator for the material table
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
-  @HostListener('input') oninput() {
-    this.mdbTablePagination.searchText = this.searchText;
-  }
 
   ngOnInit() {
     this.titleService.setTitle("Your Points");
