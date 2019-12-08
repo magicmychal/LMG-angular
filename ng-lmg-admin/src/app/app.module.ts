@@ -44,6 +44,7 @@ import {MatListModule} from "@angular/material/list";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { MatSpinnerOverlayComponent } from './addons/mat-spinner-overlay/mat-spinner-overlay.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -90,7 +91,8 @@ import { MatSpinnerOverlayComponent } from './addons/mat-spinner-overlay/mat-spi
     FormlyMaterialModule,
     MatListModule,
     MatCardModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSnackBarModule
   ],
   providers: [
 

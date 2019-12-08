@@ -15,10 +15,14 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { AuthenticationService } from '../_services';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    private _snackBar: MatSnackBar
+  ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
@@ -26,6 +30,14 @@ export class ErrorInterceptor implements HttpInterceptor {
         // auto logout if 401 response returned from api && the user is currently logged in
         this.authenticationService.logout();
         location.reload(true);
+      }
+      if (err.status === 500){
+        let errorSnackbar = this._snackBar.open("An error occur, please reload the page", "Reload", {
+          duration: 60000,
+        });
+        errorSnackbar.afterDismissed().subscribe(null, null, () => {
+          window.location.reload();
+        })
       }
 
       const error = err.error.message || err.statusText;

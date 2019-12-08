@@ -13,8 +13,10 @@
     </div>
   </div>
   <hr>
-  <div class="">
+  <div>
+    <div class="error">
 
+    </div>
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource">
         <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
@@ -40,5 +42,5 @@
     </div>
 
   </div>
-  <app-mat-spinner-overlay overlay="true" *ngIf="materialSpinner"></app-mat-spinner-overlay>
+  <app-mat-spinner-overlay overlay="true" diameter="30" strokeWidth="5" *ngIf="materialSpinner"></app-mat-spinner-overlay>
 </div>

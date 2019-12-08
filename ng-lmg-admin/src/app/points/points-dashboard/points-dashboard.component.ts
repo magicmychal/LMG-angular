@@ -3,10 +3,10 @@ import {Component, OnInit, ElementRef, HostListener, AfterViewInit, ViewChild, C
 import {Title} from "@angular/platform-browser";
 import {MdbTableDirective, MdbTablePaginationComponent} from "angular-bootstrap-md";
 import {PointsService} from "../../_services/points/points.service";
-import {NgxSpinnerService} from "ngx-spinner";
 // table
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-points-dashboard',
@@ -38,7 +38,7 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
     private titleService: Title,
     private cdRef: ChangeDetectorRef,
     private pointsService: PointsService,
-    private spinner: NgxSpinnerService
+    private _snackBar: MatSnackBar
   ) {
   }
 
@@ -62,7 +62,16 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
           this.dataSource.paginator = this.paginator;
           this.materialSpinner = false;
         },
-        error => {console.error(error)},
+        error => {
+          this.materialSpinner = false;
+          console.error('the error is', error)
+          let errorSnackbar = this._snackBar.open("An error occur, please reload the page", "Reload", {
+            duration: 60000,
+          });
+          errorSnackbar.afterDismissed().subscribe(null, null, () => {
+            window.location.reload();
+          })
+        },
       );
 
   }
