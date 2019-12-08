@@ -119,6 +119,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     this.selectedArray = Array.from(this.selection._selection);
     console.log('array is ', this.selectedArray)
 
+    // @ts-ignore
     if(this.selectedArray.length == 0 ){
       console.log('0')
       this.mainStepper.previous();
