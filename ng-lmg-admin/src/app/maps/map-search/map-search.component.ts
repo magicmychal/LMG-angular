@@ -27,12 +27,10 @@ export class MapSearchComponent implements OnInit {
     this.queryField.valueChanges
       .subscribe(queryField => this._searchService.search(queryField)
         .subscribe(response => {
-          // TODO: Response status not working properly.
           if (response === 400) {
             return;
           } else {
             this.showResults(response)
-            //this.results = response.json().artists.items;
           }
         }));
   }

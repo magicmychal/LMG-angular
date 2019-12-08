@@ -27,7 +27,6 @@ export class PointsAddComponent implements OnInit {
   returnUrl: string;
   error = '';
 
-  public query: string;
 
   leafMap: any;
   leafMarker: any;
@@ -38,7 +37,6 @@ export class PointsAddComponent implements OnInit {
               private pointsService: PointsService,
               private spinner: NgxSpinnerService,
               private mapViewService: MapViewService) {
-    this.query = "Krakow";
   }
 
   // convenience getter for easy access to form fields
