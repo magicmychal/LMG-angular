@@ -5,10 +5,9 @@ import {PointsService} from "../../_services/points/points.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {RoutesService} from "../../_services/routes/routes.service";
-import {environment} from "@environments/environment";
-import {map} from "rxjs/operators";
 import {MapViewService} from "../../_services/map/map-view.service";
 import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 
 @Component({
@@ -27,6 +26,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   initialSelection = [];
   allowMultiSelect = true;
   selection = new SelectionModel(this.allowMultiSelect, this.initialSelection);
+
 
   // for the leaf map
   leafMap: any;
@@ -51,7 +51,8 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     private pointsService: PointsService,
     private routeService: RoutesService,
     private mapViewService: MapViewService,
-    private router: Router
+    private router: Router,
+    private _snackbar: MatSnackBar
   ) {
   }
 
@@ -62,6 +63,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     this.dynamicForm = this._formBuilder.group({
       name: ['', Validators.required],
       decoy: ['', Validators.required],
+      pointsValidation: ['', Validators.required],
       lat: ['', Validators.required],
       lng: ['', Validators.required],
       locName: ['', Validators.required],
@@ -132,9 +134,16 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   }
 
   onSubmit(){
-    this.spinner = true;
-    // @ts-ignore
-    this.routeService.addNewRoute(this.f) == true ? this.onSuccessSubmit() : this.onFailSubmit()
+    if (this.dynamicForm.invalid){
+      this._snackbar.open('Form invalid. Check the form for any mistakes', 'Dismiss', {
+        duration: 3500
+      });
+      return;
+    } else {
+      this.spinner = true;
+      // @ts-ignore
+      this.routeService.addNewRoute(this.f) == true ? this.onSuccessSubmit() : this.onFailSubmit()
+    }
   }
 
   onSuccessSubmit(){
