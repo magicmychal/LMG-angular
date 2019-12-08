@@ -8,6 +8,7 @@ import {RoutesService} from "../../_services/routes/routes.service";
 import {MapViewService} from "../../_services/map/map-view.service";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatStepper} from "@angular/material/stepper";
 
 
 @Component({
@@ -40,6 +41,8 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   selectedArray: object = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
+  @ViewChild('stepper', {static: false}) private mainStepper: MatStepper;
+
   // dynamic form testing
   dynamicForm: FormGroup;
 
@@ -63,7 +66,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     this.dynamicForm = this._formBuilder.group({
       name: ['', Validators.required],
       decoy: ['', Validators.required],
-      pointsValidation: ['', Validators.required],
       lat: ['', Validators.required],
       lng: ['', Validators.required],
       locName: ['', Validators.required],
@@ -112,10 +114,19 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   }
 
   initiatePoints() {
-    // convert selected to the array
+        // convert selected to the array
     // @ts-ignore
     this.selectedArray = Array.from(this.selection._selection);
     console.log('array is ', this.selectedArray)
+
+    if(this.selectedArray.length == 0 ){
+      console.log('0')
+      this.mainStepper.previous();
+      this._snackbar.open('Select points', 'Dismiss', {
+        duration: 3500
+      });
+    }
+
 
    // this.dynamicForm.reset();
    this.pointsArray.clear();
@@ -172,5 +183,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     this.leafMarker= L.marker([position[0], position[1]]).addTo(this.leafMap);
 
   }
+
 
 }
