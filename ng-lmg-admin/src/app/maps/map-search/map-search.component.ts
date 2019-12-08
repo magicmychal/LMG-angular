@@ -1,5 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormControl} from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import {SearchService} from "../../_services/map/search.service";
 
 
@@ -17,7 +17,7 @@ export class MapSearchComponent implements OnInit {
   @Output() notifyResults = new EventEmitter();
 
   results: any[] = [];
-  queryField: FormControl = new FormControl();
+  queryField: FormControl = new FormControl('', Validators.required);
 
   constructor(private _searchService: SearchService) {
   }
