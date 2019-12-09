@@ -1,16 +1,18 @@
 <div class="wrapper">
   <div class="row">
-    <h2>Let Me Guide</h2>
+    <div class="col-12">
+      <h2>Let Me Guide</h2>
+    </div>
   </div>
   <hr>
   <mat-nav-list *ngIf="currentUser" class="navbar">
     <a mat-list-item class="nav-item nav-link" [routerLink]="'/'">
       <mat-icon>dashboard</mat-icon> Dashboard
     </a>
-    <a mat-list-item class="nav-item nav-link" [routerLink]="'/points'">
+    <a mat-list-item class="nav-item nav-link" [routerLink]="'/points'" routerLinkActive="active" >
       <mat-icon>outlined_flag</mat-icon> Points
     </a>
-    <a mat-list-item class="nav-item nav-link" [routerLink]="'/routes'">
+    <a mat-list-item class="nav-item nav-link" [routerLink]="'/routes'" routerLinkActive="active-link">
       <mat-icon>near_me</mat-icon> Routes
     </a>
     <a mat-list-item class="nav-item nav-link" *ngIf="!currentUser" [routerLink]="'/login'">
