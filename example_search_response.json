@@ -1,17 +1,22 @@
-[
-  {
-    "name": "name of the point",
-    "sightseeing": "dddd",
-    "challenge": "dddd"
+{
+  "name": "ss",
+  "decoy": "sss",
+  "description": "sss",
+  "location": {
+    "name": "Q-Club",
+    "longitude": 18.252533,
+    "latitude": 52.232586
   },
-  {
-    "name": "name of the point",
-    "sightseeing": "dddd",
-    "challenge": "dddd"
-  },
-  {
-    "name": "name of the point",
-    "sightseeing": "dddd",
-    "challenge": "dddd"
-  }
-]
+  "targets": [
+    {
+      "challenge_tip": "sss",
+      "explore_tip": "ss",
+      "next_target_id": null
+    },
+    {
+      "challenge_tip": "sss",
+      "explore_tip": "sss",
+      "next_target_id": null
+    }
+  ]
+}
