@@ -43,7 +43,16 @@ export class RoutesDashboardComponent implements OnInit {
             this.dataSource.paginator = this.paginator;
             this.materialSpinner = false;
         },
-        error => console.log(error)
+        error => {
+          this.materialSpinner = false;
+          console.error('the error is', error)
+          let errorSnackbar = this._snackBar.open("An error occur, please reload the page", "Reload", {
+            duration: 60000,
+          });
+          errorSnackbar.afterDismissed().subscribe(null, null, () => {
+            window.location.reload();
+          })
+        }
       )
   }
 

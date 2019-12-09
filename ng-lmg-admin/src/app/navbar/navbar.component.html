@@ -1,20 +1,24 @@
 <div class="wrapper">
   <div class="row">
-    <h1>LMG</h1>
     <h2>Let Me Guide</h2>
   </div>
-  <div class="row" *ngIf="currentUser">
-    <ul>
-      <a class="nav-item nav-link" [routerLink]="'/'">Summary</a>
-      <a class="nav-item nav-link" [routerLink]="'/points'">Points</a>
-      <a class="nav-item nav-link" [routerLink]="'/routes'">Routes</a>
-    </ul>
-  </div>
   <hr>
-  <div class="row">
-    <a class="nav-item nav-link" [routerLink]="'/login'" *ngIf="!currentUser">Login</a>
-  </div>
-  <div class="row" *ngIf="currentUser">
-    <a class="nav-item nav-link" (click)="logout()">Logout</a>
-  </div>
+  <mat-nav-list *ngIf="currentUser" class="navbar">
+    <a mat-list-item class="nav-item nav-link" [routerLink]="'/'">
+      <mat-icon>dashboard</mat-icon> Dashboard
+    </a>
+    <a mat-list-item class="nav-item nav-link" [routerLink]="'/points'">
+      <mat-icon>outlined_flag</mat-icon> Points
+    </a>
+    <a mat-list-item class="nav-item nav-link" [routerLink]="'/routes'">
+      <mat-icon>near_me</mat-icon> Routes
+    </a>
+    <a mat-list-item class="nav-item nav-link" *ngIf="!currentUser" [routerLink]="'/login'">
+      <mat-icon>near_me</mat-icon> Login
+    </a>
+    <a mat-list-item class="nav-item nav-link" *ngIf="currentUser" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon> Logout
+    </a>
+  </mat-nav-list>
+  <hr>
 </div>
