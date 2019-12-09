@@ -1,10 +1,4 @@
-// Colors
-$primary-color: #1F1F1F;
-$secondary-color: #E5E5E5;
-
-$success-color: #65DE62;
-
-$side-bar-width: 200px;
+$side-bar-width: 250px;
 
 .mainContainer {
   position: absolute;
@@ -12,23 +6,15 @@ $side-bar-width: 200px;
   bottom: 0;
   left: 0;
   right: 0;
-  background: #eee;
 }
 
 
 .wrapper {
   display: flex;
-  width: 100%;
   align-items: stretch;
 }
 
 #sidebar {
-  //position: fixed;
-  //min-width: 250px;
-  //max-width: 250px;
-  //min-height: 100vh;
-
-  width: $side-bar-width;
   position: fixed;
   top: 0;
   left: 0;
@@ -47,8 +33,4 @@ $side-bar-width: 200px;
   padding-left: 15px;
   padding-top: 15px;
   margin-left: $side-bar-width;
-}
-
-.loading{
-  color: white;
 }
