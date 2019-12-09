@@ -8,6 +8,9 @@ import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
+import {MatDialog} from "@angular/material/dialog";
+import {MapmodalComponent} from "../../addons/mapmodal/mapmodal.component";
+
 @Component({
   selector: 'app-points-dashboard',
   templateUrl: './points-dashboard.component.html',
@@ -30,7 +33,8 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
     private titleService: Title,
     private cdRef: ChangeDetectorRef,
     private pointsService: PointsService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
   }
 
@@ -60,6 +64,20 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
           })
         },
       );
+
+  }
+
+  openMapDialog(location){
+    // set the geolocation
+    let lat = location.latitude
+    let lng = location.longitude
+    console.log(lng)
+    const dialogRef = this.dialog.open(MapmodalComponent, {
+      data: {
+        lat: lat,
+        lng: lng
+      }
+    });
 
   }
 

@@ -8,7 +8,6 @@ import {TooltipModule} from "ngx-bootstrap";
 import { LoginComponent } from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
-import {AuthenticationService} from "./_services";
 import { GetComponent } from './test/get/get.component';
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from "./_helpers/error.interceptor";
@@ -45,6 +44,8 @@ import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import { MatSpinnerOverlayComponent } from './addons/mat-spinner-overlay/mat-spinner-overlay.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import { MapmodalComponent } from './addons/mapmodal/mapmodal.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -62,10 +63,12 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     RoutesAddComponent,
     MapImageComponent,
     MatSpinnerOverlayComponent,
+    MapmodalComponent,
 
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     TooltipModule.forRoot(),
     FormsModule,
@@ -92,7 +95,11 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     MatListModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule
+  ],
+  entryComponents:[
+    MapmodalComponent
   ],
   providers: [
 
