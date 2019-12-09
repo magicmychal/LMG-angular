@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "@environments/environment";
 import {map} from "rxjs/operators";
+import {forkJoin} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -62,9 +63,54 @@ export class RoutesService {
          )
   }
 
+  // initiate the next_target_id
+  nextTargetId = null;
   addTargets(points, routeId){
+    // reverse array
+    points = points.reverse()
+
+
+    console.log('initial next target is', this.nextTargetId)
+
+    // loop through the reverse points
+    for (let index in points){
+
+      let body = {
+        "challenge_tip": points[index].challenge,
+        "explore_tip": points[index].sightseeing,
+        "point_id": points[index].pointId,
+        "road_id": routeId
+      }
+
+      // tu nie działa!
+      if ( this.nextTargetId !== null){
+        console.warn('next target in the loop is', this.nextTargetId)
+        // @ts-ignore
+        body.next_target_id = this.nextTargetId
+      }
+
+      console.log('the full body request', body)
+
+      let response = this.http.post<any>(`${environment.apiUrl}/target`, body)
+        forkJoin(response)
+
+        /*.subscribe(
+          (response) => {
+            console.log('new target', response)
+            this.nextTargetId = response.id
+          },
+          (error) => {
+            // do something to stop
+            console.error('new target', error);
+            return false;
+          }
+        )*/
+
+      console.error('id from the response', this.nextTargetId)
+    }
+
 // loop through the points
-    for (let index in points) {
+  /*  for (let index in points) {
       // set the next index; used to define if the next_target_id is possible
       let nextInLine = Number(index) + 1;
       // @ts-ignore
@@ -94,7 +140,7 @@ export class RoutesService {
           }
         )
     }
-
+*/
     // done, we can return
     return true;
   }
