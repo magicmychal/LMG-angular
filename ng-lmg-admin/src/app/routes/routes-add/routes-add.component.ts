@@ -153,8 +153,14 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
       return;
     } else {
       this.spinner = true;
-      // @ts-ignore
-      this.routeService.addNewRoute(this.f) == true ? this.onSuccessSubmit() : this.onFailSubmit()
+      //this.routeService.addNewRoute(this.f) == true ? this.onSuccessSubmit() : this.onFailSubmit()
+      this.routeService.addNewRoute(this.f)
+        .subscribe(results => {
+          this.onSuccessSubmit()
+        },
+          error => {
+          this.onFailSubmit()
+          })
     }
   }
 

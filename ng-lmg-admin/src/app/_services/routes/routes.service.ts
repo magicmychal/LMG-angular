@@ -186,16 +186,9 @@ export class RoutesService {
     console.log(body)
 
     // make a call
-    this.http.post<any>(`${environment.apiUrl}/road`, body)
-      .toPromise()
-      .then(response => {
-      console.log('promise response is', response)
-      return true;
-    })
-      .catch(error => {
-        console.log('something went wrong', error)
-        return false
-      })
+    let responseStatus = false
+    return this.http.post<any>(`${environment.apiUrl}/road`, body).pipe(
+      map(this.extractData));
   }
 
   private extractData(res: Response) {
