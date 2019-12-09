@@ -63,7 +63,7 @@ export class RoutesDashboardComponent implements OnInit {
     // set the geolocation
     let lat = location.latitude
     let lng = location.longitude
-    console.log(lat, lng)
+    console.log(location)
     const dialogRef = this.dialog.open(MapmodalComponent, {
       data: {
         lat: lat,

@@ -39,8 +39,8 @@ export class RoutesService {
       "description": description,
       "location": {
         "name": locName,
-        "longitude": lat,
-        "latitude": lng
+        "longitude": lng,
+        "latitude": lat
       }
     };
 
