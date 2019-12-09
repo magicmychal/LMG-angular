@@ -4,6 +4,8 @@ import {RoutesService} from "../../_services/routes/routes.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import {MapmodalComponent} from "../../addons/mapmodal/mapmodal.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-routes-dashboard',
@@ -26,6 +28,7 @@ export class RoutesDashboardComponent implements OnInit {
     private titleService: Title,
     private roadService: RoutesService,
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
   }
 
@@ -54,6 +57,19 @@ export class RoutesDashboardComponent implements OnInit {
           })
         }
       )
+  }
+
+  openMapDialog(location){
+    // set the geolocation
+    let lat = location.latitude
+    let lng = location.longitude
+    console.log(lat, lng)
+    const dialogRef = this.dialog.open(MapmodalComponent, {
+      data: {
+        lat: lat,
+        lng: lng
+      }
+    });
   }
 
 

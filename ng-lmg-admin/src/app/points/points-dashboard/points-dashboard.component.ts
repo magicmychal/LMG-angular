@@ -78,7 +78,6 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
         lng: lng
       }
     });
-
   }
 
   ngAfterViewInit() {
