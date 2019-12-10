@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-12">
       <form (ngSubmit)="onSubmit()" [formGroup]="dynamicForm">
-        <mat-vertical-stepper linear #stepper>
+        <mat-vertical-stepper [linear]="isLinear" #stepper>
           <!--        First stepper to fill the basic info-->
           <mat-step [stepControl]="dynamicForm">
             <ng-template matStepLabel>Fill out basic details</ng-template>

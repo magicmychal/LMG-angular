@@ -27,6 +27,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   initialSelection = [];
   allowMultiSelect = true;
   selection = new SelectionModel(this.allowMultiSelect, this.initialSelection);
+  isLinear = false;
 
 
   // for the leaf map
@@ -128,6 +129,8 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
       });
     }
 
+    this.isLinear = false;
+
 
    // this.dynamicForm.reset();
    this.pointsArray.clear();
@@ -137,8 +140,8 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
       let pointId = point.id
       this.pointsArray.push(this._formBuilder.group({
         pointId: [pointId],
-        sightseeing: [''],
-        challenge: ['']
+        sightseeing: ['', Validators.required],
+        challenge: ['', Validators.required]
       }));
     }
 
