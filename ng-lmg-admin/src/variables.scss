@@ -3,7 +3,7 @@
 
 /* ======== Angular material custom themes ======== */
 $main-material-primary: mat-palette($mat-light-green);
-$main-material-accent: mat-palette($mat-yellow, 100, 500, A100);
+$main-material-accent: mat-palette($mat-amber, 300, 500, A100);
 $main-material-warn: mat-palette($mat-blue-grey);
 
 /*
@@ -11,6 +11,6 @@ Remember to update colors both above and below.
  */
 $primary: #8BC34A;
 $primary400: #92ba51;
-$accent500: #FFEB3B;
+$accent500: #ffa040;
 $accent100: #FFF9C4;
 $a100: #FFFF8D;
