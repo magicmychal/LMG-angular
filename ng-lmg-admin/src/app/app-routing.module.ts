@@ -10,6 +10,7 @@ import {RoutesDashboardComponent} from "./routes/routes-dashboard/routes-dashboa
 import {RoutesAddComponent} from "./routes/routes-add/routes-add.component";
 import {MapImageComponent} from "./maps/map-image/map-image.component";
 import {MapSearchComponent} from "./maps/map-search/map-search.component";
+import {PointsEditComponent} from "./points/points-edit/points-edit.component";
 
 
 const routes: Routes = [
@@ -35,7 +36,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {path: '', component: PointsDashboardComponent},
-      {path: 'add', component: PointsAddComponent}
+      {path: 'add', component: PointsAddComponent},
+      {path: 'edit/:id', component: PointsAddComponent}
     ]
   },
   {

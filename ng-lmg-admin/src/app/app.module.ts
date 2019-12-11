@@ -46,6 +46,7 @@ import { MatSpinnerOverlayComponent } from './addons/mat-spinner-overlay/mat-spi
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { MapmodalComponent } from './addons/mapmodal/mapmodal.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import { PointsEditComponent } from './points/points-edit/points-edit.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     MapImageComponent,
     MatSpinnerOverlayComponent,
     MapmodalComponent,
+    PointsEditComponent,
 
   ],
   imports: [

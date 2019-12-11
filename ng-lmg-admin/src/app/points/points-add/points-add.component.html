@@ -1,7 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-4">Add new point</h1>
+      <h1 class="display-4" *ngIf="!pointId">Add new point</h1>
+      <h1 class="display-4" *ngIf="pointId">Edit point</h1>
       <p class="lead">Please fill all required forms (marked with a
         red star) for the best results</p>
     </div>
@@ -27,11 +28,9 @@
         </div>
         <hr>
         <app-map-search (notifyPosition)="onResultClick($event)" (notifyResults)="passTheResults($event)" class="width-max"
-                        id="map-search"></app-map-search>
+                        id="map-search" [locationName]="this.pointLocationName"></app-map-search>
         <div id="mapid"></div>
         <div class="input-group">
-          <!--<app-here-map lat="50.279278" lng="19.176333"
-                        width="500px" height="500px" (getMarkerLocation)="clickOnMarker($event)"></app-here-map>-->
           <input formControlName="latitude" type="hidden">
           <input formControlName="longitude" type="hidden">
           <input formControlName="locationName" type="hidden">
@@ -45,7 +44,6 @@
     <button [disabled]="loading" class="btn btn-outline-success">Save</button>
     <!--  <app-form-nav-buttons cancel="true" save="true"></app-form-nav-buttons>-->
   </form>
-  <ngx-spinner [fullScreen]="true" size="medium" type="cube-transition">
-    <p class="loading">Adding a new point. You will be redirected in a moment</p>
-  </ngx-spinner>
+  <app-mat-spinner-overlay *ngIf="materialSpinner" diameter="30" overlay="true"
+                           strokeWidth="5"></app-mat-spinner-overlay>
 </div>

@@ -33,8 +33,9 @@ export class PointsService {
       map(this.extractData));
   }
 
-  getPointsArray(): Observable<any[]>{
-    return this.http.get<any>(`${environment.apiUrl}/point`);
+  getPoint(id){
+    return this.http.get<any>(`${environment.apiUrl}/point/${id}`).pipe(
+      map(this.extractData));
   }
 
   private extractData(res: Response) {

@@ -31,12 +31,18 @@ export class PointsAddComponent implements OnInit {
   leafMap: any;
   leafMarker: any;
 
+  // for the edit
+  pointId: string;
+  pointLocationName: string;
+
+  materialSpinner = false;
+
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
               private pointsService: PointsService,
               private spinner: NgxSpinnerService,
-              private mapViewService: MapViewService) {
+              private mapViewService: MapViewService,) {
   }
 
   // convenience getter for easy access to form fields
@@ -45,6 +51,10 @@ export class PointsAddComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    // check if editing or not
+    this.route.params.subscribe( params => this.pointId = params.id)
+
     this.addNewPointForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(250)]],
       // description is technically not required for the database
@@ -55,6 +65,33 @@ export class PointsAddComponent implements OnInit {
     })
 
     this.leafMap = this.mapViewService.setLeafMap();
+
+    if (this.pointId !== undefined){
+      this.materialSpinner = true;
+      console.log('edit')
+      this.editInit();
+    }
+  }
+
+  editInit(){
+    let point: any;
+
+    // fetch the point
+    this.pointsService.getPoint(this.pointId)
+      .subscribe(result => {
+        this.f.name.setValue(result['name']);
+        this.f.description.setValue(result['description']);
+        this.f.latitude.setValue(result['location']['latitude'])
+        this.f.longitude.setValue(result['location']['longitude'])
+        this.f.locationName.setValue(result['location']['name'])
+        this.pointLocationName = result['location']['name'];
+
+        this.onResultClick([result['location']['latitude'],result['location']['longitude']])
+
+        // stop the spinner
+        this.materialSpinner = false;
+      })
+
   }
 
   onSubmit() {
@@ -71,11 +108,16 @@ export class PointsAddComponent implements OnInit {
     const lng = this.f.longitude.value;
     const locationname = this.f.locationName.value;
 
-    this.spinner.show();
+    this.materialSpinner = true;
 
+    // define if it's edit or new point
     this.pointsService.addNewPoint(name, desc, lat, lng, locationname).subscribe({
       next: response => this.onSuccessfulSubmit(response),
-      error: err => console.log("The error is ", err)
+      error: err => {
+        // TODO: Add error snackbar
+        this.materialSpinner = false;
+        console.log("The error is ", err)
+      }
     });
 
     return;
@@ -83,7 +125,7 @@ export class PointsAddComponent implements OnInit {
 
   onSuccessfulSubmit(response) {
     console.log(response);
-    this.spinner.hide();
+    this.materialSpinner = true;
     this.router.navigate(['/points']);
   }
 
