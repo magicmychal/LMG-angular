@@ -38,6 +38,21 @@ export class PointsService {
       map(this.extractData));
   }
 
+  updatePoint(id, name, description, lat, lng, locationName){
+    const body = {
+      "name": name,
+      "description": description,
+      "location": {
+        "latitude": lat,
+        "longitude": lng,
+        "name": locationName
+      }
+    };
+
+    return this.http.put<any>(`${environment.apiUrl}/point/${id}`, body).pipe(
+      map(this.extractData));
+  }
+
   private extractData(res: Response) {
     let body = res;
     return body || {};

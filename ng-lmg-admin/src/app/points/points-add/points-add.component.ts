@@ -11,6 +11,8 @@ import {NgxSpinnerService} from "ngx-spinner";
 import {HereMapComponent} from "../../maps/here-map/here-map.component";
 import { environment } from '@environments/environment';
 import {MapViewService} from "../../_services/map/map-view.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -33,7 +35,7 @@ export class PointsAddComponent implements OnInit {
 
   // for the edit
   pointId: string;
-  pointLocationName: string;
+  pointLocationName: Observable<string>;
 
   materialSpinner = false;
 
@@ -42,7 +44,8 @@ export class PointsAddComponent implements OnInit {
               private router: Router,
               private pointsService: PointsService,
               private spinner: NgxSpinnerService,
-              private mapViewService: MapViewService,) {
+              private mapViewService: MapViewService,
+              private _snackBar: MatSnackBar) {
   }
 
   // convenience getter for easy access to form fields
@@ -74,22 +77,23 @@ export class PointsAddComponent implements OnInit {
   }
 
   editInit(){
-    let point: any;
-
     // fetch the point
     this.pointsService.getPoint(this.pointId)
       .subscribe(result => {
+        // set the form values
         this.f.name.setValue(result['name']);
         this.f.description.setValue(result['description']);
         this.f.latitude.setValue(result['location']['latitude'])
         this.f.longitude.setValue(result['location']['longitude'])
         this.f.locationName.setValue(result['location']['name'])
-        this.pointLocationName = result['location']['name'];
 
+        // set the location and map
+        this.pointLocationName = result['location']['name'];
         this.onResultClick([result['location']['latitude'],result['location']['longitude']])
 
         // stop the spinner
         this.materialSpinner = false;
+        console.log(this.pointLocationName)
       })
 
   }
@@ -111,14 +115,27 @@ export class PointsAddComponent implements OnInit {
     this.materialSpinner = true;
 
     // define if it's edit or new point
-    this.pointsService.addNewPoint(name, desc, lat, lng, locationname).subscribe({
-      next: response => this.onSuccessfulSubmit(response),
-      error: err => {
-        // TODO: Add error snackbar
-        this.materialSpinner = false;
-        console.log("The error is ", err)
-      }
-    });
+    if (this.pointId !== undefined){
+      this.pointsService.updatePoint(this.pointId, name, desc, lat, lng, locationname)
+        .subscribe({
+          next: response => this.onSuccessfulSubmit(response),
+          error: err => {
+            // TODO: Add error snackbar
+            this.materialSpinner = false;
+            console.log("The error is ", err)
+            this.onFailedSubmit()
+          }})
+    } else {
+      this.pointsService.addNewPoint(name, desc, lat, lng, locationname).subscribe({
+        next: response => this.onSuccessfulSubmit(response),
+        error: err => {
+          // TODO: Add error snackbar
+          this.materialSpinner = false;
+          console.log("The error is ", err)
+          this.onFailedSubmit()
+        }
+      });
+    }
 
     return;
   }
@@ -127,6 +144,12 @@ export class PointsAddComponent implements OnInit {
     console.log(response);
     this.materialSpinner = true;
     this.router.navigate(['/points']);
+  }
+
+  onFailedSubmit(){
+    this._snackBar.open("An error occur, please check the form and submit again", "Dismiss", {
+      duration: 60000,
+    });
   }
 
   onResultClick(position) {

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {SearchService} from "../../_services/map/search.service";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -11,12 +12,12 @@ import {SearchService} from "../../_services/map/search.service";
 export class MapSearchComponent implements OnInit {
 
   // send the position on the result click
-  @Output() notifyPosition: EventEmitter<any>=new EventEmitter<any>();
+  @Output() notifyPosition: EventEmitter<any> = new EventEmitter<any>();
 
   // pass all the results
   @Output() notifyResults = new EventEmitter();
 
-  @Input() locationName: string;
+  @Input() locationName: Observable<any>;
 
 
   results: any[] = [];
@@ -36,6 +37,13 @@ export class MapSearchComponent implements OnInit {
             this.showResults(response)
           }
         }));
+    console.log('locationname ', this.locationName)
+
+    this.locationName.subscribe(value => {
+      console.log('got the value!');
+      this.queryField.setValue(this.locationName)
+    })
+
   }
 
   showResults(results) {
@@ -45,7 +53,7 @@ export class MapSearchComponent implements OnInit {
     this.notifyResults.emit(results);
   }
 
-  onResultClick(position, locationName){
+  onResultClick(position, locationName) {
     // @ts-ignore
     position.push(locationName)
     this.notifyPosition.emit(position);

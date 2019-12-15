@@ -1,7 +1,7 @@
 <mat-form-field appearance="outline" class="width-max">
   <mat-label>Location search</mat-label>
   <input [formControl]="queryField" [matAutocomplete]="auto" autocomplete="off" matInput name="location"
-         placeholder="Name of the route" value="{{locationName}}">
+         placeholder="Name of the route">
   <mat-autocomplete #auto="matAutocomplete">
     <mat-option (onSelectionChange)="onResultClick(result.value.position,result.value.title)" *ngFor="let result of results | keyvalue"
                 [value]="result.value.title">
