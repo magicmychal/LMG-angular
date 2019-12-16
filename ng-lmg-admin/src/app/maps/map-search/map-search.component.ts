@@ -38,11 +38,7 @@ export class MapSearchComponent implements OnInit {
           }
         }));
     console.log('locationname ', this.locationName)
-
-    this.locationName.subscribe(value => {
-      console.log('got the value!');
-      this.queryField.setValue(this.locationName)
-    })
+    this.queryField.setValue(this.locationName)
 
   }
 
