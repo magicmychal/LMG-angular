@@ -59,7 +59,7 @@ export class PointsAddComponent implements OnInit {
     this.route.params.subscribe( params => this.pointId = params.id)
 
     this.addNewPointForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(250)]],
+      name: ['dupa', [Validators.required, Validators.maxLength(250)]],
       // description is technically not required for the database
       description: ['', [Validators.required, Validators.maxLength(250)]],
       latitude: ['', Validators.required],
@@ -83,13 +83,17 @@ export class PointsAddComponent implements OnInit {
         // set the form values
         this.f.name.setValue(result['name']);
         this.f.description.setValue(result['description']);
-        this.f.latitude.setValue(result['location']['latitude'])
-        this.f.longitude.setValue(result['location']['longitude'])
-        this.f.locationName.setValue(result['location']['name'])
+
 
         // set the location and map
         this.pointLocationName = result['location']['name'];
-        this.onResultClick([result['location']['latitude'],result['location']['longitude']])
+
+        const position = [
+          result['location']['latitude'],
+          result['location']['longitude'],
+          result['location']['name']
+        ]
+        this.onResultClick(position)
 
         // stop the spinner
         this.materialSpinner = false;
@@ -103,6 +107,7 @@ export class PointsAddComponent implements OnInit {
     // stop here if form is invalid
     if (this.addNewPointForm.invalid) {
       console.warn('form is invalid');
+      console.log(this.addNewPointForm)
       return;
     }
     this.loading = true;
@@ -144,6 +149,9 @@ export class PointsAddComponent implements OnInit {
     console.log(response);
     this.materialSpinner = true;
     this.router.navigate(['/points']);
+    this._snackBar.open("Success", null, {
+      duration: 3000,
+    });
   }
 
   onFailedSubmit(){
@@ -157,7 +165,9 @@ export class PointsAddComponent implements OnInit {
 
     this.f.latitude.setValue(position[0]);
     this.f.longitude.setValue(position[1]);
+    console.log('position 2', position[2])
     this.f.locationName.setValue(position[2]);
+    console.log(this.f)
 
     if (this.leafMarker) {
       this.leafMarker.remove();

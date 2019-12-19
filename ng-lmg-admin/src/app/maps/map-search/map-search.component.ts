@@ -37,7 +37,6 @@ export class MapSearchComponent implements OnInit {
             this.showResults(response)
           }
         }));
-    console.log('locationname ', this.locationName)
     this.queryField.setValue(this.locationName)
 
   }
