@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-12">
       <form (ngSubmit)="onSubmit()" [formGroup]="dynamicForm">
-        <mat-vertical-stepper [linear]="isLinear" #stepper>
+        <mat-vertical-stepper #stepper [linear]="isLinear">
           <!--        First stepper to fill the basic info-->
           <mat-step [stepControl]="dynamicForm">
             <ng-template matStepLabel>Fill out basic details</ng-template>
@@ -39,9 +39,9 @@
             </div>
             <div class="w-90">
               <!--map-->
-              <app-map-search *ngIf="this.roadLocationName" (notifyPosition)="onResultClick($event)"
-                              id="map-search" [locationName]="this.roadLocationName"></app-map-search>
-              <app-map-search *ngIf="!this.roadLocationName" (notifyPosition)="onResultClick($event)"
+              <app-map-search (notifyPosition)="onResultClick($event)" *ngIf="this.roadLocationName"
+                              [locationName]="this.roadLocationName" id="map-search"></app-map-search>
+              <app-map-search (notifyPosition)="onResultClick($event)" *ngIf="!this.roadLocationName"
                               id="map-search"></app-map-search>
               <div id="mapid"></div>
             </div>
@@ -102,7 +102,7 @@
             </div>-->
             <div class="mt-2">
               <button mat-button matStepperPrevious type="button">Back</button>
-              <button (click)="initiatePoints()" mat-button matStepperNext type="button" id="choosepoints">Next</button>
+              <button (click)="initiatePoints()" id="choosepoints" mat-button matStepperNext type="button">Next</button>
             </div>
           </mat-step>
           <!--        Stepper for each point-->
@@ -112,7 +112,8 @@
               <input formControlName="pointId" type="hidden" value="{{this.selectedArray[i].id}}">
               <mat-form-field appearance="outline" class="width-max">
                 <mat-label>Description for sightseeing</mat-label>
-                <textarea #sightseeing formControlName="sightseeing" matInput placeholder="Textarea" autofocus></textarea>
+                <textarea #sightseeing autofocus formControlName="sightseeing" matInput
+                          placeholder="Textarea"></textarea>
                 <mat-hint align="end">{{sightseeing.value?.length || 0}}/250</mat-hint>
                 <mat-hint>Description is what should encourage tourist to take the selected route.
                 </mat-hint>
@@ -153,6 +154,6 @@
         </mat-vertical-stepper>
       </form>
     </div>
-    <app-mat-spinner-overlay overlay="true" *ngIf="spinner"></app-mat-spinner-overlay>
+    <app-mat-spinner-overlay *ngIf="spinner" overlay="true"></app-mat-spinner-overlay>
   </div>
 </div>

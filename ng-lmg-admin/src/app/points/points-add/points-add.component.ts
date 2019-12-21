@@ -9,7 +9,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PointsService} from "../../_services/points/points.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {HereMapComponent} from "../../maps/here-map/here-map.component";
-import { environment } from '@environments/environment';
+import {environment} from '@environments/environment';
 import {MapViewService} from "../../_services/map/map-view.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Observable} from "rxjs";
@@ -26,7 +26,6 @@ export class PointsAddComponent implements OnInit {
   addNewPointForm: FormGroup;
   loading = false;
   submitted = false;
-  returnUrl: string;
   error = '';
 
 
@@ -54,48 +53,48 @@ export class PointsAddComponent implements OnInit {
   }
 
   ngOnInit() {
-        this.addNewPointForm = this.fb.group({
+    this.addNewPointForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(250)]],
       // description is technically not required for the database
       description: ['', [Validators.required, Validators.maxLength(250)]],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
       locationName: ['', Validators.required]
-    })
+    });
 
     this.leafMap = this.mapViewService.setLeafMap();
 
     // check if editing or not
-    this.route.params.subscribe( params => this.pointId = params.id)
-    if (this.pointId !== undefined){
+    this.route.params.subscribe(params => this.pointId = params.id);
+    if (this.pointId !== undefined) {
       this.materialSpinner = true;
       this.editInit();
     }
   }
 
-  editInit(){
+  editInit() {
     // fetch the point
     this.pointsService.getPoint(this.pointId)
       .subscribe(result => {
-        // set the form values
-        this.f.name.setValue(result['name']);
-        this.f.description.setValue(result['description']);
+          // set the form values
+          this.f.name.setValue(result['name']);
+          this.f.description.setValue(result['description']);
 
 
-        // set the location and map
-        this.pointLocationName = result['location']['name'];
+          // set the location and map
+          this.pointLocationName = result['location']['name'];
 
-        const position = [
-          result['location']['latitude'],
-          result['location']['longitude'],
-          result['location']['name']
-        ]
-        this.onResultClick(position)
+          const position = [
+            result['location']['latitude'],
+            result['location']['longitude'],
+            result['location']['name']
+          ];
+          this.onResultClick(position);
 
-        // stop the spinner
-        this.materialSpinner = false;
-        console.log(this.pointLocationName)
-      },
+          // stop the spinner
+          this.materialSpinner = false;
+          console.log(this.pointLocationName)
+        },
         error => {
           this._snackBar.open("An error occur, try loading again", "Dismiss", {
             duration: 60000,
@@ -110,7 +109,7 @@ export class PointsAddComponent implements OnInit {
     // stop here if form is invalid
     if (this.addNewPointForm.invalid) {
       console.warn('form is invalid');
-      console.log(this.addNewPointForm)
+      console.log(this.addNewPointForm);
       return;
     }
     this.loading = true;
@@ -123,23 +122,24 @@ export class PointsAddComponent implements OnInit {
     this.materialSpinner = true;
 
     // define if it's edit or new point
-    if (this.pointId !== undefined){
+    if (this.pointId !== undefined) {
       this.pointsService.updatePoint(this.pointId, name, desc, lat, lng, locationname)
         .subscribe({
           next: response => this.onSuccessfulSubmit(response),
           error: err => {
             // TODO: Add error snackbar
             this.materialSpinner = false;
-            console.log("The error is ", err)
+            console.log("The error is ", err);
             this.onFailedSubmit()
-          }})
+          }
+        })
     } else {
       this.pointsService.addNewPoint(name, desc, lat, lng, locationname).subscribe({
         next: response => this.onSuccessfulSubmit(response),
         error: err => {
           // TODO: Add error snackbar
           this.materialSpinner = false;
-          console.log("The error is ", err)
+          console.log("The error is ", err);
           this.onFailedSubmit()
         }
       });
@@ -157,7 +157,7 @@ export class PointsAddComponent implements OnInit {
     });
   }
 
-  onFailedSubmit(){
+  onFailedSubmit() {
     this._snackBar.open("An error occur, please check the form and submit again", "Dismiss", {
       duration: 60000,
     });
@@ -168,17 +168,17 @@ export class PointsAddComponent implements OnInit {
 
     this.f.latitude.setValue(position[0]);
     this.f.longitude.setValue(position[1]);
-    console.log('position 2', position[2])
+    console.log('position 2', position[2]);
     this.f.locationName.setValue(position[2]);
-    console.log(this.f)
+    console.log(this.f);
 
     if (this.leafMarker) {
       this.leafMarker.remove();
     }
     // @ts-ignore
-    this.leafMap.setView(L.latLng(position[0], position[1]), 10)
+    this.leafMap.setView(L.latLng(position[0], position[1]), 10);
     // @ts-ignore
-    this.leafMarker= L.marker([position[0], position[1]]).addTo(this.leafMap);
+    this.leafMarker = L.marker([position[0], position[1]]).addTo(this.leafMap);
 
   }
 

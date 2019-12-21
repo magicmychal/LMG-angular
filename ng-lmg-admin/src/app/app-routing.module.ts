@@ -9,6 +9,7 @@ import {PointsAddComponent} from "./points/points-add/points-add.component";
 import {RoutesDashboardComponent} from "./roads/roads-dashboard/routes-dashboard.component";
 import {RoutesAddComponent} from "./roads/roads-add/routes-add.component";
 import {MapSearchComponent} from "./maps/map-search/map-search.component";
+import {RoadsEditComponent} from "./roads/roads-edit/roads-edit.component";
 
 
 const routes: Routes = [
@@ -44,7 +45,7 @@ const routes: Routes = [
     children: [
       {path: '', component: RoutesDashboardComponent},
       {path: 'add', component: RoutesAddComponent},
-      {path: 'edit/:id', component: RoutesAddComponent}
+      {path: 'edit/:id', component: RoadsEditComponent}
     ]
   },
   {

@@ -9,7 +9,6 @@ import {MapViewService} from "../../_services/map/map-view.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatStepper} from "@angular/material/stepper";
-import {repeat} from "rxjs/operators";
 
 
 @Component({
@@ -40,7 +39,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   selectedArray: object = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  // dynamic form testing
   dynamicForm: FormGroup;
   // spinner
   spinner = false;
@@ -57,8 +55,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
     private roadService: RoadService,
     private mapViewService: MapViewService,
     private router: Router,
-    private _snackbar: MatSnackBar,
-    private route: ActivatedRoute
+    private _snackbar: MatSnackBar
   ) {
   }
 
@@ -94,57 +91,9 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
           console.error(error)
         },
       );
-
-    // check if editing or not
-    this.route.params.subscribe(params => this.roadId = params.id);
-    if (this.roadId !== undefined) {
-      this.spinner = true;
-      this.editInit();
-    }
   }
 
-  editInit() {
-    // fetch the point
-    this.roadService.getRoadById(this.roadId)
-      .subscribe(response => {
-        this.f.name.setValue(response['name']);
-        this.f.decoy.setValue(response['decoy']);
-        this.f.description.setValue(response['description']);
 
-        const position = [
-          response['location']['latitude'],
-          response['location']['longitude'],
-          response['location']['name']
-        ];
-
-        this.onResultClick(position);
-        this.roadLocationName = position[3];
-
-        /*
-        move the targets to the selected location
-         */
-        for (let target of response['targets']) {
-          let something = {
-            id: target['id'],
-            name: target['point']['name'],
-            description: target['point']['description'],
-            code: target['point']['code'],
-            location: {
-              latitude: target['point']['location']['latitude'],
-              longitude: target['point']['location']['longitude']
-            }
-          };
-          console.log('target', something);
-          // @ts-ignore
-          this.selectedArray.push(something)
-
-        }
-        console.log('array for us is', this.selectedArray);
-        this.initiateEditPoints();
-
-        this.spinner = false;
-      })
-  }
 
   ngAfterViewInit() {
     this.leafMap = this.mapViewService.setLeafMap();
