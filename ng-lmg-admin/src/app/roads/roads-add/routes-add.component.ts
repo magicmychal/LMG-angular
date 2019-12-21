@@ -118,12 +118,12 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
         ];
 
         this.onResultClick(position);
-        this.roadLocationName = position[3]
+        this.roadLocationName = position[3];
 
         /*
         move the targets to the selected location
          */
-        for (let target of response['targets']){
+        for (let target of response['targets']) {
           let something = {
             id: target['id'],
             name: target['point']['name'],
@@ -133,13 +133,14 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
               latitude: target['point']['location']['latitude'],
               longitude: target['point']['location']['longitude']
             }
-          }
-          console.log('target', something)
+          };
+          console.log('target', something);
+          // @ts-ignore
           this.selectedArray.push(something)
 
         }
-        console.log('array for us is', this.selectedArray)
-        this.initiatePoints();
+        console.log('array for us is', this.selectedArray);
+        this.initiateEditPoints();
 
         this.spinner = false;
       })
@@ -169,10 +170,8 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
 
   initiatePoints() {
     // convert selected to the array
-    if (this.roadId == undefined) {
-      // @ts-ignore
-      this.selectedArray = Array.from(this.selection._selection);
-    }
+    // @ts-ignore
+    this.selectedArray = Array.from(this.selection._selection);
     console.log('array is ', this.selectedArray);
 
     // @ts-ignore
@@ -193,6 +192,34 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
     // @ts-ignore
     for (let point of this.selectedArray) {
       let pointId = point.id;
+      this.pointsArray.push(this._formBuilder.group({
+        pointId: [pointId],
+        sightseeing: ['', Validators.required],
+        challenge: ['', Validators.required]
+      }));
+    }
+
+    console.log('the forms is', this.pointsArray)
+  }
+
+  initiateEditPoints() {
+    console.log('array is ', this.selectedArray);
+
+    // @ts-ignore
+    if (this.selectedArray.length == 0) {
+      console.log('0');
+      this.mainStepper.previous();
+      this._snackbar.open('Select points', 'Dismiss', {
+        duration: 3500
+      });
+    }
+
+    this.isLinear = false;
+
+    // @ts-ignore
+    for (let point of this.selectedArray) {
+      let pointId = point.id;
+      console.log('point is', point)
       this.pointsArray.push(this._formBuilder.group({
         pointId: [pointId],
         sightseeing: ['', Validators.required],
