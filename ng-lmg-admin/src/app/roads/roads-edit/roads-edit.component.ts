@@ -16,6 +16,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   roadsForm: FormGroup;
 
   roadId: string;
+  roadLocationName: any;
 
   // for the leaf map
   leafMap: any;
@@ -61,6 +62,8 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
         this.f.name.setValue(response['name']);
         this.f.decoy.setValue(response['decoy']);
         this.f.description.setValue(response['description']);
+
+        this.roadLocationName = response['location']['name'];
 
         const position = [
           response['location']['latitude'],

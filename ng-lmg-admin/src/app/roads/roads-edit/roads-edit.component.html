@@ -32,7 +32,7 @@
         </div>
         <div class="w-90">
           <!--map-->
-          <app-map-search (notifyPosition)="onResultClick($event)"
+          <app-map-search *ngIf="this.roadLocationName" (notifyPosition)="onResultClick($event)"
                           [locationName]="this.roadLocationName" id="map-search"></app-map-search>
           <div id="mapid"></div>
         </div>
