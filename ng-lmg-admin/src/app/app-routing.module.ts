@@ -6,11 +6,9 @@ import {HomeComponent} from "./home/home.component";
 import {AuthGuard} from "./_helpers/auth.guard";
 import {PointsDashboardComponent} from "./points/points-dashboard/points-dashboard.component";
 import {PointsAddComponent} from "./points/points-add/points-add.component";
-import {RoutesDashboardComponent} from "./routes/routes-dashboard/routes-dashboard.component";
-import {RoutesAddComponent} from "./routes/routes-add/routes-add.component";
-import {MapImageComponent} from "./maps/map-image/map-image.component";
+import {RoutesDashboardComponent} from "./roads/roads-dashboard/routes-dashboard.component";
+import {RoutesAddComponent} from "./roads/roads-add/routes-add.component";
 import {MapSearchComponent} from "./maps/map-search/map-search.component";
-import {PointsEditComponent} from "./points/points-edit/points-edit.component";
 
 
 const routes: Routes = [
@@ -41,11 +39,12 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'routes',
+    path: 'roads',
     canActivate: [AuthGuard],
     children: [
       {path: '', component: RoutesDashboardComponent},
-      {path: 'add', component: RoutesAddComponent}
+      {path: 'add', component: RoutesAddComponent},
+      {path: 'edit/:id', component: RoutesAddComponent}
     ]
   },
   {

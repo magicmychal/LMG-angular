@@ -54,12 +54,8 @@ export class PointsAddComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    // check if editing or not
-    this.route.params.subscribe( params => this.pointId = params.id)
-
-    this.addNewPointForm = this.fb.group({
-      name: ['dupa', [Validators.required, Validators.maxLength(250)]],
+        this.addNewPointForm = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(250)]],
       // description is technically not required for the database
       description: ['', [Validators.required, Validators.maxLength(250)]],
       latitude: ['', Validators.required],
@@ -69,9 +65,10 @@ export class PointsAddComponent implements OnInit {
 
     this.leafMap = this.mapViewService.setLeafMap();
 
+    // check if editing or not
+    this.route.params.subscribe( params => this.pointId = params.id)
     if (this.pointId !== undefined){
       this.materialSpinner = true;
-      console.log('edit')
       this.editInit();
     }
   }
@@ -98,7 +95,13 @@ export class PointsAddComponent implements OnInit {
         // stop the spinner
         this.materialSpinner = false;
         console.log(this.pointLocationName)
-      })
+      },
+        error => {
+          this._snackBar.open("An error occur, try loading again", "Dismiss", {
+            duration: 60000,
+          });
+          this.materialSpinner = false;
+        })
 
   }
 

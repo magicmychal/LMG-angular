@@ -4,11 +4,12 @@ import {SelectionModel} from "@angular/cdk/collections";
 import {PointsService} from "../../_services/points/points.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
-import {RoutesService} from "../../_services/routes/routes.service";
+import {RoadService} from "../../_services/roads/road.service";
 import {MapViewService} from "../../_services/map/map-view.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatStepper} from "@angular/material/stepper";
+import {repeat} from "rxjs/operators";
 
 
 @Component({
@@ -16,7 +17,7 @@ import {MatStepper} from "@angular/material/stepper";
   templateUrl: './routes-add.component.html',
   styleUrls: ['./routes-add.component.scss']
 })
-export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
+export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
 
   // for the table
   points: any;
@@ -33,37 +34,44 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   // for the leaf map
   leafMap: any;
   leafMarker: any;
-  private L: any;
-
   /*
   Selection is the type of set, which is hard to operate on.
   Converting it to array will simplify further operations
    */
   selectedArray: object = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-
-  @ViewChild('stepper', {static: false}) private mainStepper: MatStepper;
-
   // dynamic form testing
   dynamicForm: FormGroup;
-
   // spinner
   spinner = false;
+  // for editing
+  roadId: string;
+  roadLocationName: any;
+
+  private L: any;
+  @ViewChild('stepper', {static: false}) private mainStepper: MatStepper;
 
   constructor(
     private _formBuilder: FormBuilder,
     private pointsService: PointsService,
-    private routeService: RoutesService,
+    private roadService: RoadService,
     private mapViewService: MapViewService,
     private router: Router,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private route: ActivatedRoute
   ) {
   }
 
+  // convenience getters for easy access to form fields
+  get f() {
+    return this.dynamicForm.controls;
+  }
+
+  get pointsArray() {
+    return this.f.points as FormArray;
+  }
+
   ngOnInit() {
-    // TODO: check if array exist and ask to continue the last
-
-
     this.dynamicForm = this._formBuilder.group({
       name: ['', Validators.required],
       decoy: ['', Validators.required],
@@ -86,6 +94,55 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
           console.error(error)
         },
       );
+
+    // check if editing or not
+    this.route.params.subscribe(params => this.roadId = params.id);
+    if (this.roadId !== undefined) {
+      this.spinner = true;
+      this.editInit();
+    }
+  }
+
+  editInit() {
+    // fetch the point
+    this.roadService.getRoadById(this.roadId)
+      .subscribe(response => {
+        this.f.name.setValue(response['name']);
+        this.f.decoy.setValue(response['decoy']);
+        this.f.description.setValue(response['description']);
+
+        const position = [
+          response['location']['latitude'],
+          response['location']['longitude'],
+          response['location']['name']
+        ];
+
+        this.onResultClick(position);
+        this.roadLocationName = position[3]
+
+        /*
+        move the targets to the selected location
+         */
+        for (let target of response['targets']){
+          let something = {
+            id: target['id'],
+            name: target['point']['name'],
+            description: target['point']['description'],
+            code: target['point']['code'],
+            location: {
+              latitude: target['point']['location']['latitude'],
+              longitude: target['point']['location']['longitude']
+            }
+          }
+          console.log('target', something)
+          this.selectedArray.push(something)
+
+        }
+        console.log('array for us is', this.selectedArray)
+        this.initiatePoints();
+
+        this.spinner = false;
+      })
   }
 
   ngAfterViewInit() {
@@ -95,10 +152,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   ngOnDestroy() {
     localStorage.removeItem('currentPoints')
   }
-
-  // convenience getters for easy access to form fields
-  get f() { return this.dynamicForm.controls; }
-  get pointsArray() { return this.f.points as FormArray; }
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -115,14 +168,16 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
   }
 
   initiatePoints() {
-        // convert selected to the array
-    // @ts-ignore
-    this.selectedArray = Array.from(this.selection._selection);
-    console.log('array is ', this.selectedArray)
+    // convert selected to the array
+    if (this.roadId == undefined) {
+      // @ts-ignore
+      this.selectedArray = Array.from(this.selection._selection);
+    }
+    console.log('array is ', this.selectedArray);
 
     // @ts-ignore
-    if(this.selectedArray.length == 0 ){
-      console.log('0')
+    if (this.selectedArray.length == 0) {
+      console.log('0');
       this.mainStepper.previous();
       this._snackbar.open('Select points', 'Dismiss', {
         duration: 3500
@@ -132,12 +187,12 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     this.isLinear = false;
 
 
-   // this.dynamicForm.reset();
-   this.pointsArray.clear();
+    // this.dynamicForm.reset();
+    this.pointsArray.clear();
 
     // @ts-ignore
-    for (let point of this.selectedArray){
-      let pointId = point.id
+    for (let point of this.selectedArray) {
+      let pointId = point.id;
       this.pointsArray.push(this._formBuilder.group({
         pointId: [pointId],
         sightseeing: ['', Validators.required],
@@ -148,31 +203,31 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     console.log('the forms is', this.pointsArray)
   }
 
-  onSubmit(){
-    if (this.dynamicForm.invalid){
+  onSubmit() {
+    if (this.dynamicForm.invalid) {
       this._snackbar.open('Form invalid. Check the form for any mistakes', 'Dismiss', {
         duration: 3500
       });
       return;
     } else {
       this.spinner = true;
-      //this.routeService.addNewRoute(this.f) == true ? this.onSuccessSubmit() : this.onFailSubmit()
-      this.routeService.addNewRoute(this.f)
+      //this.roadService.addNewRoute(this.f) == true ? this.onSuccessSubmit() : this.onFailSubmit()
+      this.roadService.addNewRoute(this.f)
         .subscribe(results => {
-          this.onSuccessSubmit()
-        },
+            this.onSuccessSubmit()
+          },
           error => {
-          this.onFailSubmit()
+            this.onFailSubmit()
           })
     }
   }
 
-  onSuccessSubmit(){
-    console.log('success')
-    this.router.navigate(['/routes']);
+  onSuccessSubmit() {
+    console.log('success');
+    this.router.navigate(['/roads']);
   }
 
-  onFailSubmit(){
+  onFailSubmit() {
     this.spinner = false;
     console.log('error');
     this._snackbar.open('Error submitting the form, check the fields and try again.', 'Dismiss', {
@@ -180,6 +235,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
     });
     // give user feedback
   }
+
   onResultClick(position) {
     // set the map in the right position and show the marker
 
@@ -191,9 +247,9 @@ export class RoutesAddComponent implements OnInit, AfterViewInit ,OnDestroy {
       this.leafMarker.remove();
     }
     // @ts-ignore
-    this.leafMap.setView(L.latLng(position[0], position[1]), 10)
+    this.leafMap.setView(L.latLng(position[0], position[1]), 10);
     // @ts-ignore
-    this.leafMarker= L.marker([position[0], position[1]]).addTo(this.leafMap);
+    this.leafMarker = L.marker([position[0], position[1]]).addTo(this.leafMap);
 
   }
 

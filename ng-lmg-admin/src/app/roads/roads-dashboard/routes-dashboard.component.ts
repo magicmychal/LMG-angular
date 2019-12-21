@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
-import {RoutesService} from "../../_services/routes/routes.service";
+import {RoadService} from "../../_services/roads/road.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
@@ -26,7 +26,7 @@ export class RoutesDashboardComponent implements OnInit {
 
   constructor(
     private titleService: Title,
-    private roadService: RoutesService,
+    private roadService: RoadService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {

@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-3">Your routes</h1>
+      <h1 class="display-3">Your roads</h1>
       <p class="lead">Routes are collections of roads that together create a trip for the tourists. Routes have two
         distinct categories - sightseeing mode and a challenge mode. Please remember to provide additional description
         for both of the modes. </p>
@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <button color="primary" mat-raised-button routerLink="/routes/add">Add new route</button>
+      <button color="primary" mat-raised-button routerLink="/roads/add">Add new route</button>
     </div>
   </div>
   <hr>
@@ -33,7 +33,10 @@
         <ng-container matColumnDef="action">
           <th *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let road" mat-cell>
-            <button (click)="openMapDialog(road.location)" color="accent" mat-raised-button>Show on map</button>
+            <div class="action-buttons">
+              <button (click)="openMapDialog(road.location)" color="accent" mat-stroked-button>Show on map</button>
+              <button [routerLink]="['edit', road.id]" color="accent" mat-stroked-button>Edit</button>
+            </div>
           </td>
         </ng-container>
       </table>
