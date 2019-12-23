@@ -123,7 +123,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     moveItemInArray(this.targetsArray, event.previousIndex, event.currentIndex);
     console.log(event.previousIndex, event.currentIndex)
     // append correct next_target_id
-    this.targetsArray[event.currentIndex]['next_taeget_id'] = this.targetsArray[event.currentIndex+1]['id']
+    this.targetsArray[event.currentIndex]['next_target_id'] = this.targetsArray[event.currentIndex+1]['id']
     console.log('id of the current target', this.targetsArray[event.currentIndex]['id'])
   }
 
@@ -138,9 +138,20 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    this.spinner = true;
+    //this.spinner = true;
 
-    this.roadService.updateRoad(this.f, this.roadId).subscribe(
+    // sort targets
+    console.log(this.targetsArray)
+    for (let index in this.targetsArray){
+      if(this.targetsArray[Number(index)+1] !== undefined) {
+        this.targetsArray[index]['next_target_id'] = this.targetsArray[Number(index)+1]['id']
+      }
+    }
+
+    console.log('sorted array', this.targetsArray)
+
+
+    /*this.roadService.updateRoad(this.f, this.roadId).subscribe(
       response => {
         this.spinner = false;
         console.log('response', response)
@@ -148,7 +159,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       error => {
         this.spinner = false;
       }
-    )
+    )*/
   }
 
   removeTargetFromRoad(targetIndex){
