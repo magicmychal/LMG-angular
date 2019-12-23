@@ -66,14 +66,17 @@
 
               <mat-action-row>
                 <button color="warn" mat-button>Edit</button>
-                <button type="button" color="warn" mat-button (click)="removeTargetFromRoad(i)">Remove from the road</button>
+                <button (click)="removeTargetFromRoad(i)" color="warn" mat-button type="button">Remove from the road
+                </button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
         <hr>
+        <button color="primary" mat-stroked-button (click)="publishRoad()"
+                type="button">{{this.is_published === true ? "Withhold" : "Publish"}}</button>
         <button color="primary" mat-stroked-button type="submit">Save</button>
-        <button type="button" (click)="removeRoad()" color="warn" mat-stroked-button>Delete</button>
+        <button (click)="removeRoad()" color="warn" mat-stroked-button type="button">Delete</button>
       </form>
     </div>
   </div>

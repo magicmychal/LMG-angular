@@ -39,6 +39,14 @@
             </div>
           </td>
         </ng-container>
+        <ng-container matColumnDef="is_published">
+          <th *matHeaderCellDef mat-header-cell>Published</th>
+          <td *matCellDef="let road" mat-cell>
+            <div class="action-buttons">
+              <mat-icon>check</mat-icon>
+            </div>
+          </td>
+        </ng-container>
       </table>
       <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
     </div>

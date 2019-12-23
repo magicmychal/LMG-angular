@@ -21,6 +21,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
   roadId: string;
   roadLocationName: any;
+  is_published: boolean;
 
   // for the leaf map
   leafMap: any;
@@ -86,9 +87,19 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
         this.targetsArray = response['targets']
 
+        this.is_published = response['published']
+
 
         this.spinner = false;
-      })
+      },
+        error => {
+          let errorSnackBar = this._snackbar.open('Error loading road', 'Reload', {
+            duration: 3500
+          });
+          errorSnackBar.afterDismissed().subscribe(null, null, () => {
+            window.location.reload();
+          })
+        })
   }
 
   onResultClick(position) {
@@ -126,6 +137,18 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       });
       return;
     }
+
+    this.spinner = true;
+
+    this.roadService.updateRoad(this.f, this.roadId).subscribe(
+      response => {
+        this.spinner = false;
+        console.log('response', response)
+      },
+      error => {
+        this.spinner = false;
+      }
+    )
   }
 
   removeTargetFromRoad(targetIndex){
@@ -137,6 +160,10 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     removeSnackBar.afterDismissed().subscribe(null, null, () => {
       this.targetsArray.splice(targetIndex,0, removedTarget)
     })
+
+  }
+
+  publishRoad(){
 
   }
 
