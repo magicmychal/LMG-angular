@@ -38,15 +38,36 @@
         </div>
       </form>
     </div>
-    <hr>
+  </div>
+  <div class="row">
+    <mat-divider></mat-divider>
     <div class="col-12">
       <h2>Targets</h2>
-      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let target of selectedArray" cdkDrag>
-          {{target['point']['name']}}
-        </div>
-      </div>
+      <div (cdkDropListDropped)="drop($event)" cdkDropList id="targets-panel">
+        <mat-expansion-panel *ngFor="let target of selectedArray" cdkDrag>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{target['point']['name']}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{target['point']['description']}}
+            </mat-panel-description>
+          </mat-expansion-panel-header>
 
+          Location:
+          <div class="target-description">{{target['point']['location']['name']}}</div>
+          Sightseeing description:
+          <div class="target-description">{{target['explore_tip']}}</div>
+          Challenge description:
+          <div class="target-description">{{target['challenge_tip']}}</div>
+
+
+          <mat-action-row>
+            <button color="warn" mat-button>Edit</button>
+            <button color="warn" mat-button>Remove</button>
+          </mat-action-row>
+        </mat-expansion-panel>
+      </div>
     </div>
     <app-mat-spinner-overlay *ngIf="spinner" overlay="true"></app-mat-spinner-overlay>
   </div>

@@ -48,6 +48,8 @@ import {MapmodalComponent} from './addons/mapmodal/mapmodal.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import { RoadsEditComponent } from './roads/roads-edit/roads-edit.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {MatDividerModule} from '@angular/material/divider';
+import {MatExpansionModule} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -99,7 +101,9 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatDialogModule,
-    DragDropModule
+    DragDropModule,
+    MatDividerModule,
+    MatExpansionModule
   ],
   entryComponents: [
     MapmodalComponent
