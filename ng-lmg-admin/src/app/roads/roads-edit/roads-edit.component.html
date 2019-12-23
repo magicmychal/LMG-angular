@@ -32,11 +32,21 @@
         </div>
         <div class="w-90">
           <!--map-->
-          <app-map-search *ngIf="this.roadLocationName" (notifyPosition)="onResultClick($event)"
+          <app-map-search (notifyPosition)="onResultClick($event)" *ngIf="this.roadLocationName"
                           [locationName]="this.roadLocationName" id="map-search"></app-map-search>
           <div id="mapid"></div>
         </div>
       </form>
+    </div>
+    <hr>
+    <div class="col-12">
+      <h2>Targets</h2>
+      <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let target of selectedArray" cdkDrag>
+          {{target['point']['name']}}
+        </div>
+      </div>
+
     </div>
     <app-mat-spinner-overlay *ngIf="spinner" overlay="true"></app-mat-spinner-overlay>
   </div>

@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RoadService} from "../../_services/roads/road.service";
 import {ActivatedRoute} from "@angular/router";
 import {MapViewService} from "../../_services/map/map-view.service";
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-roads-edit',
@@ -22,7 +23,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   leafMap: any;
   leafMarker: any;
 
-  selectedArray: object = [];
+  selectedArray: Array<any>;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -76,23 +77,23 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
         /*
         move the targets to the selected location
          */
-        for (let target of response['targets']) {
-          let something = {
-            id: target['id'],
-            name: target['point']['name'],
-            description: target['point']['description'],
-            code: target['point']['code'],
-            location: {
-              latitude: target['point']['location']['latitude'],
-              longitude: target['point']['location']['longitude']
-            }
-          };
-          console.log('target', something);
-          // @ts-ignore
-          this.selectedArray.push(something)
+          /*for (let target of response['targets']) {
+            let something = {
+              id: target['id'],
+              name: target['point']['name'],
+              description: target['point']['description'],
+              code: target['point']['code'],
+              location: {
+                latitude: target['point']['location']['latitude'],
+                longitude: target['point']['location']['longitude']
+              }
+            };
+            // @ts-ignore
+            this.selectedArray.push(something)
 
-        }
-        console.log('array for us is', this.selectedArray);
+          }*/
+        this.selectedArray = response['targets']
+        console.log('selectedarraytype', typeof(this.selectedArray), this.selectedArray);
         //this.initiateEditPoints();
 
         this.spinner = false;
@@ -115,4 +116,20 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     this.leafMarker = L.marker([position[0], position[1]]).addTo(this.leafMap);
 
   }
+
+  movies = [
+    'Episode I - The Phantom Menace',
+    'Episode II - Attack of the Clones',
+    'Episode III - Revenge of the Sith',
+    'Episode IV - A New Hope',
+    'Episode V - The Empire Strikes Back',
+    'Episode VI - Return of the Jedi',
+    'Episode VII - The Force Awakens',
+    'Episode VIII - The Last Jedi'
+  ];
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.selectedArray, event.previousIndex, event.currentIndex);
+  }
+
 }
