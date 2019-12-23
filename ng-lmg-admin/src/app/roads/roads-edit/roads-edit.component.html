@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <form [formGroup]="roadsForm">
+      <form [formGroup]="roadsForm" (ngSubmit)="onSubmit()">
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
@@ -17,8 +17,9 @@
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Decoy</mat-label>
-            <input autofocus formControlName="decoy" matInput placeholder="Decoy">
+            <input #decoy autofocus formControlName="decoy" matInput placeholder="Decoy">
             <mat-hint>Something that will attract tourist to click.</mat-hint>
+            <mat-hint align="end">{{decoy .value?.length || 0}}/250</mat-hint>
           </mat-form-field>
         </div>
         <div>
@@ -36,39 +37,41 @@
                           [locationName]="this.roadLocationName" id="map-search"></app-map-search>
           <div id="mapid"></div>
         </div>
+        <h2>Targets</h2>
+        <p>Please move the targets in order the user will go.</p>
+          <mat-accordion class="example-headers-align" (cdkDropListDropped)="moveTarget($event)" cdkDropList class="w-90">
+          <mat-expansion-panel *ngFor="let target of targetsArray; let i = index " cdkDrag>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{i+1}}  {{target['point']['name']}}
+              </mat-panel-title>
+              <mat-panel-description>
+                {{target['point']['description']}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <mat-divider> </mat-divider>
+
+            Location:
+            <div class="target-description">{{target['point']['location']['name']}}</div>
+            Code:
+            <div class="target-description">{{target['point']['code']}}</div>
+            Sightseeing description:
+            <div class="target-description">{{target['explore_tip']}}</div>
+            Challenge description:
+            <div class="target-description">{{target['challenge_tip']}}</div>
+
+
+            <mat-action-row>
+              <button color="warn" mat-button>Edit</button>
+              <button color="warn" mat-button>Remove</button>
+            </mat-action-row>
+          </mat-expansion-panel>
+          </mat-accordion>
+        <hr>
+        <button mat-stroked-button color="primary" type="submit">Save</button>
+        <button mat-stroked-button color="warn">Delete</button>
       </form>
     </div>
   </div>
-  <div class="row">
-    <mat-divider></mat-divider>
-    <div class="col-12">
-      <h2>Targets</h2>
-      <div (cdkDropListDropped)="drop($event)" cdkDropList id="targets-panel">
-        <mat-expansion-panel *ngFor="let target of selectedArray" cdkDrag>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{target['point']['name']}}
-            </mat-panel-title>
-            <mat-panel-description>
-              {{target['point']['description']}}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-
-          Location:
-          <div class="target-description">{{target['point']['location']['name']}}</div>
-          Sightseeing description:
-          <div class="target-description">{{target['explore_tip']}}</div>
-          Challenge description:
-          <div class="target-description">{{target['challenge_tip']}}</div>
-
-
-          <mat-action-row>
-            <button color="warn" mat-button>Edit</button>
-            <button color="warn" mat-button>Remove</button>
-          </mat-action-row>
-        </mat-expansion-panel>
-      </div>
-    </div>
-    <app-mat-spinner-overlay *ngIf="spinner" overlay="true"></app-mat-spinner-overlay>
-  </div>
+  <app-mat-spinner-overlay *ngIf="spinner" overlay="true"></app-mat-spinner-overlay>
 </div>

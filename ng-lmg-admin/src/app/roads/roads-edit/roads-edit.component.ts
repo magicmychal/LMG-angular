@@ -4,6 +4,7 @@ import {RoadService} from "../../_services/roads/road.service";
 import {ActivatedRoute} from "@angular/router";
 import {MapViewService} from "../../_services/map/map-view.service";
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-roads-edit',
@@ -23,13 +24,14 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   leafMap: any;
   leafMarker: any;
 
-  selectedArray: Array<any>;
+  targetsArray: Array<any>;
 
   constructor(
     private _formBuilder: FormBuilder,
     private roadService: RoadService,
     private route: ActivatedRoute,
     private mapViewService: MapViewService,
+    private _snackbar: MatSnackBar
   ) { }
 
   get f() {
@@ -40,8 +42,8 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     this.route.params.subscribe(params => this.roadId = params.id);
 
     this.roadsForm = this._formBuilder.group({
-      name: ['', Validators.required],
-      decoy: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(250)]],
+      decoy: ['', [Validators.required, Validators.maxLength(250)]],
       lat: ['', Validators.required],
       lng: ['', Validators.required],
       locName: ['', Validators.required],
@@ -57,6 +59,8 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   }
 
   editInit() {
+    this.spinner = true;
+
     // fetch the point
     this.roadService.getRoadById(this.roadId)
       .subscribe(response => {
@@ -74,27 +78,8 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
         this.onResultClick(position);
 
-        /*
-        move the targets to the selected location
-         */
-          /*for (let target of response['targets']) {
-            let something = {
-              id: target['id'],
-              name: target['point']['name'],
-              description: target['point']['description'],
-              code: target['point']['code'],
-              location: {
-                latitude: target['point']['location']['latitude'],
-                longitude: target['point']['location']['longitude']
-              }
-            };
-            // @ts-ignore
-            this.selectedArray.push(something)
+        this.targetsArray = response['targets']
 
-          }*/
-        this.selectedArray = response['targets']
-        console.log('selectedarraytype', typeof(this.selectedArray), this.selectedArray);
-        //this.initiateEditPoints();
 
         this.spinner = false;
       })
@@ -117,19 +102,25 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
   }
 
-  movies = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi'
-  ];
+  moveTarget(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.targetsArray, event.previousIndex, event.currentIndex);
+    console.log(event.previousIndex, event.currentIndex)
+    // append correct next_target_id
+    this.targetsArray[event.currentIndex]['next_taeget_id'] = this.targetsArray[event.currentIndex+1]['id']
+    console.log('id of the current target', this.targetsArray[event.currentIndex]['id'])
+  }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.selectedArray, event.previousIndex, event.currentIndex);
+  onSubmit(){
+    console.log('submitting', this.f)
+    console.log(this.targetsArray)
+
+    if(this.roadsForm.invalid){
+      this._snackbar.open('Form invalid. Check the form for any mistakes', 'Dismiss', {
+        duration: 3500
+      });
+      return;
+    }
+
   }
 
 }
