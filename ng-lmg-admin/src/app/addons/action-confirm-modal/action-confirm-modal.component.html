@@ -1,1 +1,8 @@
-<p>action-confirm-modal works!</p>
+<h1 mat-dialog-title> Confirm the action </h1>
+<div mat-dialog-content>
+  Do you want to delete selected road?
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="confirm()">Yes, delete</button>
+  <button mat-button cdkFocusInitial (click)="close()">Cancel</button>
+</div>

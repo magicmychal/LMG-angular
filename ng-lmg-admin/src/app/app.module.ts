@@ -50,6 +50,7 @@ import { RoadsEditComponent } from './roads/roads-edit/roads-edit.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from "@angular/material/expansion";
+import { ActionConfirmModalComponent } from './addons/action-confirm-modal/action-confirm-modal.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
     MatSpinnerOverlayComponent,
     MapmodalComponent,
     RoadsEditComponent,
+    ActionConfirmModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,7 +108,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
     MatExpansionModule
   ],
   entryComponents: [
-    MapmodalComponent
+    MapmodalComponent,
+    ActionConfirmModalComponent
   ],
   providers: [
 

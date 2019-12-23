@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MapViewService} from "../../_services/map/map-view.service";
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MatDialog} from "@angular/material/dialog";
+import {ActionConfirmModalComponent} from "../../addons/action-confirm-modal/action-confirm-modal.component";
 
 @Component({
   selector: 'app-roads-edit',
@@ -33,6 +35,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     private mapViewService: MapViewService,
     private _snackbar: MatSnackBar,
     private router: Router,
+    public dialog: MatDialog
   ) { }
 
   get f() {
@@ -139,25 +142,31 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
   removeRoad(){
     // confirm action
-
-
-    this.f.is_deleted.setValue(true);
-    let id = this.roadId;
-    console.log(this.f)
-    this.roadService.updateRoad(this.f, this.roadId).subscribe(
+    const confirmDialog = this.dialog.open(ActionConfirmModalComponent)
+    confirmDialog.afterClosed().subscribe(
       result => {
-        this._snackbar.open('Road deleted', 'Dismiss', {
-          duration: 3500
-        });
-        this.router.navigate(['/roads']);
-      },
-      error => {
-        console.error(error)
-        this._snackbar.open('Something went wrong, on our side. Please try again', 'Dismiss', {
-          duration: 3500
-        });
+        if(result['confirm'] == false){
+          return;
+        }
+        this.f.is_deleted.setValue(true);
+        let id = this.roadId;
+        console.log(this.f)
+        this.roadService.updateRoad(this.f, this.roadId).subscribe(
+          result => {
+            this._snackbar.open('Road deleted', 'Dismiss', {
+              duration: 3500
+            });
+            this.router.navigate(['/roads']);
+          },
+          error => {
+            console.error(error)
+            this._snackbar.open('Something went wrong, on our side. Please try again', 'Dismiss', {
+              duration: 3500
+            });
+          }
+            )
       }
-        )
+    )
   }
 
 }
