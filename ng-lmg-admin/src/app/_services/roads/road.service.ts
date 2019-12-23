@@ -21,12 +21,12 @@ export class RoadService {
       map(this.extractData));
   }
 
-  getRoadById(id){
+  getRoadById(id) {
     return this.http.get<any>(`${environment.apiUrl}/road/${id}`).pipe(
       map(this.extractData));
   }
 
-  updateRoad(road, id){
+  updateRoad(road, id) {
     const body = {
       "name": road.name.value,
       "decoy": road.decoy.value,
@@ -40,6 +40,21 @@ export class RoadService {
       "is_published": road.is_published.value,
       "is_deleted": road.is_deleted.value
     };
+
+
+    for (let point of road['points'].value) {
+      let target = {
+        "id": point['targetId'],
+        "challenge_tip": point['challenge'],
+        "explore_tip": point['sightseeing'],
+        "point_id": point['pointId'],
+        "next_target_id": point['nextTargetId'],
+      };
+
+      body.targets.push(target)
+    }
+
+    console.log(JSON.stringify(body))
 
     return this.http.put<any>(`${environment.apiUrl}/road/${id}`, body).pipe(
       map(this.extractData));
@@ -74,8 +89,6 @@ export class RoadService {
     };
 
     for (let point of points) {
-      console.log(point);
-
       let target = {
         "challenge_tip": point['challenge'],
         "explore_tip": point['sightseeing'],
@@ -85,11 +98,8 @@ export class RoadService {
 
       body.targets.push(target)
     }
-
-    console.log(body)
-
     // make a call
-    let responseStatus = false
+    let responseStatus = false;
     return this.http.post<any>(`${environment.apiUrl}/road`, body).pipe(
       map(this.extractData));
   }

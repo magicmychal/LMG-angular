@@ -43,6 +43,10 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     return this.roadsForm.controls;
   }
 
+  get targetsFormArray(){
+    return this.f.points as FormArray;
+  }
+
   ngOnInit() {
     this.route.params.subscribe(params => this.roadId = params.id);
 
@@ -138,28 +142,36 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       return;
     }
 
-    //this.spinner = true;
+    this.spinner = true;
 
-    // sort targets
+    // sort targets and add them to the form
     console.log(this.targetsArray)
     for (let index in this.targetsArray){
       if(this.targetsArray[Number(index)+1] !== undefined) {
         this.targetsArray[index]['next_target_id'] = this.targetsArray[Number(index)+1]['id']
       }
+      this.targetsFormArray.push(this._formBuilder.group({
+        targetId: [this.targetsArray[index]['id']],
+        pointId: [this.targetsArray[index]['point']['id'], Validators.required],
+        sightseeing: [this.targetsArray[index]['explore_tip'], Validators.required],
+        challenge: [this.targetsArray[index]['challenge_tip'], Validators.required],
+        nextTargetId: [this.targetsArray[index]['next_target_id']]
+      }))
     }
 
-    console.log('sorted array', this.targetsArray)
-
-
-    /*this.roadService.updateRoad(this.f, this.roadId).subscribe(
+    console.log('form ', this.f)
+    this.roadService.updateRoad(this.f, this.roadId).subscribe(
       response => {
         this.spinner = false;
         console.log('response', response)
       },
       error => {
         this.spinner = false;
+        this._snackbar.open('Something went wrong on our side', 'Dismiss', {
+          duration: 3200
+        })
       }
-    )*/
+    )
   }
 
   removeTargetFromRoad(targetIndex){
