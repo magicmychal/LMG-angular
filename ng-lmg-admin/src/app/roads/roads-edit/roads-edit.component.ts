@@ -163,8 +163,37 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
   }
 
-  publishRoad(){
+  publishRoad(withhold?){
+    if (withhold == true) {
+      this.f.is_published.setValue(false);
+    } else {
+      this.f.is_published.setValue(true);
+    }
 
+    this.roadService.updateRoad(this.f, this.roadId)
+      .subscribe(
+        response => {
+          this.is_published = response['published']
+          let publishSnackbar;
+          if (this.is_published == true) {
+            publishSnackbar = this._snackbar.open('Road published', 'Withhold', {
+              duration: 3500
+            })
+          } else {
+            publishSnackbar = this._snackbar.open('Road Withhold', 'Republish', {
+              duration: 3500
+            })
+          }
+          publishSnackbar.afterDismissed().subscribe(null, null, () => {
+            this.publishRoad(true)
+          })
+        },
+        error => {
+          this._snackbar.open('There was an error on our side. Try again', 'Dismiss', {
+            duration: 3500
+          })
+        }
+      )
   }
 
   removeRoad(){
