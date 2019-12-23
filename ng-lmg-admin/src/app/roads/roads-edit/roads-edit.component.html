@@ -6,7 +6,8 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <form [formGroup]="roadsForm" (ngSubmit)="onSubmit()">
+      <h2>Basic information</h2>
+      <form (ngSubmit)="onSubmit()" [formGroup]="roadsForm">
         <div>
           <mat-form-field appearance="outline">
             <mat-label>Name</mat-label>
@@ -19,7 +20,7 @@
             <mat-label>Decoy</mat-label>
             <input #decoy autofocus formControlName="decoy" matInput placeholder="Decoy">
             <mat-hint>Something that will attract tourist to click.</mat-hint>
-            <mat-hint align="end">{{decoy .value?.length || 0}}/250</mat-hint>
+            <mat-hint align="end">{{decoy.value?.length || 0}}/250</mat-hint>
           </mat-form-field>
         </div>
         <div>
@@ -37,39 +38,42 @@
                           [locationName]="this.roadLocationName" id="map-search"></app-map-search>
           <div id="mapid"></div>
         </div>
-        <h2>Targets</h2>
-        <p>Please move the targets in order the user will go.</p>
-          <mat-accordion class="example-headers-align" (cdkDropListDropped)="moveTarget($event)" cdkDropList class="w-90">
-          <mat-expansion-panel *ngFor="let target of targetsArray; let i = index " cdkDrag>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                {{i+1}}  {{target['point']['name']}}
-              </mat-panel-title>
-              <mat-panel-description>
-                {{target['point']['description']}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
-            <mat-divider> </mat-divider>
+        <div class="w-90 targets">
+          <hr>
+          <h2>Targets</h2>
+          <p>Please move the targets in order the user will go.</p>
+          <mat-accordion (cdkDropListDropped)="moveTarget($event)" cdkDropList class="example-headers-align">
+            <mat-expansion-panel *ngFor="let target of targetsArray; let i = index " cdkDrag>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{i + 1}}  {{target['point']['name']}}
+                </mat-panel-title>
+                <mat-panel-description>
+                  {{target['point']['description']}}
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-divider></mat-divider>
 
-            Location:
-            <div class="target-description">{{target['point']['location']['name']}}</div>
-            Code:
-            <div class="target-description">{{target['point']['code']}}</div>
-            Sightseeing description:
-            <div class="target-description">{{target['explore_tip']}}</div>
-            Challenge description:
-            <div class="target-description">{{target['challenge_tip']}}</div>
+              Location:
+              <div class="target-description">{{target['point']['location']['name']}}</div>
+              Code:
+              <div class="target-description">{{target['point']['code']}}</div>
+              Sightseeing description:
+              <div class="target-description">{{target['explore_tip']}}</div>
+              Challenge description:
+              <div class="target-description">{{target['challenge_tip']}}</div>
 
 
-            <mat-action-row>
-              <button color="warn" mat-button>Edit</button>
-              <button color="warn" mat-button>Remove</button>
-            </mat-action-row>
-          </mat-expansion-panel>
+              <mat-action-row>
+                <button color="warn" mat-button>Edit</button>
+                <button color="warn" mat-button>Remove</button>
+              </mat-action-row>
+            </mat-expansion-panel>
           </mat-accordion>
+        </div>
         <hr>
-        <button mat-stroked-button color="primary" type="submit">Save</button>
-        <button mat-stroked-button color="warn">Delete</button>
+        <button color="primary" mat-stroked-button type="submit">Save</button>
+        <button color="warn" mat-stroked-button>Delete</button>
       </form>
     </div>
   </div>

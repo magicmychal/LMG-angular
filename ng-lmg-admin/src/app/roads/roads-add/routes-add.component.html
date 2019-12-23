@@ -24,8 +24,9 @@
             <div>
               <mat-form-field appearance="outline">
                 <mat-label>Decoy</mat-label>
-                <input autofocus formControlName="decoy" matInput placeholder="Decoy">
+                <input #decoy autofocus formControlName="decoy" matInput placeholder="Decoy">
                 <mat-hint>Something that will attract tourist to click.</mat-hint>
+                <mat-hint align="end">{{decoy.value?.length || 0}}/250</mat-hint>
               </mat-form-field>
             </div>
             <div>

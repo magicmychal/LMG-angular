@@ -27,7 +27,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
   initialSelection = [];
   allowMultiSelect = true;
   selection = new SelectionModel(this.allowMultiSelect, this.initialSelection);
-  isLinear = false;
+  isLinear = true;
 
 
   // for the leaf map
@@ -70,11 +70,11 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit() {
     this.dynamicForm = this._formBuilder.group({
-      name: ['', Validators.required],
-      decoy: ['', Validators.required],
+      name: ['', [Validators.required, Validators.maxLength(250)]],
+      decoy: ['', [Validators.required, Validators.maxLength(250)]],
       lat: ['', Validators.required],
       lng: ['', Validators.required],
-      locName: ['', Validators.required],
+      locName: ['', [Validators.required, Validators.maxLength(250)]],
       description: ['', [Validators.required, Validators.maxLength(250)]],
       points: new FormArray([])
     });
@@ -190,17 +190,19 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
       //this.roadService.addNewRoute(this.f) == true ? this.onSuccessSubmit() : this.onFailSubmit()
       this.roadService.addNewRoute(this.f)
         .subscribe(results => {
-            this.onSuccessSubmit()
+            let roadId = results['id'];
+            this.onSuccessSubmit(roadId);
           },
           error => {
-            this.onFailSubmit()
+            this.onFailSubmit();
           })
     }
   }
 
-  onSuccessSubmit() {
-    console.log('success');
-    this.router.navigate(['/roads']);
+  onSuccessSubmit(roadId) {
+    console.log('success', roadId);
+    let returnUrl = '/roads/edit/'+roadId
+    this.router.navigate([returnUrl]);
   }
 
   onFailSubmit() {
