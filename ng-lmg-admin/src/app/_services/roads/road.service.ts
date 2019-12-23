@@ -54,8 +54,7 @@ export class RoadService {
       body.targets.push(target)
     }
 
-    console.log(JSON.stringify(body))
-
+    console.log(body)
     return this.http.put<any>(`${environment.apiUrl}/road/${id}`, body).pipe(
       map(this.extractData));
 

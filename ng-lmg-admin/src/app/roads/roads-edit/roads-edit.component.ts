@@ -142,6 +142,8 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       return;
     }
 
+    this.targetsFormArray.clear();
+
     this.spinner = true;
 
     // sort targets and add them to the form
