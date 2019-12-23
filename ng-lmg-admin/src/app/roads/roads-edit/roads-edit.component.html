@@ -66,7 +66,7 @@
 
               <mat-action-row>
                 <button color="warn" mat-button>Edit</button>
-                <button color="warn" mat-button>Remove</button>
+                <button type="button" color="warn" mat-button (click)="removeTargetFromRoad(i)">Remove from the road</button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>

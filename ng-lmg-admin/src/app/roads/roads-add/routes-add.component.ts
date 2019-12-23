@@ -200,7 +200,9 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSuccessSubmit(roadId) {
-    console.log('success', roadId);
+    this._snackbar.open('Road added, you can now edit the details', 'Dismiss', {
+      duration: 3500
+    });
     let returnUrl = '/roads/edit/'+roadId
     this.router.navigate([returnUrl]);
   }
