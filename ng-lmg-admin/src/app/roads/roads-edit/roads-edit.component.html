@@ -75,8 +75,9 @@
         <hr>
         <button color="primary" mat-stroked-button (click)="publishRoad()"
                 type="button">{{this.is_published === true ? "Withhold" : "Publish"}}</button>
-        <button color="primary" mat-stroked-button type="submit">Save</button>
+        <button color="primary" mat-stroked-button type="submit">Save changes</button>
         <button (click)="removeRoad()" color="warn" mat-stroked-button type="button">Delete</button>
+        <button mat-stroked-button type="button" [routerLink]="['/roads']">Cancel</button>
       </form>
     </div>
   </div>
