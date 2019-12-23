@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RoadService} from "../../_services/roads/road.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MapViewService} from "../../_services/map/map-view.service";
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -31,7 +31,8 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     private roadService: RoadService,
     private route: ActivatedRoute,
     private mapViewService: MapViewService,
-    private _snackbar: MatSnackBar
+    private _snackbar: MatSnackBar,
+    private router: Router,
   ) { }
 
   get f() {
@@ -48,7 +49,9 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       lng: ['', Validators.required],
       locName: ['', Validators.required],
       description: ['', [Validators.required, Validators.maxLength(250)]],
-      points: new FormArray([])
+      points: new FormArray([]),
+      is_published: [false, Validators.required],
+      is_deleted: [false, Validators.required]
     })
 
     this.editInit();
@@ -132,6 +135,29 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       this.targetsArray.splice(targetIndex,0, removedTarget)
     })
 
+  }
+
+  removeRoad(){
+    // confirm action
+
+
+    this.f.is_deleted.setValue(true);
+    let id = this.roadId;
+    console.log(this.f)
+    this.roadService.updateRoad(this.f, this.roadId).subscribe(
+      result => {
+        this._snackbar.open('Road deleted', 'Dismiss', {
+          duration: 3500
+        });
+        this.router.navigate(['/roads']);
+      },
+      error => {
+        console.error(error)
+        this._snackbar.open('Something went wrong, on our side. Please try again', 'Dismiss', {
+          duration: 3500
+        });
+      }
+        )
   }
 
 }

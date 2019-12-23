@@ -26,85 +26,24 @@ export class RoadService {
       map(this.extractData));
   }
 
-  addNewRouteOLD(form) {
-
-    /*
-    First, we need to get the name of the route and description, decoy, and location
-     */
-    let name = form.name.value;
-    let decoy = form.decoy.value;
-    let description = form.description.value;
-    let lat = form.lat.value;
-    let lng = form.lng.value;
-    let locName = form.locName.value;
-
-    let points: [] = form.points.value;
-
+  updateRoad(road, id){
     const body = {
-      "name": name,
-      "decoy": decoy,
-      "description": description,
+      "name": road.name.value,
+      "decoy": road.decoy.value,
+      "description": road.description.value,
       "location": {
-        "name": locName,
-        "longitude": lng,
-        "latitude": lat
-      }
+        "name": road.locName.value,
+        "longitude": road.lng.value,
+        "latitude": road.lat.value
+      },
+      "targets": [],
+      "is_published": road.is_published.value,
+      "is_deleted": road.is_deleted.value
     };
 
-    //add new route
-    this.http.post<any>(`${environment.apiUrl}/road`, body)
-      .subscribe(
-        (response) => {
-          let routeId = response.id;
-          console.log('new route', response);
-          // if everything goes well, add targets
-          console.log('id', routeId);
-          let addTargets = this.addTargets(points, routeId);
-          return addTargets == true ? true : false
-        },
-        (error) => {
-          // do something to stop
-          console.error('new route', error);
-          return false;
-        }
-      )
-  }
+    return this.http.put<any>(`${environment.apiUrl}/road/${id}`, body).pipe(
+      map(this.extractData));
 
-  addTargets(points, routeId) {
-    // reverse array
-    points = points.reverse();
-
-
-    console.log('initial next target is', this.nextTargetId);
-
-    // loop through the reverse points
-    for (let index in points) {
-
-      let body = {
-        "challenge_tip": points[index].challenge,
-        "explore_tip": points[index].sightseeing,
-        "point_id": points[index].pointId,
-        "road_id": routeId
-      };
-
-      // tu nie działa!
-      if (this.nextTargetId !== null) {
-        console.warn('next target in the loop is', this.nextTargetId);
-        // @ts-ignore
-        body.next_target_id = this.nextTargetId
-      }
-
-      console.log('the full body request', body);
-
-      let response = this.http.post<any>(`${environment.apiUrl}/target`, body);
-      forkJoin(response);
-
-
-      console.error('id from the response', this.nextTargetId)
-    }
-
-    // done, we can return
-    return true;
   }
 
   addNewRoute(form) {
@@ -129,7 +68,9 @@ export class RoadService {
         "longitude": lng,
         "latitude": lat
       },
-      "targets": []
+      "targets": [],
+      "is_published": false,
+      "is_deleted": false
     };
 
     for (let point of points) {

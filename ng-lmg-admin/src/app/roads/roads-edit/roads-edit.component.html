@@ -40,7 +40,7 @@
         </div>
         <div class="w-90 targets">
           <hr>
-          <h2>Targets</h2>
+          <h2 #targets id="targets">Targets</h2>
           <p>Please move the targets in order the user will go.</p>
           <mat-accordion (cdkDropListDropped)="moveTarget($event)" cdkDropList class="example-headers-align">
             <mat-expansion-panel *ngFor="let target of targetsArray; let i = index " cdkDrag>
@@ -73,7 +73,7 @@
         </div>
         <hr>
         <button color="primary" mat-stroked-button type="submit">Save</button>
-        <button color="warn" mat-stroked-button>Delete</button>
+        <button type="button" (click)="removeRoad()" color="warn" mat-stroked-button>Delete</button>
       </form>
     </div>
   </div>
