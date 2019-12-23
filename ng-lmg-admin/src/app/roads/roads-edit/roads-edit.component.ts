@@ -157,7 +157,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     let removeSnackBar = this._snackbar.open('Point removed from the road', 'Undo', {
       duration: 3500
     });
-    removeSnackBar.afterDismissed().subscribe(null, null, () => {
+    removeSnackBar.onAction().subscribe(null, null, () => {
       this.targetsArray.splice(targetIndex,0, removedTarget)
     })
 
@@ -169,7 +169,6 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     } else {
       this.f.is_published.setValue(true);
     }
-
     this.roadService.updateRoad(this.f, this.roadId)
       .subscribe(
         response => {
@@ -179,14 +178,14 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
             publishSnackbar = this._snackbar.open('Road published', 'Withhold', {
               duration: 3500
             })
-          } else {
+          } if (this.is_published == false) {
             publishSnackbar = this._snackbar.open('Road Withhold', 'Republish', {
               duration: 3500
             })
           }
-          publishSnackbar.afterDismissed().subscribe(null, null, () => {
+          publishSnackbar.onAction().subscribe(() => {
             this.publishRoad(true)
-          })
+          });
         },
         error => {
           this._snackbar.open('There was an error on our side. Try again', 'Dismiss', {

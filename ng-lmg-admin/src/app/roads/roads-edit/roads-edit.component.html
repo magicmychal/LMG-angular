@@ -73,7 +73,7 @@
           </mat-accordion>
         </div>
         <hr>
-        <button color="primary" mat-stroked-button (click)="publishRoad()"
+        <button color="primary" mat-stroked-button (click)="publishRoad(this.is_published)"
                 type="button">{{this.is_published === true ? "Withhold" : "Publish"}}</button>
         <button color="primary" mat-stroked-button type="submit">Save changes</button>
         <button (click)="removeRoad()" color="warn" mat-stroked-button type="button">Delete</button>
