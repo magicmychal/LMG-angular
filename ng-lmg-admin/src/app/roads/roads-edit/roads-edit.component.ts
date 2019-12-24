@@ -165,7 +165,10 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     this.roadService.updateRoad(this.f, this.roadId).subscribe(
       response => {
         this.spinner = false;
-        console.log('response', response)
+        this._snackbar.open('Changes saved', 'Dismiss', {
+          duration: 3500
+        });
+        this.router.navigate(['/roads']);
       },
       error => {
         this.spinner = false;
