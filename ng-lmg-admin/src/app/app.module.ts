@@ -51,6 +51,7 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { ActionConfirmModalComponent } from './addons/action-confirm-modal/action-confirm-modal.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -105,7 +106,8 @@ import { ActionConfirmModalComponent } from './addons/action-confirm-modal/actio
     MatDialogModule,
     DragDropModule,
     MatDividerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTooltipModule
   ],
   entryComponents: [
     MapmodalComponent,

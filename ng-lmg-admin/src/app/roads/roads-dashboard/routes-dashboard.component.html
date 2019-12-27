@@ -42,8 +42,10 @@
         <ng-container matColumnDef="is_published">
           <th *matHeaderCellDef mat-header-cell>Published</th>
           <td *matCellDef="let road" mat-cell>
-            <div class="action-buttons">
-              <mat-icon *ngIf="road['published'] == true">check</mat-icon>
+            <div class="is_published">
+              <mat-icon *ngIf="road['published'] == true" color="primary"
+                        matTooltip="This road is available for the users. Edit the road to change it.">check
+              </mat-icon>
             </div>
           </td>
         </ng-container>
