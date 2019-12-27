@@ -45,6 +45,18 @@ export class MapSearchComponent implements OnInit {
     console.log(results)
     this.results['results'] = results.results['items'];
     this.results = this.results['results']
+    // remove all the "<br/"
+    for (let result of this.results){
+      console.log(result['vicinity'])
+      let stringBefore = result['vicinity'];
+      let stringAfter = result['vicinity'].replace("<br/>", ", ");
+      do {
+        stringBefore = stringAfter
+        stringAfter = stringBefore.replace("<br/>", ", ");
+      } while ( stringBefore !== stringAfter )
+      result['vicinity'] = stringAfter
+
+    }
     this.notifyResults.emit(results);
   }
 
