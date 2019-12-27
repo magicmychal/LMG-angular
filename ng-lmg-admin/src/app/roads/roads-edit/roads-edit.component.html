@@ -49,7 +49,7 @@
                   {{i + 1}}  {{target['point']['name']}}
                 </mat-panel-title>
                 <mat-panel-description>
-                  {{target['point']['description']}}
+                  {{target['point']['description'] | slice: 0:100}}...
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <mat-divider></mat-divider>

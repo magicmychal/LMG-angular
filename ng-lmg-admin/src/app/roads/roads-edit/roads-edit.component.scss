@@ -1,16 +1,32 @@
-.container{
+.container {
   margin-bottom: 50px;
 }
 
-.target-description{
+.target-description {
   padding: 20px;
   font-style: italic;
 }
 
-.targets{
+.targets {
   margin-top: 10px;
 }
 
-button{
+button {
   margin: 5px;
 }
+
+mat-panel-description {
+  width: 30%;
+  text-align: left;
+}
+
+mat-panel-title {
+  flex-grow: unset;
+  width: 30%;
+}
+
+/*mat-expansion-panel-header {
+  height: unset !important;
+  min-height: 40px;
+  max-height: 300px !important;
+}*/
