@@ -1,0 +1,16 @@
+mat-card{
+
+  min-width: 20vw;
+  max-width: 40vw;
+
+  mat-form-field{
+    width: 100%;
+  }
+  mat-card-actions{
+    text-align: right;
+  }
+  p{
+    margin: 10px;
+    font-size: 0.6em;
+  }
+}

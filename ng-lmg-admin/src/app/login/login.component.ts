@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
   notFound: string;
 
 
+
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
@@ -50,6 +51,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log('logging in')
     this.submitted = true;
 
     // stop here if form is invalid

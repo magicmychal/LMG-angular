@@ -28,8 +28,13 @@ export class ErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(catchError(err => {
       if (err.status === 401 && this.authenticationService.currentUserValue) {
         // auto logout if 401 response returned from api && the user is currently logged in
-        this.authenticationService.logout();
-        location.reload(true);
+        let errorSnackbar = this._snackBar.open("Your session has expired. Please log in again", "Dismiss", {
+          duration: 60000,
+        });
+        errorSnackbar.afterDismissed().subscribe(null, null, () => {
+          this.authenticationService.logout();
+          location.reload(true);
+        })
       }
       if (err.status === 500){
         let errorSnackbar = this._snackBar.open("An error occur, please reload the page", "Reload", {

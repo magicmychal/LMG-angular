@@ -1,5 +1,5 @@
 <div class="container-fluid">
-  <div class="row justify-content-md-center">
+  <!--<div class="row justify-content-md-center">
     <div class="col6">
       <div *ngIf="error" class="alert alert-danger">{{error}}</div>
       <h2>Login</h2>
@@ -28,8 +28,37 @@
 
       </form>
     </div>
+  </div>-->
+  <div class="row justify-content-md-center">
+    <mat-card>
+      <mat-card-title>
+        Login to Let Me Guide
+      </mat-card-title>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <input formControlName="email" matInput type="email" placeholder="Email" required>
+<!--          <mat-error *ngIf="f.email.errors.required">Email is required</mat-error>-->
+          <mat-error *ngIf="f.email.errors.email">Wrong email. Check for mistakes</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="password" matInput type="password" placeholder="Password" required>
+<!--          <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>-->
+        </mat-form-field>
+        <mat-card-actions>
+          <button type="submit" mat-raised-button color="primary">Login</button>
+        </mat-card-actions>
+        <mat-card-footer>
+          <p>
+            This area is restricted only for the administrators.
+            Download the app if you want to use Let Me Guide.
+          </p>
+        </mat-card-footer>
+      </form>
+    </mat-card>
   </div>
 </div>
+
+
 <ngx-spinner [fullScreen]="true" type="cube-transition" size="medium">
   <p class="loading">Logging in</p>
 </ngx-spinner>
