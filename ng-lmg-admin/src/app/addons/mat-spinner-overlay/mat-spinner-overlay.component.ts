@@ -8,9 +8,9 @@ import {Component, Input, OnInit} from '@angular/core';
 export class MatSpinnerOverlayComponent implements OnInit {
 
   @Input() value : number = 100;
-  @Input() diameter: number = 100;
+  @Input() diameter: number = 30;
   @Input() mode : string ="indeterminate";
-  @Input() strokeWidth : number = 10;
+  @Input() strokeWidth : number = 5;
   @Input() overlay: boolean = false;
   @Input() color: string = "primary";
 

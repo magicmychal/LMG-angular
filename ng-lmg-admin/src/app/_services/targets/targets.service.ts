@@ -41,9 +41,7 @@ export class TargetsService {
   }
 
   sortHierarchy(targets) {
-    let sortedArrays = [];
-
-    targets = targets.sort(function(a, b){
+      targets = targets.sort(function(a, b){
       return a['hierarchy'] - b['hierarchy']
     });
 
