@@ -23,6 +23,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   roadId: string;
   roadLocationName: any;
   is_published: boolean;
+  loopCheck: boolean;
 
   // for the leaf map
   leafMap: any;
@@ -62,7 +63,8 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       description: ['', [Validators.required, Validators.maxLength(250)]],
       points: new FormArray([]),
       is_published: [false, Validators.required],
-      is_deleted: [false, Validators.required]
+      is_deleted: [false, Validators.required],
+      loop: ['']
     });
 
     this.editInit();
@@ -91,9 +93,10 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
           ];
 
           this.onResultClick(position);
-
           //this.targetsArray = response['targets'];
           this.targetsArray = this.targetsService.sortHierarchy(response['targets']);
+          this.checkLoop();
+
 
           this.is_published = response['published'];
 
@@ -133,6 +136,36 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     this.targetsArray[event.currentIndex]['next_target_id'] = this.targetsArray[event.currentIndex + 1]['id'];
   }
 
+  checkLoop(){
+    /*
+    check if loop is set to true
+     */
+    let firstTargetId = this.targetsArray[0]['id']
+    let lastTargetNextTargetId = this.targetsArray[this.targetsArray.length-1]['next_target_id']
+    if (firstTargetId == lastTargetNextTargetId) {
+      this.f.loop.setValue(true)
+    } else {
+      this.f.loop.setValue(false)
+    }
+  }
+
+  setLoop(){
+    /*
+    We need to connect last target with the first one by next_target_id
+    That can be done by looking at the hierarchy or by relying on targets array that is already
+     */
+    if(this.targetsArray.length < 2){
+      this._snackbar.open('Only roads with one target can be looped', 'Dismiss', {
+        duration: 3500
+      });
+      this.f.loop.setValue(false);
+      return false
+    }
+
+    this.targetsArray[this.targetsArray.length-1]['next_target_id'] = this.targetsArray[0]['id'];
+    console.log('loop yes')
+  }
+
   onSubmit() {
 
     if (this.roadsForm.invalid) {
@@ -145,6 +178,14 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     this.targetsFormArray.clear();
 
     this.spinner = true;
+
+    // check if the road has a loop
+    if (this.f.loop.value == true){
+      if(this.setLoop() == false){
+        this.spinner = false;
+        return
+      }
+    }
 
     // sort targets and add them to the form
     console.log(this.targetsArray);

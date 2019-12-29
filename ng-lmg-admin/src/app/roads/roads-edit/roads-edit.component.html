@@ -71,13 +71,18 @@
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
+          <div id="loop-checkbox">
+            <mat-checkbox formControlName="loop" matTooltip="Looping gives a user option to start a road
+          from the middle without going back to the first point">Loop the targets
+            </mat-checkbox>
+          </div>
         </div>
         <hr>
-        <button color="primary" mat-stroked-button (click)="publishRoad(this.is_published)"
+        <button (click)="publishRoad(this.is_published)" color="primary" mat-stroked-button
                 type="button">{{this.is_published === true ? "Withhold" : "Publish"}}</button>
         <button color="primary" mat-stroked-button type="submit">Save changes</button>
         <button (click)="removeRoad()" color="warn" mat-stroked-button type="button">Delete</button>
-        <button mat-stroked-button type="button" [routerLink]="['/roads']">Cancel</button>
+        <button [routerLink]="['/roads']" mat-stroked-button type="button">Cancel</button>
       </form>
     </div>
   </div>
