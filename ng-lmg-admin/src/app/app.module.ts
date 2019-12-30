@@ -53,6 +53,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { ActionConfirmModalComponent } from './addons/action-confirm-modal/action-confirm-modal.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { PointsSelectorComponent } from './addons/points-selector/points-selector.component';
+import { PointsSelectorModalComponent } from './addons/points-selector-modal/points-selector-modal.component';
 
 @NgModule({
   declarations: [
@@ -74,6 +75,7 @@ import { PointsSelectorComponent } from './addons/points-selector/points-selecto
     RoadsEditComponent,
     ActionConfirmModalComponent,
     PointsSelectorComponent,
+    PointsSelectorModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,7 +115,8 @@ import { PointsSelectorComponent } from './addons/points-selector/points-selecto
   ],
   entryComponents: [
     MapmodalComponent,
-    ActionConfirmModalComponent
+    ActionConfirmModalComponent,
+    PointsSelectorModalComponent
   ],
   providers: [
 

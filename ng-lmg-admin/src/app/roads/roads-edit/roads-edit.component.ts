@@ -8,6 +8,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {ActionConfirmModalComponent} from "../../addons/action-confirm-modal/action-confirm-modal.component";
 import {TargetsService} from "../../_services/targets/targets.service";
+import {PointsSelectorModalComponent} from "../../addons/points-selector-modal/points-selector-modal.component";
 
 @Component({
   selector: 'app-roads-edit',
@@ -23,7 +24,6 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   roadId: string;
   roadLocationName: any;
   is_published: boolean;
-  loopCheck: boolean;
 
   // for the leaf map
   leafMap: any;
@@ -293,6 +293,10 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
         )
       }
     )
+  }
+
+  triggerPointsSelectorModal(){
+    this.dialog.open(PointsSelectorModalComponent,{})
   }
 
 }

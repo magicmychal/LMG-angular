@@ -42,6 +42,7 @@
           <hr>
           <h2 #targets id="targets">Targets</h2>
           <p>Please move the targets in order the user will go.</p>
+          <button type="button" (click)="this.triggerPointsSelectorModal()"  mat-button color="primary">Add new targets</button>
           <mat-accordion (cdkDropListDropped)="moveTarget($event)" cdkDropList class="example-headers-align">
             <mat-expansion-panel *ngFor="let target of targetsArray; let i = index " cdkDrag>
               <mat-expansion-panel-header>
