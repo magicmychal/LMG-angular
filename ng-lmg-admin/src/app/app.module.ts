@@ -52,6 +52,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { ActionConfirmModalComponent } from './addons/action-confirm-modal/action-confirm-modal.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { PointsSelectorComponent } from './addons/points-selector/points-selector.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MapmodalComponent,
     RoadsEditComponent,
     ActionConfirmModalComponent,
+    PointsSelectorComponent,
   ],
   imports: [
     BrowserModule,

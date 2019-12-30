@@ -148,36 +148,8 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
       }));
     }
 
-    console.log('the forms is', this.pointsArray)
   }
 
-  initiateEditPoints() {
-    console.log('array is ', this.selectedArray);
-
-    // @ts-ignore
-    if (this.selectedArray.length == 0) {
-      console.log('0');
-      this.mainStepper.previous();
-      this._snackbar.open('Select points', 'Dismiss', {
-        duration: 3500
-      });
-    }
-
-    this.isLinear = false;
-
-    // @ts-ignore
-    for (let point of this.selectedArray) {
-      let pointId = point.id;
-      console.log('point is', point)
-      this.pointsArray.push(this._formBuilder.group({
-        pointId: [pointId],
-        sightseeing: ['', Validators.required],
-        challenge: ['', Validators.required]
-      }));
-    }
-
-    console.log('the forms is', this.pointsArray)
-  }
 
   onSubmit() {
     if (this.dynamicForm.invalid) {

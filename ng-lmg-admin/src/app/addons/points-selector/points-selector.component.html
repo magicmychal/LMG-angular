@@ -1,0 +1,36 @@
+<p>points-selector works!</p>
+<div class="mat-elevation-z8">
+  <table [dataSource]="dataSource" class="full-width-table" mat-table>
+    <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+    <tr *matRowDef="let dataSource; columns: columnsToDisplay" mat-row></tr>
+    <ng-container matColumnDef="select">
+      <th *matHeaderCellDef mat-header-cell>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      class="checkbox-column">
+        </mat-checkbox>
+      </th>
+      <td *matCellDef="let row" mat-cell>kkk
+        <mat-checkbox (change)="$event ? selection.toggle(row) : null"
+                      (click)="$event.stopPropagation()"
+                      [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th *matHeaderCellDef mat-header-cell> name</th>
+      <td *matCellDef="let point" mat-cell> {{point.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <th *matHeaderCellDef class="description-column" mat-header-cell> Description</th>
+      <td *matCellDef="let point" mat-cell> {{point.description | slice:0:140}} </td>
+    </ng-container>
+    <ng-container matColumnDef="code">
+      <th *matHeaderCellDef mat-header-cell> Code</th>
+      <td *matCellDef="let point" mat-cell> {{point.code}} </td>
+    </ng-container>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15, 20]" showFirstLastButtons></mat-paginator>
+  <app-mat-spinner-overlay *ngIf="spinner" overlay="false"></app-mat-spinner-overlay>
+</div>
