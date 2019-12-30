@@ -1,12 +1,15 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {log} from "util";
 
 @Component({
   selector: 'app-points-selector-modal',
   templateUrl: './points-selector-modal.component.html',
   styleUrls: ['./points-selector-modal.component.scss']
 })
-export class PointsSelectorModalComponent implements OnInit {
+export class PointsSelectorModalComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('pointSelector', {static: false}) pointSelector;
 
   constructor(
     public dialogRef: MatDialogRef<PointsSelectorModalComponent>,
@@ -14,6 +17,10 @@ export class PointsSelectorModalComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   confirm(){

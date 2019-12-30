@@ -27,6 +27,7 @@ export class PointsSelectorComponent implements OnInit {
   selectedArray: object = [];
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
+  @Input() public passedSelectedPoints: any;
 
   // spinner
   spinner = false;
@@ -47,7 +48,12 @@ export class PointsSelectorComponent implements OnInit {
           this.dataSource = new MatTableDataSource(this.points);
           this.dataSource.paginator = this.paginator;
 
-          this.spinner = false;
+          if (this.passedSelectedPoints){
+            this.checkSelected()
+          } else {
+            this.spinner = false;
+          }
+
         },
         error => {
           console.error(error)
@@ -71,5 +77,19 @@ export class PointsSelectorComponent implements OnInit {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
+
+  checkSelected(){
+    console.log('datasource before', this.selection['_selection'])
+
+    // bledne odniesienie tutaj
+    for (let point of this.points) {
+      this.selection.select(point)
+      //this.selection['_selection'].add(point)
+    }
+    console.log('datasource after', this.selection['_selection'])
+
+    this.spinner = false;
+  }
+
 
 }

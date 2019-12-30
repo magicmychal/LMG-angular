@@ -296,7 +296,9 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   }
 
   triggerPointsSelectorModal(){
-    this.dialog.open(PointsSelectorModalComponent,{})
+    this.dialog.open(PointsSelectorModalComponent,{
+      data: this.targetsArray
+    })
   }
 
 }
