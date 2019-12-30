@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
@@ -10,7 +10,6 @@ import {PointsService} from "../../_services/points/points.service";
   styleUrls: ['./points-selector.component.scss']
 })
 export class PointsSelectorComponent implements OnInit {
-
   points: any;
   columnsToDisplay = ['select', 'name', 'description', 'code'];
   dataSource: any;
@@ -73,14 +72,4 @@ export class PointsSelectorComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  select(event){
-
-    console.log(event)
-    console.log(this.selection)
-  }
-
-  emmit(){
-    this.selectedArray = Array.from(this.selection['_selection']);
-    console.log('array is ', this.selectedArray);
-  }
 }

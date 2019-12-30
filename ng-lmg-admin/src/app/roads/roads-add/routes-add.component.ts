@@ -17,37 +17,22 @@ import {MatStepper} from "@angular/material/stepper";
   styleUrls: ['./routes-add.component.scss']
 })
 export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  // for the table
-  points: any;
-  columnsToDisplay = ['select', 'name', 'description', 'code'];
-  dataSource: any;
-
-  // for the selection
-  initialSelection = [];
-  allowMultiSelect = true;
-  selection = new SelectionModel(this.allowMultiSelect, this.initialSelection);
-  isLinear = true;
-
-
   // for the leaf map
   leafMap: any;
   leafMarker: any;
-  /*
-  Selection is the type of set, which is hard to operate on.
-  Converting it to array will simplify further operations
-   */
+
   selectedArray: object = [];
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   dynamicForm: FormGroup;
   // spinner
   spinner = false;
   // for editing
   roadId: string;
   roadLocationName: any;
+  isLinear: boolean = true;
 
   private L: any;
   @ViewChild('stepper', {static: false}) private mainStepper: MatStepper;
+  @ViewChild('pointsSelector', {static: false}) pointSelector;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -78,19 +63,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
       description: ['', [Validators.required, Validators.maxLength(250)]],
       points: new FormArray([])
     });
-
-    this.pointsService.getPoints()
-      .subscribe(
-        results => {
-          this.points = results;
-          console.log(results);
-          this.dataSource = new MatTableDataSource(this.points);
-          this.dataSource.paginator = this.paginator;
-        },
-        error => {
-          console.error(error)
-        },
-      );
   }
 
 
@@ -103,24 +75,13 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
     localStorage.removeItem('currentPoints')
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
 
   initiatePoints() {
+    console.log('initiating')
+    console.log(this.pointSelector.selection._selection)
     // convert selected to the array
     // @ts-ignore
-    this.selectedArray = Array.from(this.selection._selection);
+    this.selectedArray = Array.from(this.pointSelector.selection._selection);
     console.log('array is ', this.selectedArray);
 
     // @ts-ignore

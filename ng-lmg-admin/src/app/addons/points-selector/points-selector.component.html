@@ -11,7 +11,7 @@
                       class="checkbox-column">
         </mat-checkbox>
       </th>
-      <td *matCellDef="let row" mat-cell>kkk
+      <td *matCellDef="let row" mat-cell>
         <mat-checkbox (change)="$event ? selection.toggle(row) : null"
                       (click)="$event.stopPropagation()"
                       [checked]="selection.isSelected(row)">
