@@ -8,6 +8,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {ActionConfirmModalComponent} from "../../addons/action-confirm-modal/action-confirm-modal.component";
 import {TargetsService} from "../../_services/targets/targets.service";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-roads-edit',
@@ -32,6 +33,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   targetsArray: Array<any>;
 
   constructor(
+    private titleService: Title,
     private _formBuilder: FormBuilder,
     private roadService: RoadService,
     private route: ActivatedRoute,
@@ -52,6 +54,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.titleService.setTitle("Edit a road...");
     this.route.params.subscribe(params => this.roadId = params.id);
 
     this.roadsForm = this._formBuilder.group({
@@ -76,7 +79,6 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
   editInit() {
     this.spinner = true;
-
     // fetch the point
     this.roadService.getRoadById(this.roadId)
       .subscribe(response => {
@@ -100,10 +102,11 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
           this.is_published = response['published'];
 
-
+          this.titleService.setTitle("Edit a "+response['name']);
           this.spinner = false;
         },
         error => {
+          this.spinner = false;
           let errorSnackBar = this._snackbar.open('Error loading road', 'Reload', {
             duration: 3500
           });
@@ -136,12 +139,12 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     this.targetsArray[event.currentIndex]['next_target_id'] = this.targetsArray[event.currentIndex + 1]['id'];
   }
 
-  checkLoop(){
+  checkLoop() {
     /*
     check if loop is set to true
      */
-    let firstTargetId = this.targetsArray[0]['id']
-    let lastTargetNextTargetId = this.targetsArray[this.targetsArray.length-1]['next_target_id']
+    let firstTargetId = this.targetsArray[0]['id'];
+    let lastTargetNextTargetId = this.targetsArray[this.targetsArray.length - 1]['next_target_id'];
     if (firstTargetId == lastTargetNextTargetId) {
       this.f.loop.setValue(true)
     } else {
@@ -149,12 +152,12 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     }
   }
 
-  setLoop(){
+  setLoop() {
     /*
     We need to connect last target with the first one by next_target_id
     That can be done by looking at the hierarchy or by relying on targets array that is already
      */
-    if(this.targetsArray.length < 2){
+    if (this.targetsArray.length < 2) {
       this._snackbar.open('Only roads with one target can be looped', 'Dismiss', {
         duration: 3500
       });
@@ -162,7 +165,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       return false
     }
 
-    this.targetsArray[this.targetsArray.length-1]['next_target_id'] = this.targetsArray[0]['id'];
+    this.targetsArray[this.targetsArray.length - 1]['next_target_id'] = this.targetsArray[0]['id'];
     console.log('loop yes')
   }
 
@@ -180,8 +183,8 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     this.spinner = true;
 
     // check if the road has a loop
-    if (this.f.loop.value == true){
-      if(this.setLoop() == false){
+    if (this.f.loop.value == true) {
+      if (this.setLoop() == false) {
         this.spinner = false;
         return
       }

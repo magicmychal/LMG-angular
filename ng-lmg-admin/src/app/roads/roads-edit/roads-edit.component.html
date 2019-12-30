@@ -65,7 +65,9 @@
 
 
               <mat-action-row>
-                <button color="warn" mat-button>Edit</button>
+                <button color="warn" disabled mat-button
+                        tooltip="You can't edit points yet. This feature will appear shortly">Edit
+                </button>
                 <button (click)="removeTargetFromRoad(i)" color="warn" mat-button type="button">Remove from the road
                 </button>
               </mat-action-row>
