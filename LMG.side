@@ -1258,6 +1258,149 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "427bbb4b-2a67-45bb-991b-858d0010a4c2",
+    "name": "Edit a road",
+    "commands": [{
+      "id": "8ae9554e-4817-40fe-9205-351b351de883",
+      "comment": "",
+      "command": "open",
+      "target": "/home",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5f0fa616-0021-48f4-a46c-786863ba793a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1548x849",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "627e3a91-a2dc-4948-8f2b-102970936a48",
+      "comment": "",
+      "command": "click",
+      "target": "css=.nav-item:nth-child(3) > .mat-list-item-content",
+      "targets": [
+        ["css=.nav-item:nth-child(3) > .mat-list-item-content", "css:finder"],
+        ["xpath=//a[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c8633618-c9be-4e5d-8f5d-40e4b5d1d59a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cdk-focused > .mat-button-wrapper",
+      "targets": [
+        ["css=.cdk-focused > .mat-button-wrapper", "css:finder"],
+        ["xpath=//button[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Edit')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb8e8fbd-cdaa-40b4-9955-299629a6d223",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "96257507-8996-44f8-a6f4-f0e99adbe7e6",
+      "comment": "",
+      "command": "type",
+      "target": "id=mat-input-0",
+      "targets": [
+        ["id=mat-input-0", "id"],
+        ["css=#mat-input-0", "css:finder"],
+        ["xpath=//input[@id='mat-input-0']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Road name (new name)"
+    }, {
+      "id": "59f82fb0-5a31-45ef-9faf-6d696cd50ec4",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cdk-focused > .mat-button-wrapper",
+      "targets": [
+        ["css=.cdk-focused > .mat-button-wrapper", "css:finder"],
+        ["xpath=//form/button[2]/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Save changes')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "9e1c05ca-caad-49be-99ff-930dfbfd7ca1",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.mat-row:nth-child(6) .mat-stroked-button:nth-child(2)",
+      "targets": [
+        ["css=.mat-row:nth-child(6) .mat-stroked-button:nth-child(2)", "css:finder"],
+        ["xpath=//tr[6]/td[4]/div/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d17fd9d4-c112-43d3-b299-d2fa45fd6a10",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cdk-focused",
+      "targets": [
+        ["css=.cdk-focused", "css:finder"],
+        ["xpath=//tr[6]/td[4]/div/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8b3cc5c1-931f-4a09-9af3-df928d28e995",
+      "comment": "",
+      "command": "click",
+      "target": "css=.mat-drawer-content > .ng-star-inserted",
+      "targets": [
+        ["css=.mat-drawer-content > .ng-star-inserted", "css:finder"],
+        ["xpath=//app-roads-edit", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c5ef4682-3648-41a4-8789-016dd199506a",
+      "comment": "",
+      "command": "type",
+      "target": "id=mat-input-7",
+      "targets": [
+        ["id=mat-input-7", "id"],
+        ["name=location", "name"],
+        ["css=#mat-input-7", "css:finder"],
+        ["xpath=//input[@id='mat-input-7']", "xpath:attributes"],
+        ["xpath=//app-map-search[@id='map-search']/mat-form-field/div/div/div[3]/input", "xpath:idRelative"],
+        ["xpath=//app-map-search/mat-form-field/div/div/div[3]/input", "xpath:position"]
+      ],
+      "value": "q-clu"
+    }, {
+      "id": "c4c27a08-a98e-478a-b5de-033f807a36a7",
+      "comment": "",
+      "command": "click",
+      "target": "css=#mat-option-34 > .mat-option-text > span",
+      "targets": [
+        ["css=#mat-option-34 > .mat-option-text > span", "css:finder"],
+        ["xpath=//mat-option[@id='mat-option-34']/span/span", "xpath:idRelative"],
+        ["xpath=//mat-option/span/span", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "cea21de1-2fc7-4984-bfc1-e2670f8dcd54",
+      "comment": "",
+      "command": "runScript",
+      "target": "window.scrollTo(0,0)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c90b9244-8c1e-4981-be49-02a723ec6a23",
+      "comment": "",
+      "command": "click",
+      "target": "css=.cdk-focused",
+      "targets": [
+        ["css=.cdk-focused", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Save changes')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
   }],
   "suites": [{
     "id": "148e1812-6a61-44e8-9b01-18bc772d3d09",
