@@ -1,8 +1,8 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {SelectionModel} from "@angular/cdk/collections";
 import {MatPaginator} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
 import {PointsService} from "../../_services/points/points.service";
+import {MatTableDataSource} from "@angular/material/table";
 
 
 @Component({
@@ -46,13 +46,12 @@ export class PointsSelectorComponent implements OnInit {
       .subscribe(
         results => {
           this.points = results;
-          console.log(results);
-          this.dataSource = new MatTableDataSource(this.points);
-          this.dataSource.paginator = this.paginator;
-
           if (this.passedSelectedPoints) {
-            this.checkSelected()
+            this.checkSelected(this.points)
           } else {
+            this.dataSource = new MatTableDataSource(this.points);
+            this.dataSource.paginator = this.paginator;
+
             this.spinner = false;
           }
 
@@ -80,32 +79,31 @@ export class PointsSelectorComponent implements OnInit {
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
 
-  checkSelected() {
+  checkSelected(points) {
 
-    //this.dataSource._data._value.shift();
 
-    let newSelection = []
-    for (let point of this.passedSelectedPoints){
-      let targetId = point['point']['id']
-      console.log('target id', targetId)
+    let newSelection = [];
+    for (let point of this.passedSelectedPoints) {
+      let targetId = point['point']['id'];
+      console.log('target id', targetId);
       // look for that point in the array
-      console.log('found',this.dataSource._data._value.find(point => point.id == targetId))
-      if (this.dataSource._data._value.find(point => point.id == targetId)){
-        this.selection.select(this.dataSource._data._value.find(point => point.id == targetId))
+      let currentDataSourceIndex = points.findIndex(point => point.id == targetId);
+      if (currentDataSourceIndex) {
+        console.log(typeof currentDataSourceIndex);
+        this.points.splice(currentDataSourceIndex, 1)
       }
 
-      for (let index in this.dataSource._data._value){
-        if(this.dataSource._data._value[index]['id'] !== targetId ){
-         //this.dataSource._data._value = this.dataSource._data._value.splice(Number(index), 1)
+      this.dataSource = new MatTableDataSource(this.points);
+      this.dataSource.paginator = this.paginator;
+
+      for (let index in this.dataSource._data._value) {
+        if (this.dataSource._data._value[index]['id'] !== targetId) {
+          //this.dataSource._data._value = this.dataSource._data._value.splice(Number(index), 1)
           //newSelection.push(this.dataSource._data._value[index])
         }
       }
     }
-    console.log(newSelection)
-
-
-
-
+    console.log(newSelection);
 
 
     this.spinner = false;
