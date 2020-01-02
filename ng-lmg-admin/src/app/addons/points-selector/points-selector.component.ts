@@ -82,17 +82,22 @@ export class PointsSelectorComponent implements OnInit {
 
   checkSelected() {
 
-    console.log('data source', this.dataSource._data._value);
-    this.dataSource._data._value.shift();
+    //this.dataSource._data._value.shift();
 
     let newSelection = []
     for (let point of this.passedSelectedPoints){
       let targetId = point['point']['id']
+      console.log('target id', targetId)
       // look for that point in the array
+      console.log('found',this.dataSource._data._value.find(point => point.id == targetId))
+      if (this.dataSource._data._value.find(point => point.id == targetId)){
+        this.selection.select(this.dataSource._data._value.find(point => point.id == targetId))
+      }
+
       for (let index in this.dataSource._data._value){
-        if(this.dataSource._data._value[index]['id'] == targetId ){
+        if(this.dataSource._data._value[index]['id'] !== targetId ){
          //this.dataSource._data._value = this.dataSource._data._value.splice(Number(index), 1)
-          newSelection = this.dataSource._data._value.splice(Number(index), 1)
+          //newSelection.push(this.dataSource._data._value[index])
         }
       }
     }
