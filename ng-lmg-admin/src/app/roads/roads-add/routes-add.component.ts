@@ -77,8 +77,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   initiatePoints() {
-    console.log('initiating')
-    console.log(this.pointSelector.selection._selection)
     // convert selected to the array
     // @ts-ignore
     this.selectedArray = Array.from(this.pointSelector.selection._selection);
