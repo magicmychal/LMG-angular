@@ -80,12 +80,8 @@ export class PointsSelectorComponent implements OnInit {
   }
 
   checkSelected(points) {
-
-
-    let newSelection = [];
     for (let point of this.passedSelectedPoints) {
       let targetId = point['point']['id'];
-      console.log('target id', targetId);
       // look for that point in the array
       let currentDataSourceIndex = points.findIndex(point => point.id == targetId);
       if (currentDataSourceIndex) {
@@ -96,15 +92,7 @@ export class PointsSelectorComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.points);
       this.dataSource.paginator = this.paginator;
 
-      for (let index in this.dataSource._data._value) {
-        if (this.dataSource._data._value[index]['id'] !== targetId) {
-          //this.dataSource._data._value = this.dataSource._data._value.splice(Number(index), 1)
-          //newSelection.push(this.dataSource._data._value[index])
-        }
-      }
     }
-    console.log(newSelection);
-
 
     this.spinner = false;
   }
