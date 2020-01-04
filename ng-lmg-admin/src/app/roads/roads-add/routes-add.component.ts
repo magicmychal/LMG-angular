@@ -80,7 +80,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
     // convert selected to the array
     // @ts-ignore
     this.selectedArray = Array.from(this.pointSelector.selection._selection);
-    console.log('array is ', this.selectedArray);
 
     // @ts-ignore
     if (this.selectedArray.length == 0) {

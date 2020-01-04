@@ -38,7 +38,7 @@ export class MapViewService {
       // @ts-ignore
       layers: [L.tileLayer(hereTileUrl)]
     });
-    this.leafMap.attributionControl.addAttribution('&copy; HERE 2019');
+    this.leafMap.attributionControl.addAttribution('&copy; HERE 2020');
 
     return this.leafMap;
   }
