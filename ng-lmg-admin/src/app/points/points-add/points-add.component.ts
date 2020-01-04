@@ -9,10 +9,10 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PointsService} from "../../_services/points/points.service";
 import {NgxSpinnerService} from "ngx-spinner";
 import {HereMapComponent} from "../../maps/here-map/here-map.component";
-import {environment} from '@environments/environment';
 import {MapViewService} from "../../_services/map/map-view.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Observable} from "rxjs";
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -38,13 +38,15 @@ export class PointsAddComponent implements OnInit {
 
   materialSpinner = false;
 
-  constructor(private fb: FormBuilder,
-              private route: ActivatedRoute,
-              private router: Router,
-              private pointsService: PointsService,
-              private spinner: NgxSpinnerService,
-              private mapViewService: MapViewService,
-              private _snackBar: MatSnackBar) {
+  constructor(
+    private titleService: Title,
+    private _formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private pointsService: PointsService,
+    private spinner: NgxSpinnerService,
+    private mapViewService: MapViewService,
+    private _snackBar: MatSnackBar) {
   }
 
   // convenience getter for easy access to form fields
@@ -53,13 +55,14 @@ export class PointsAddComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.addNewPointForm = this.fb.group({
+    this.titleService.setTitle("Add a new point");
+    this.addNewPointForm = this._formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(250)]],
       // description is technically not required for the database
       description: ['', [Validators.required, Validators.maxLength(250)]],
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
-      locationName: ['', Validators.required]
+      locationName: ['', [Validators.required, Validators.maxLength(250)]]
     });
 
     this.leafMap = this.mapViewService.setLeafMap();

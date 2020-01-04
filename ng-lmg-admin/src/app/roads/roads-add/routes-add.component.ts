@@ -9,6 +9,7 @@ import {MapViewService} from "../../_services/map/map-view.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatStepper} from "@angular/material/stepper";
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -35,6 +36,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('pointsSelector', {static: false}) pointSelector;
 
   constructor(
+    private titleService: Title,
     private _formBuilder: FormBuilder,
     private pointsService: PointsService,
     private roadService: RoadService,
@@ -54,6 +56,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.titleService.setTitle("Add a new road");
     this.dynamicForm = this._formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(250)]],
       decoy: ['', [Validators.required, Validators.maxLength(250)]],
@@ -83,7 +86,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
 
     // @ts-ignore
     if (this.selectedArray.length == 0) {
-      console.log('0');
       this.mainStepper.previous();
       this._snackbar.open('Select points', 'Dismiss', {
         duration: 3500
@@ -91,7 +93,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.isLinear = false;
-
 
     // this.dynamicForm.reset();
     this.pointsArray.clear();

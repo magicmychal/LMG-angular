@@ -9,12 +9,12 @@ class you can create a custom interceptor to catch all error responses from the 
 Http interceptors are added to the request pipeline in the providers section of the app.module.ts file.
  */
 
-import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import {Injectable} from '@angular/core';
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {catchError} from 'rxjs/operators';
 
-import { AuthenticationService } from '../_services';
+import {AuthenticationService} from '../_services';
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable()
@@ -22,7 +22,8 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(
     private authenticationService: AuthenticationService,
     private _snackBar: MatSnackBar
-  ) { }
+  ) {
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
@@ -31,11 +32,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.authenticationService.logout();
         location.reload(true);
       }
-      if (err.status === 500){
+      if (err.status === 500) {
         let errorSnackbar = this._snackBar.open("An error occur, please reload the page", "Reload", {
           duration: 60000,
         });
-        errorSnackbar.afterDismissed().subscribe(null, null, () => {
+        errorSnackbar.onAction().subscribe(null, null, () => {
           window.location.reload();
         })
       }
