@@ -16,13 +16,14 @@ export class SearchService {
 
   search(queryString: string) {
     let URL = this.baseUrl + queryString;
-    /*return this.http.jsonp(URL, "returnjson").pipe(
+    /*return this.http.jsonp(URL, "&callback=this.returnJsonp()").pipe(
       map(this.extractData));*/
     return this.http.get<any>(URL).pipe(
       map(this.extractData));
   }
 
-  returnJsonp(data){
+  returnJsonp(data?){
+    console.log('if theres data', data)
     return data
   }
 

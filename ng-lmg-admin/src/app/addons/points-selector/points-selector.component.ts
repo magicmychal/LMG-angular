@@ -85,7 +85,6 @@ export class PointsSelectorComponent implements OnInit {
       // look for that point in the array
       let currentDataSourceIndex = points.findIndex(point => point.id == targetId);
       if (currentDataSourceIndex) {
-        console.log(typeof currentDataSourceIndex);
         this.points.splice(currentDataSourceIndex, 1)
       }
 
