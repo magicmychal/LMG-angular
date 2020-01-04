@@ -7,7 +7,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {TooltipModule} from "ngx-bootstrap";
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientJsonpModule, HttpClientModule} from "@angular/common/http";
 import {GetComponent} from './test/get/get.component';
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from "./_helpers/error.interceptor";
@@ -85,6 +85,7 @@ import { PointsSelectorModalComponent } from './addons/points-selector-modal/poi
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     NgbModule,
     MDBBootstrapModule.forRoot(),
     NgxSpinnerModule,
@@ -111,7 +112,7 @@ import { PointsSelectorModalComponent } from './addons/points-selector-modal/poi
     DragDropModule,
     MatDividerModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   entryComponents: [
     MapmodalComponent,
