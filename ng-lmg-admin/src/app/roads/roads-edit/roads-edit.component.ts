@@ -34,7 +34,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   targetsArray: Array<any>;
 
   constructor(
-    private titleService: Title,r
+    private titleService: Title,
     private _formBuilder: FormBuilder,
     private roadService: RoadService,
     private route: ActivatedRoute,
