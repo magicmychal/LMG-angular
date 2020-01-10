@@ -21,15 +21,14 @@ export class LoginComponent implements OnInit {
   invalid = false;
   returnUrl: string;
   error = '';
-
+  spinner = false;
 
 
 
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private authenticationService: AuthenticationService,
-              private spinner: NgxSpinnerService) {
+              private authenticationService: AuthenticationService) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -60,7 +59,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.spinner.show();
+    this.spinner = true;
     this.loading = true;
     this.authenticationService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
@@ -71,13 +70,14 @@ export class LoginComponent implements OnInit {
          //location.reload(true);
         },
         error => {
+          this.spinner = false;
           this.submitted = false;
           this.invalid = true;
           this.loading = false;
-          this.spinner.hide();
         },
         () => {
-          this.spinner.hide();
+          this.spinner = false;
+          this.submitted = false;
         });
   }
 
