@@ -32,18 +32,18 @@
         <app-map-search *ngIf="!this.pointLocationName" #noPredefinedLocation (notifyPosition)="onResultClick($event)" (notifyResults)="passTheResults($event)" class="width-max"
                         id="map-search" ></app-map-search>
         <div id="mapid"></div>
-        <div class="input-group">
-          <input formControlName="latitude" type="hidden">
-          <input formControlName="longitude" type="hidden">
-          <input formControlName="locationName" type="hidden">
-        </div>
+<!--        <div class="input-group">-->
+<!--          <input formControlName="latitude" type="hidden">-->
+<!--          <input formControlName="longitude" type="hidden">-->
+<!--          <input formControlName="locationName" type="hidden">-->
+<!--        </div>-->
       </div>
       <div class="col-md-auto px-lg-2">
 
       </div>
     </div>
     <hr>
-    <button [disabled]="loading" class="btn btn-outline-success">Save</button>
+    <button mat-raised-button color="primary">Save</button>
   </form>
   <app-mat-spinner-overlay *ngIf="materialSpinner" diameter="30" overlay="true"
                            strokeWidth="5"></app-mat-spinner-overlay>

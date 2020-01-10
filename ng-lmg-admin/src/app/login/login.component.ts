@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import {AuthenticationService} from "../_services";
 import {NgxSpinnerService} from "ngx-spinner";
+import {fakeAsync} from "@angular/core/testing";
 
 
 
@@ -17,10 +18,10 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
+  invalid = false;
   returnUrl: string;
   error = '';
 
-  notFound: string;
 
 
 
@@ -51,11 +52,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('logging in')
-    this.submitted = true;
-
+   this.submitted = true;
+    this.invalid = false;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
+      this.invalid = true;
       return;
     }
 
@@ -70,7 +71,8 @@ export class LoginComponent implements OnInit {
          //location.reload(true);
         },
         error => {
-          this.error = "Please check your credentials";
+          this.submitted = false;
+          this.invalid = true;
           this.loading = false;
           this.spinner.hide();
         },

@@ -49,6 +49,7 @@ export class RoadService {
         "explore_tip": point['sightseeing'],
         "point_id": point['pointId'],
         "next_target_id": point['nextTargetId'],
+        "hierarchy": point['hierarchy']
       };
 
       body.targets.push(target)

@@ -11,7 +11,7 @@ import {Title} from "@angular/platform-browser";
   providers: [AuthenticationService]
 })
 export class AppComponent implements OnInit {
-  title = 'ng-lmg-admin';
+  title = 'Let Me Guide';
   currentUser: User;
 
   constructor(

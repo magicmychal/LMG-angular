@@ -47,7 +47,6 @@ export class MapSearchComponent implements OnInit {
     this.results = this.results['results']
     // remove all the "<br/"
     for (let result of this.results){
-      console.log(result['vicinity'])
       let stringBefore = result['vicinity'];
       let stringAfter = result['vicinity'].replace("<br/>", ", ");
       do {

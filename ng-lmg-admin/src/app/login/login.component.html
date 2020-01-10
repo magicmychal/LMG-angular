@@ -1,34 +1,4 @@
 <div class="container-fluid">
-  <!--<div class="row justify-content-md-center">
-    <div class="col6">
-      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-      <h2>Login</h2>
-
-
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-        <input placeholder="E-mail" type="text" formControlName="email" class="form-control" id="txtEmailSignup"
-               [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-          <div *ngIf="f.email.errors.required">E-mail is required</div>
-          <div *ngIf="f.email.errors.email">E-mail must be a valid e-mail address</div>
-        </div>
-
-        <input placeholder="Password" type="password" formControlName="password" class="form-control"
-               id="txtPasswordSignup"
-               [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Password is required</div>
-          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
-        </div>
-
-        <div class="form-group">
-          <button [disabled]="loading" id="btnSignup" class="btn btn-primary">Log in</button>
-        </div>
-
-      </form>
-    </div>
-  </div>-->
   <div class="row justify-content-md-center">
     <mat-card>
       <mat-card-title>
@@ -37,15 +7,15 @@
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-form-field>
           <input formControlName="email" matInput type="email" placeholder="Email" required>
-<!--          <mat-error *ngIf="f.email.errors.required">Email is required</mat-error>-->
-          <mat-error *ngIf="f.email.errors.email">Wrong email. Check for mistakes</mat-error>
         </mat-form-field>
         <mat-form-field>
           <input formControlName="password" matInput type="password" placeholder="Password" required>
-<!--          <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>-->
         </mat-form-field>
+        <div>
+          <span class="mat-error" *ngIf="this.invalid" >Oh no, something went wrong. Please check credentials and try again.</span>
+        </div>
         <mat-card-actions>
-          <button type="submit" mat-raised-button color="primary">Login</button>
+          <button type="submit" mat-raised-button color="primary" [disabled]="this.submitted">Login</button>
         </mat-card-actions>
         <mat-card-footer>
           <p>
@@ -57,8 +27,3 @@
     </mat-card>
   </div>
 </div>
-
-
-<ngx-spinner [fullScreen]="true" type="cube-transition" size="medium">
-  <p class="loading">Logging in</p>
-</ngx-spinner>

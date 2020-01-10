@@ -143,7 +143,7 @@ describe('SearchService', () => {
           expect(response).toEqual(searchResponse);
         });
 
-      const request = httpMock.expectOne('https://places.demo.api.here.com/places/v1/discover/search');
+      const request = httpMock.expectOne('https://places.api.here.com/places/v1/discover/search');
       expect(request.request.method).toBe('GET');
       request.flush(searchResponse);
   };

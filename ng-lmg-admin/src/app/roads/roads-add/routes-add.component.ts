@@ -9,6 +9,7 @@ import {MapViewService} from "../../_services/map/map-view.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatStepper} from "@angular/material/stepper";
+import {Title} from "@angular/platform-browser";
 
 
 @Component({
@@ -17,39 +18,25 @@ import {MatStepper} from "@angular/material/stepper";
   styleUrls: ['./routes-add.component.scss']
 })
 export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
-
-  // for the table
-  points: any;
-  columnsToDisplay = ['select', 'name', 'description', 'code'];
-  dataSource: any;
-
-  // for the selection
-  initialSelection = [];
-  allowMultiSelect = true;
-  selection = new SelectionModel(this.allowMultiSelect, this.initialSelection);
-  isLinear = true;
-
-
   // for the leaf map
   leafMap: any;
   leafMarker: any;
-  /*
-  Selection is the type of set, which is hard to operate on.
-  Converting it to array will simplify further operations
-   */
+
   selectedArray: object = [];
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   dynamicForm: FormGroup;
   // spinner
   spinner = false;
   // for editing
   roadId: string;
   roadLocationName: any;
+  isLinear: boolean = true;
 
   private L: any;
   @ViewChild('stepper', {static: false}) private mainStepper: MatStepper;
+  @ViewChild('pointsSelector', {static: false}) pointSelector;
 
   constructor(
+    private titleService: Title,
     private _formBuilder: FormBuilder,
     private pointsService: PointsService,
     private roadService: RoadService,
@@ -69,6 +56,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.titleService.setTitle("Add a new road");
     this.dynamicForm = this._formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(250)]],
       decoy: ['', [Validators.required, Validators.maxLength(250)]],
@@ -78,19 +66,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
       description: ['', [Validators.required, Validators.maxLength(250)]],
       points: new FormArray([])
     });
-
-    this.pointsService.getPoints()
-      .subscribe(
-        results => {
-          this.points = results;
-          console.log(results);
-          this.dataSource = new MatTableDataSource(this.points);
-          this.dataSource.paginator = this.paginator;
-        },
-        error => {
-          console.error(error)
-        },
-      );
   }
 
 
@@ -103,29 +78,14 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
     localStorage.removeItem('currentPoints')
   }
 
-  /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected == numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
-  }
 
   initiatePoints() {
     // convert selected to the array
     // @ts-ignore
-    this.selectedArray = Array.from(this.selection._selection);
-    console.log('array is ', this.selectedArray);
+    this.selectedArray = Array.from(this.pointSelector.selection._selection);
 
     // @ts-ignore
     if (this.selectedArray.length == 0) {
-      console.log('0');
       this.mainStepper.previous();
       this._snackbar.open('Select points', 'Dismiss', {
         duration: 3500
@@ -133,7 +93,6 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.isLinear = false;
-
 
     // this.dynamicForm.reset();
     this.pointsArray.clear();
@@ -148,36 +107,8 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
       }));
     }
 
-    console.log('the forms is', this.pointsArray)
   }
 
-  initiateEditPoints() {
-    console.log('array is ', this.selectedArray);
-
-    // @ts-ignore
-    if (this.selectedArray.length == 0) {
-      console.log('0');
-      this.mainStepper.previous();
-      this._snackbar.open('Select points', 'Dismiss', {
-        duration: 3500
-      });
-    }
-
-    this.isLinear = false;
-
-    // @ts-ignore
-    for (let point of this.selectedArray) {
-      let pointId = point.id;
-      console.log('point is', point)
-      this.pointsArray.push(this._formBuilder.group({
-        pointId: [pointId],
-        sightseeing: ['', Validators.required],
-        challenge: ['', Validators.required]
-      }));
-    }
-
-    console.log('the forms is', this.pointsArray)
-  }
 
   onSubmit() {
     if (this.dynamicForm.invalid) {

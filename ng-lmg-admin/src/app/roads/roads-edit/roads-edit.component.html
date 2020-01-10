@@ -42,6 +42,7 @@
           <hr>
           <h2 #targets id="targets">Targets</h2>
           <p>Please move the targets in order the user will go.</p>
+          <button type="button" (click)="this.triggerPointsSelectorModal()"  mat-button color="primary">Add new targets</button>
           <mat-accordion (cdkDropListDropped)="moveTarget($event)" cdkDropList class="example-headers-align">
             <mat-expansion-panel *ngFor="let target of targetsArray; let i = index " cdkDrag>
               <mat-expansion-panel-header>
@@ -65,19 +66,26 @@
 
 
               <mat-action-row>
-                <button color="warn" mat-button>Edit</button>
+                <button color="warn" disabled mat-button
+                        tooltip="You can't edit points yet. This feature will appear shortly">Edit
+                </button>
                 <button (click)="removeTargetFromRoad(i)" color="warn" mat-button type="button">Remove from the road
                 </button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
+          <div id="loop-checkbox">
+            <mat-checkbox formControlName="loop" matTooltip="Looping gives a user option to start a road
+          from the middle without going back to the first point">Loop the targets
+            </mat-checkbox>
+          </div>
         </div>
         <hr>
-        <button color="primary" mat-stroked-button (click)="publishRoad(this.is_published)"
+        <button (click)="publishRoad(this.is_published)" color="primary" mat-stroked-button
                 type="button">{{this.is_published === true ? "Withhold" : "Publish"}}</button>
         <button color="primary" mat-stroked-button type="submit">Save changes</button>
         <button (click)="removeRoad()" color="warn" mat-stroked-button type="button">Delete</button>
-        <button mat-stroked-button type="button" [routerLink]="['/roads']">Cancel</button>
+        <button [routerLink]="['/roads']" mat-stroked-button type="button">Cancel</button>
       </form>
     </div>
   </div>

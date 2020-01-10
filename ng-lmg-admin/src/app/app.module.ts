@@ -7,7 +7,7 @@ import {NavbarComponent} from './navbar/navbar.component';
 import {TooltipModule} from "ngx-bootstrap";
 import {LoginComponent} from './login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientJsonpModule, HttpClientModule} from "@angular/common/http";
 import {GetComponent} from './test/get/get.component';
 import {JwtInterceptor} from "./_helpers/jwt.interceptor";
 import {ErrorInterceptor} from "./_helpers/error.interceptor";
@@ -52,6 +52,8 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatExpansionModule} from "@angular/material/expansion";
 import { ActionConfirmModalComponent } from './addons/action-confirm-modal/action-confirm-modal.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { PointsSelectorComponent } from './addons/points-selector/points-selector.component';
+import { PointsSelectorModalComponent } from './addons/points-selector-modal/points-selector-modal.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +74,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MapmodalComponent,
     RoadsEditComponent,
     ActionConfirmModalComponent,
+    PointsSelectorComponent,
+    PointsSelectorModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +85,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     NgbModule,
     MDBBootstrapModule.forRoot(),
     NgxSpinnerModule,
@@ -107,11 +112,12 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     DragDropModule,
     MatDividerModule,
     MatExpansionModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   entryComponents: [
     MapmodalComponent,
-    ActionConfirmModalComponent
+    ActionConfirmModalComponent,
+    PointsSelectorModalComponent
   ],
   providers: [
 
