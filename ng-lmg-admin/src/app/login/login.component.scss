@@ -3,6 +3,12 @@ mat-card{
   min-width: 20vw;
   max-width: 40vw;
 
+  mat-card-title{
+    text-align: center;
+    svg{
+      max-width: 100px;
+    }
+  }
   mat-form-field{
     width: 100%;
   }
@@ -13,4 +19,12 @@ mat-card{
     margin: 10px;
     font-size: 0.8em;
   }
+}
+
+.centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
 }
