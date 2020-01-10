@@ -113,6 +113,7 @@ import { PointsSelectorModalComponent } from './addons/points-selector-modal/poi
     MatDividerModule,
     MatExpansionModule,
     MatTooltipModule,
+    MatSortModule
   ],
   entryComponents: [
     MapmodalComponent,
