@@ -37,8 +37,8 @@
           <th *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let point" mat-cell>
             <div class="action-buttons">
-            <button (click)="openMapDialog(point.location)" color="accent" mat-stroked-button>Show on map</button>
-            <button [routerLink]="['edit', point.id]" color="accent" mat-stroked-button>Edit</button>
+            <button (click)="openMapDialog(point.location)" color="accent" mat-flat-button>Show on map</button>
+            <button [routerLink]="['edit', point.id]" color="accent" mat-flat-button>Edit</button>
             </div>
           </td>
         </ng-container>
