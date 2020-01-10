@@ -80,6 +80,11 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
     });
   }
 
+  filterTable(filterValue: string){
+    console.log(filterValue)
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   ngAfterViewInit() {
   }
 

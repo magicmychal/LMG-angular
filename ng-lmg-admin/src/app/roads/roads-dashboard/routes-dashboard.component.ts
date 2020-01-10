@@ -72,5 +72,8 @@ export class RoutesDashboardComponent implements OnInit {
     });
   }
 
-
+  filterTable(filterValue: string){
+    console.log(filterValue)
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

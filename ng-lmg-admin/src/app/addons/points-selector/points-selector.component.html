@@ -1,3 +1,8 @@
+<div class="search-table">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Type to search..." (keyup)="filterTable($event.target.value)" autocomplete="off">
+  </mat-form-field>
+</div>
 <div class="mat-elevation-z8">
   <table [dataSource]="dataSource" class="full-width-table" mat-table>
     <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>

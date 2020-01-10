@@ -62,6 +62,12 @@ button{
   color: red;
 
 }
+.search-table{
+  margin: 5px;
+  mat-form-field{
+    width: 100%;
+  }
+}
 
 .action-buttons{
   button{

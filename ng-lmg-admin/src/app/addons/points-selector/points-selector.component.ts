@@ -96,5 +96,9 @@ export class PointsSelectorComponent implements OnInit {
     this.spinner = false;
   }
 
+  filterTable(filterValue: string){
+    console.log(filterValue)
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
 }
