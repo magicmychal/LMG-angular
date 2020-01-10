@@ -48,7 +48,11 @@ export class LoginComponent implements OnInit {
 
     // get return url from route parameters or default to '/'
     this.route.queryParams
-      .subscribe(params => this.returnUrl = params['returnUrl'] || '/');
+      .subscribe(params => {
+        this.returnUrl = params['redirectUrl'] || '/'
+        console.log(this.returnUrl)
+        console.log(params)
+      } );
     //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
@@ -61,15 +65,19 @@ export class LoginComponent implements OnInit {
       return;
     }
 
+    console.log('return', this.returnUrl)
     this.spinner = true;
     this.loading = true;
     this.authenticationService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
       .subscribe(
         data => {
-          //TODO: the navigation links are broken
-         this.router.navigate([this.returnUrl]);
-         //location.reload(true);
+          //TODO: navigate returns false
+         this.router.navigate([this.returnUrl]).then(nav => {
+           console.log(nav); // true if navigation is successful
+         }, err => {
+           console.log(err) // when there's an error
+         });
         },
         error => {
           this.spinner = false;
