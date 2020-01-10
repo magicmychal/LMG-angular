@@ -64,7 +64,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           //TODO: the navigation links are broken
-         this.router.navigate([this.returnUrl]);
+         //this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/home']);
          //location.reload(true);
         },
         error => {
