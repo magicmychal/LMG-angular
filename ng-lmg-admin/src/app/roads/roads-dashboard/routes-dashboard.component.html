@@ -24,7 +24,7 @@
         <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
         <tr *matRowDef="let dataSource; columns: columnsToDisplay" mat-row></tr>
         <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Name</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Name</th>
           <td *matCellDef="let road" mat-cell> {{road.name}} </td>
         </ng-container>
         <ng-container matColumnDef="location">
@@ -45,7 +45,7 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="is_published">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header>Published</th>
+          <th *matHeaderCellDef mat-header-cell>Published</th>
           <td *matCellDef="let road" mat-cell>
             <div class="is_published">
               <mat-icon *ngIf="road['published'] == true" color="primary"
