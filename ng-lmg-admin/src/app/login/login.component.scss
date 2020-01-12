@@ -10,7 +10,7 @@ mat-card{
     }
   }
   mat-form-field{
-    width: 100%;
+    width: 70%;
   }
   mat-card-actions{
     text-align: right;
@@ -27,4 +27,11 @@ mat-card{
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
+}
+
+.parent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }

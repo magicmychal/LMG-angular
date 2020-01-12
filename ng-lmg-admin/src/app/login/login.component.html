@@ -53,11 +53,13 @@
         <br>
         Login to Let Me Guide
       </mat-card-title>
+
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <mat-form-field>
+        <div class="parent">
+        <mat-form-field appearance="outline">
           <input formControlName="email" matInput type="email" placeholder="Email"  required>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <input formControlName="password" matInput type="password" placeholder="Password" required>
         </mat-form-field>
         <div>
@@ -72,7 +74,9 @@
             Download the app if you want to use Let Me Guide.
           </p>
         </mat-card-footer>
+        </div>
       </form>
+
     </mat-card>
     <app-mat-spinner-overlay *ngIf="spinner" overlay="true"></app-mat-spinner-overlay>
   </div>

@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import {AuthenticationService} from "../_services";
 import {NgxSpinnerService} from "ngx-spinner";
 import {fakeAsync} from "@angular/core/testing";
+import {log} from "util";
 
 
 
@@ -22,6 +23,8 @@ export class LoginComponent implements OnInit {
   returnUrl: string;
   error = '';
   spinner = false;
+
+  roadUrl = '/roads'
 
 
 
@@ -46,14 +49,9 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
-    // get return url from route parameters or default to '/'
-    this.route.queryParams
-      .subscribe(params => {
-        this.returnUrl = params['redirectUrl'] || '/'
-        console.log(this.returnUrl)
-        console.log(params)
-      } );
-    //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.route.queryParams.subscribe(
+      params => (this.returnUrl = params.redirectUrl || '/')
+    );
   }
 
   onSubmit() {
@@ -72,23 +70,14 @@ export class LoginComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //TODO: navigate returns false
-         this.router.navigate([this.returnUrl]).then(nav => {
-           console.log(nav); // true if navigation is successful
-         }, err => {
-           console.log(err) // when there's an error
-         });
+          this.router.navigate([this.returnUrl]).then(whatever => console.log(whatever), error => console.log(error));
         },
         error => {
           this.spinner = false;
           this.submitted = false;
           this.invalid = true;
           this.loading = false;
-        },
-        () => {
-          this.spinner = false;
-          this.submitted = false;
-        });
+        })
   }
 
 }
