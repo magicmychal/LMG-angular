@@ -25,7 +25,7 @@ export class RoutesAddComponent implements OnInit, AfterViewInit, OnDestroy {
   selectedArray: object = [];
   dynamicForm: FormGroup;
   // spinner
-  spinner = false;
+  spinner:boolean = false;
   // for editing
   roadId: string;
   roadLocationName: any;

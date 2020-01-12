@@ -24,7 +24,6 @@ export class PointsSelectorModalComponent implements OnInit, AfterViewInit {
   }
 
   confirm(){
-    console.log(this.pointSelector.selection._selection)
     this.dialogRef.close({
       confirm: true,
       data: this.pointSelector.selection._selection

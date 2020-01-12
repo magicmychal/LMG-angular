@@ -9,8 +9,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {ActionConfirmModalComponent} from "../../addons/action-confirm-modal/action-confirm-modal.component";
 import {TargetsService} from "../../_services/targets/targets.service";
 import {PointsSelectorModalComponent} from "../../addons/points-selector-modal/points-selector-modal.component";
-import {log} from "util";
 import {Title} from "@angular/platform-browser";
+import {TargetModifyModalComponent} from "../../addons/target-modify-modal/target-modify-modal.component";
 
 @Component({
   selector: 'app-roads-edit',
@@ -315,4 +315,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     )
   }
 
+  triggerTargetEditModal(){
+    let targetEditDialog = this.dialog.open(TargetModifyModalComponent)
+  }
 }

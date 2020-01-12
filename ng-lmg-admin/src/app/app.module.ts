@@ -54,6 +54,8 @@ import { ActionConfirmModalComponent } from './addons/action-confirm-modal/actio
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { PointsSelectorComponent } from './addons/points-selector/points-selector.component';
 import { PointsSelectorModalComponent } from './addons/points-selector-modal/points-selector-modal.component';
+import { TargetModifyModalComponent } from './addons/target-modify-modal/target-modify-modal.component';
+import { TargetModifyComponent } from './addons/target-modify/target-modify.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import { PointsSelectorModalComponent } from './addons/points-selector-modal/poi
     ActionConfirmModalComponent,
     PointsSelectorComponent,
     PointsSelectorModalComponent,
+    TargetModifyModalComponent,
+    TargetModifyComponent,
   ],
   imports: [
     BrowserModule,
@@ -117,7 +121,8 @@ import { PointsSelectorModalComponent } from './addons/points-selector-modal/poi
   entryComponents: [
     MapmodalComponent,
     ActionConfirmModalComponent,
-    PointsSelectorModalComponent
+    PointsSelectorModalComponent,
+    TargetModifyModalComponent
   ],
   providers: [
 
