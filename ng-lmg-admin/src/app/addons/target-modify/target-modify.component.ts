@@ -1,5 +1,5 @@
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Title} from "@angular/platform-browser";
 
 @Component({
@@ -22,19 +22,21 @@ export class TargetModifyComponent implements OnInit {
   ngOnInit() {
     this.spinner = true;
 
+    console.log('target', this.target)
+
     this.targetForm = this._formBuilder.group({
       sightseeing: ['', [Validators.required, Validators.maxLength(250)]],
       challenge: ['', [Validators.required, Validators.maxLength(250)]]
     })
 
     if (this.target !== undefined) {
-      this.targetForm.controls.sightseeing.setValue(this.target['sightseeing']);
-      this.targetForm.controls.challenge.setValue(this.target['challenge']);
+      this.targetForm.controls.sightseeing.setValue(this.target['challenge_tip']);
+      this.targetForm.controls.challenge.setValue(this.target['challenge_tip']);
+        /*// add new values
+        this.targetForm.addControl('id', new FormControl(this.target['id'], Validators.required));
+        this.targetForm.addControl('code', new FormControl(this.target['code'], Validators.required));*/
     }
-
     this.spinner = false;
-
-
   }
 
 }

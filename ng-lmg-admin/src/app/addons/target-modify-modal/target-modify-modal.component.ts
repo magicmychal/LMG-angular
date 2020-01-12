@@ -1,4 +1,4 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {Component, Inject, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
@@ -9,28 +9,38 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 })
 export class TargetModifyModalComponent implements OnInit, OnDestroy {
 
-  spinner:boolean = false;
+  spinner: boolean = false;
   originalTitle: string;
-  target: object;
+
+  @ViewChild('targetModifyComponent', {static: false}) targetModifyComponent;
 
   constructor(
     private titleService: Title,
     public dialogRef: MatDialogRef<TargetModifyModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
     this.spinner = true;
     this.originalTitle = this.titleService.getTitle();
     this.titleService.setTitle('Modify target(s)');
+
+
   }
+
   ngOnDestroy() {
     this.titleService.setTitle(this.originalTitle)
   }
 
-  confirm(){
+  confirm() {
+    let modifiedTarget = {
+      'sightseeing': this.targetModifyComponent.targetForm.controls.sightseeing.value,
+      'challenge': this.targetModifyComponent.targetForm.controls.challenge.value
+    }
     this.dialogRef.close({
       confirm: true,
+      modifiedTarget: modifiedTarget
     })
   }
 

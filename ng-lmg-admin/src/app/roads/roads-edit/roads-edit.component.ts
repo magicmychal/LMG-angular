@@ -315,7 +315,20 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     )
   }
 
-  triggerTargetEditModal(){
-    let targetEditDialog = this.dialog.open(TargetModifyModalComponent)
+  triggerTargetEditModal(target){
+    console.log(target)
+    let targetEditDialog = this.dialog.open(TargetModifyModalComponent, {
+      data: target
+    })
+    targetEditDialog.afterClosed().subscribe(
+      result => {
+        this.updateTargetInArray(result)
+      }
+    )
+  }
+
+  updateTargetInArray(target){
+    // update rarget
+    console.log('updating', target)
   }
 }

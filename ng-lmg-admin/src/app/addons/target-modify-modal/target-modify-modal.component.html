@@ -1,8 +1,8 @@
 <h1 mat-dialog-title>Edit details for ...</h1>
 <div mat-dialog-content>
-  <app-target-modify #targetModifyComponent></app-target-modify>
+  <app-target-modify #targetModifyComponent [target]="data"></app-target-modify>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="confirm()">Modify</button>
-  <button mat-button cdkFocusInitial (click)="close()">Cancel</button>
+  <button mat-flat-button color="primary" cdkFocusInitial (click)="confirm()">Modify</button>
+  <button mat-button (click)="close()">Cancel</button>
 </div>
