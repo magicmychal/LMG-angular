@@ -54,6 +54,15 @@
             </div>
           </td>
         </ng-container>
+        <ng-container matColumnDef="rating">
+          <th *matHeaderCellDef mat-header-cell>Rating</th>
+          <td *matCellDef="let road" mat-cell>
+            <div class="rating">
+              <!--<bar-rating [(rate)]="road['rating']['average']" [max]="5" [readOnly]="true"></bar-rating>-->
+              <bar-rating [(rate)]="road['rating']['average']" [max]="5" [readOnly]="true" [theme]="'default'"></bar-rating>
+            </div>
+          </td>
+        </ng-container>
       </table>
       <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
     </div>

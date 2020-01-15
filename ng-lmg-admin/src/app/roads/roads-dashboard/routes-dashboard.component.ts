@@ -18,7 +18,7 @@ export class RoutesDashboardComponent implements OnInit {
 
   // variables for the table
   roads: any;
-  columnsToDisplay = ['name', 'location', 'decoy', 'action', 'is_published'];
+  columnsToDisplay = ['name', 'location', 'decoy', 'action', 'is_published', 'rating'];
   dataSource: any;
 
   // paginator for the material table

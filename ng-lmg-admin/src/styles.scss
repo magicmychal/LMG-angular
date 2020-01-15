@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 //@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-@import "variables";
+@import "global_variables";
+@import '~ngx-bar-rating/themes/br-default-theme';
+@import '~ngx-bar-rating/themes/br-bootstrap-theme';
+@import '~ngx-bar-rating/themes/br-fontawesome-theme';
+
 
 
 $main-material-theme: mat-light-theme($main-material-primary,$main-material-accent, $main-material-warn);
