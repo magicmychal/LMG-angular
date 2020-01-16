@@ -10,6 +10,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 
 import {MatDialog} from "@angular/material/dialog";
 import {MapmodalComponent} from "../../addons/mapmodal/mapmodal.component";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-points-dashboard',
@@ -28,6 +29,8 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
 
   // paginator for the material table
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private titleService: Title,
@@ -51,6 +54,13 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
           this.dataSource = new MatTableDataSource(this.points);
           this.dataSource.paginator = this.paginator;
           this.materialSpinner = false;
+          this.dataSource.sort = this.sort;
+          this.dataSource.sortingDataAccessor = (item, property) => {
+            switch(property) {
+              case 'location.name': return item.location.name;
+              default: return item[property];
+            }
+          };
           this.dataSource.filterPredicate = (data, filter) => {
             const dataStr = data.name + data.location.name + data.description;
             return dataStr.indexOf(filter) != -1;
