@@ -97,7 +97,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
           this.onResultClick(position);
           //this.targetsArray = response['targets'];
-          if ( this.targetsArray == undefined){
+          if (response['targets'].length == 0 ){
             this._snackbar.open('Please remember to add targets', 'Dismiss', {
               duration: 3500
             });
@@ -105,7 +105,6 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
             this.targetsArray = this.targetsService.sortHierarchy(response['targets']);
             this.checkLoop();
           }
-
 
           this.is_published = response['published'];
 
