@@ -5,6 +5,12 @@
   <mat-sidenav-content>
     <mat-toolbar *ngIf="showMobileNavBar">
       <mat-icon color="primary" (click)="sidenav.toggle()">menu</mat-icon>
+      <div id="logo">
+        <img src="/assets/2x/Asset 1@2x.png" alt="">
+      </div>
+      <div>
+        <h2>Let Me Guide</h2>
+      </div>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

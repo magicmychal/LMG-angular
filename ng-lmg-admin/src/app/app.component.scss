@@ -34,3 +34,12 @@ mat-sidenav {
   padding-left: 15px;
   padding-top: 15px;
 }
+
+mat-toolbar{
+  #logo{
+    height: 80%;
+    img{
+      height: 100%;
+    }
+  }
+}
