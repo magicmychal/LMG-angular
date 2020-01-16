@@ -97,8 +97,14 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
           this.onResultClick(position);
           //this.targetsArray = response['targets'];
-          this.targetsArray = this.targetsService.sortHierarchy(response['targets']);
-          this.checkLoop();
+          if ( this.targetsArray == undefined){
+            this._snackbar.open('Please remember to add targets', 'Dismiss', {
+              duration: 3500
+            });
+          } else {
+            this.targetsArray = this.targetsService.sortHierarchy(response['targets']);
+            this.checkLoop();
+          }
 
 
           this.is_published = response['published'];
@@ -238,6 +244,12 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   }
 
   publishRoad(withhold?) {
+    if ( this.targetsArray == undefined){
+      this._snackbar.open('Please add targets before publishing the road', 'Dismiss', {
+        duration: 3500
+      });
+      return;
+    }
     if (withhold == true) {
       this.f.is_published.setValue(false);
     } else {
