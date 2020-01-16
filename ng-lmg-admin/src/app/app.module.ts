@@ -56,6 +56,7 @@ import { PointsSelectorComponent } from './addons/points-selector/points-selecto
 import { PointsSelectorModalComponent } from './addons/points-selector-modal/points-selector-modal.component';
 import {BarRatingModule} from "ngx-bar-rating";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -116,7 +117,8 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
     MatExpansionModule,
     MatTooltipModule,
     BarRatingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatToolbarModule
   ],
   entryComponents: [
     MapmodalComponent,
