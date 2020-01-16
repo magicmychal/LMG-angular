@@ -44,22 +44,22 @@
             </div>
           </td>
         </ng-container>
-        <ng-container matColumnDef="is_published">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header="is_published">Published</th>
-          <td *matCellDef="let road" mat-cell>
-            <div class="is_published">
-              <mat-icon *ngIf="road['published'] == true" color="primary"
-                        matTooltip="This road is available for the users. Edit the road to change it.">check
-              </mat-icon>
-            </div>
-          </td>
-        </ng-container>
         <ng-container matColumnDef="rating">
           <th *matHeaderCellDef mat-header-cell>Rating</th>
           <td *matCellDef="let road" mat-cell>
             <div class="rating">
               <!--<bar-rating [(rate)]="road['rating']['average']" [max]="5" [readOnly]="true"></bar-rating>-->
               <bar-rating [(rate)]="road['rating']['average']" [max]="5" [readOnly]="true" [theme]="'default'"></bar-rating>
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="is_published">
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="is_published"><mat-icon matTooltip="Published roads">public</mat-icon> </th>
+          <td *matCellDef="let road" mat-cell>
+            <div class="is_published">
+              <mat-icon *ngIf="road['published'] == true" color="primary"
+                        matTooltip="This road is available for the users. Edit the road to change it.">check
+              </mat-icon>
             </div>
           </td>
         </ng-container>

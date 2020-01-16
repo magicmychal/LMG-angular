@@ -10,9 +10,25 @@ table {
   text-align: center;
 }
 
+.mat-column-is_published{
+  width: 10px;
+}
+
+/* LAST COLUMN START */
+th.mat-header-cell:last-of-type{
+  padding-right: unset;
+}
+td.mat-cell:last-of-type{
+  padding-right: unset;
+}
+
+/* LAST COLUMN END */
+
 bar-rating {
   height: 60px !important;
 }
+
+/* MOBILE STYLE START  */
 
 @media screen and (max-width: 960px) {
   .description-container{
@@ -88,3 +104,5 @@ bar-rating {
   }
 
 }
+
+/* MOBILE STYLE STOP */
