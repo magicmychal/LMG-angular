@@ -45,6 +45,10 @@ export class RoutesDashboardComponent implements OnInit {
             this.dataSource = new MatTableDataSource(this.roads);
             this.dataSource.paginator = this.paginator;
             this.materialSpinner = false;
+          this.dataSource.filterPredicate = (data, filter) => {
+            const dataStr = data.name + data.decoy + data.location.name;
+            return dataStr.indexOf(filter) != -1;
+          }
         },
         error => {
           this.materialSpinner = false;
@@ -73,7 +77,6 @@ export class RoutesDashboardComponent implements OnInit {
   }
 
   filterTable(filterValue: string){
-    console.log(filterValue)
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 }
