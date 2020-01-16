@@ -25,9 +25,7 @@ export class JwtInterceptor implements HttpInterceptor {
   ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('request goes to', request.url)
     if (!request.url.includes(environment.apiUrl)){
-      console.warn(request)
       return next.handle(request);
     }
 
