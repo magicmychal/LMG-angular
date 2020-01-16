@@ -3,8 +3,8 @@
     <app-navbar></app-navbar>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar *ngIf="showMobileNavBar">
-      <mat-icon color="primary" (click)="sidenav.toggle()">menu</mat-icon>
+    <mat-toolbar *ngIf="showMobileNavBar" color="primary">
+      <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
       <div id="logo">
         <img src="/assets/2x/Asset 1@2x.png" alt="">
       </div>
