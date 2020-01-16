@@ -54,6 +54,9 @@ import { ActionConfirmModalComponent } from './addons/action-confirm-modal/actio
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { PointsSelectorComponent } from './addons/points-selector/points-selector.component';
 import { PointsSelectorModalComponent } from './addons/points-selector-modal/points-selector-modal.component';
+import {BarRatingModule} from "ngx-bar-rating";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -113,6 +116,9 @@ import { PointsSelectorModalComponent } from './addons/points-selector-modal/poi
     MatDividerModule,
     MatExpansionModule,
     MatTooltipModule,
+    BarRatingModule,
+    FontAwesomeModule,
+    MatToolbarModule,
     MatSortModule
   ],
   entryComponents: [

@@ -19,14 +19,13 @@ export class RoutesDashboardComponent implements OnInit {
 
   // variables for the table
   roads: any;
-  columnsToDisplay = ['name', 'location', 'decoy', 'action', 'is_published'];
+  columnsToDisplay = ['name', 'location', 'decoy', 'action', 'is_published', 'rating'];
   dataSource: any;
 
   // paginator for the material table
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
   constructor(
     private titleService: Title,
     private roadService: RoadService,
@@ -49,6 +48,17 @@ export class RoutesDashboardComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
           this.materialSpinner = false;
           this.dataSource.sort = this.sort;
+          this.dataSource.sortingDataAccessor = (item, property) => {
+            switch(property) {
+              case 'location.name': return item.location.name;
+              case 'is_published': return item.published
+              default: return item[property];
+            }
+          };
+          this.dataSource.filterPredicate = (data, filter) => {
+            const dataStr = data.name + data.decoy + data.location.name;
+            return dataStr.indexOf(filter) != -1;
+          }
         },
         error => {
           this.materialSpinner = false;
@@ -76,8 +86,7 @@ export class RoutesDashboardComponent implements OnInit {
     });
   }
 
-  filterTable(filterValue: string) {
-    console.log(filterValue);
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  filterTable(filterValue: string){
+    this.dataSource.filter = filterValue;
   }
 }

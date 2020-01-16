@@ -31,7 +31,7 @@
           <th *matHeaderCellDef mat-header-cell>Location</th>
           <td *matCellDef="let point" mat-cell> {{point.location['name']}} </td>
         </ng-container>
-        <ng-container class="description-column" matColumnDef="description">
+        <ng-container class="description-column" matColumnDef="description" class="description-container">
           <th *matHeaderCellDef class="description-column" mat-header-cell>Description</th>
           <td *matCellDef="let point" mat-cell> {{point.description | slice:0:140}}...</td>
         </ng-container>

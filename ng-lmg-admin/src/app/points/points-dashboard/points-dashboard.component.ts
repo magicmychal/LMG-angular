@@ -35,8 +35,7 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
     private pointsService: PointsService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog
-  ) {
-  }
+  ) { }
 
 
 
@@ -52,6 +51,10 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
           this.dataSource = new MatTableDataSource(this.points);
           this.dataSource.paginator = this.paginator;
           this.materialSpinner = false;
+          this.dataSource.filterPredicate = (data, filter) => {
+            const dataStr = data.name + data.location.name + data.description;
+            return dataStr.indexOf(filter) != -1;
+          }
         },
         error => {
           this.materialSpinner = false;
@@ -81,8 +84,11 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   filterTable(filterValue: string){
-    console.log(filterValue)
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    //console.log(this.dataSource)
+    //this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+
+
   }
 
   ngAfterViewInit() {

@@ -33,7 +33,7 @@
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/variables.scss"]
+              "includePaths": ["src/global_variables.scss"]
             }
           },
           "configurations": {

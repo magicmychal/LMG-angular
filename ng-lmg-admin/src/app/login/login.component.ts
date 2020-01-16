@@ -17,8 +17,10 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loading = false;
   submitted = false;
+  invalid = false;
   returnUrl: string;
   error = '';
+  spinner = false;
 
   notFound: string;
 
@@ -26,8 +28,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router,
-              private authenticationService: AuthenticationService,
-              private spinner: NgxSpinnerService) {
+              private authenticationService: AuthenticationService) {
     // redirect to home if already logged in
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -45,19 +46,22 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]]
     });
 
-    // get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.route.queryParams.subscribe(
+      params => (this.returnUrl = params.redirectUrl || '/')
+    );
   }
 
   onSubmit() {
-    //this.submitted = true;
-
+   this.submitted = true;
+    this.invalid = false;
     // stop here if form is invalid
     if (this.loginForm.invalid) {
+      this.invalid = true;
       return;
     }
 
-    this.spinner.show();
+    console.log('return', this.returnUrl)
+    this.spinner = true;
     this.loading = true;
     this.authenticationService.login(this.f.email.value, this.f.password.value)
       .pipe(first())
@@ -69,13 +73,11 @@ export class LoginComponent implements OnInit {
          //location.reload(true);
         },
         error => {
-          this.error = "Please check your credentials";
+          this.spinner = false;
+          this.submitted = false;
+          this.invalid = true;
           this.loading = false;
-          this.spinner.hide();
-        },
-        () => {
-          this.spinner.hide();
-        });
+        })
   }
 
 }
