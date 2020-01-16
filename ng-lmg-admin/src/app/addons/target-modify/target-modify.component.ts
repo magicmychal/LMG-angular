@@ -22,19 +22,16 @@ export class TargetModifyComponent implements OnInit {
   ngOnInit() {
     this.spinner = true;
 
-    console.log('target', this.target)
-
     this.targetForm = this._formBuilder.group({
       sightseeing: ['', [Validators.required, Validators.maxLength(250)]],
-      challenge: ['', [Validators.required, Validators.maxLength(250)]]
+      challenge: ['', [Validators.required, Validators.maxLength(250)]],
+      id: [''],
     })
 
     if (this.target !== undefined) {
-      this.targetForm.controls.sightseeing.setValue(this.target['challenge_tip']);
+      this.targetForm.controls.sightseeing.setValue(this.target['explore_tip']);
       this.targetForm.controls.challenge.setValue(this.target['challenge_tip']);
-        /*// add new values
-        this.targetForm.addControl('id', new FormControl(this.target['id'], Validators.required));
-        this.targetForm.addControl('code', new FormControl(this.target['code'], Validators.required));*/
+      this.targetForm.controls.id.setValue(this.target['id'])
     }
     this.spinner = false;
   }

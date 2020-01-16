@@ -128,7 +128,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
   entryComponents: [
     MapmodalComponent,
     ActionConfirmModalComponent,
-    PointsSelectorModalComponent
+    PointsSelectorModalComponent,
+    TargetModifyModalComponent
   ],
   providers: [
 

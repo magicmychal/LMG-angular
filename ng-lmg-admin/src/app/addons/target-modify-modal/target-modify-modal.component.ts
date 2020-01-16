@@ -26,7 +26,6 @@ export class TargetModifyModalComponent implements OnInit, OnDestroy {
     this.originalTitle = this.titleService.getTitle();
     this.titleService.setTitle('Modify target(s)');
 
-
   }
 
   ngOnDestroy() {
@@ -36,10 +35,12 @@ export class TargetModifyModalComponent implements OnInit, OnDestroy {
   confirm() {
     let modifiedTarget = {
       'sightseeing': this.targetModifyComponent.targetForm.controls.sightseeing.value,
-      'challenge': this.targetModifyComponent.targetForm.controls.challenge.value
+      'challenge': this.targetModifyComponent.targetForm.controls.challenge.value,
+      'id': this.targetModifyComponent.targetForm.controls.id.value
     }
     this.dialogRef.close({
       confirm: true,
+      type: "edit",
       modifiedTarget: modifiedTarget
     })
   }
