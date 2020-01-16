@@ -6,6 +6,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {MapmodalComponent} from "../../addons/mapmodal/mapmodal.component";
 import {MatDialog} from "@angular/material/dialog";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-routes-dashboard',
@@ -18,12 +19,13 @@ export class RoutesDashboardComponent implements OnInit {
 
   // variables for the table
   roads: any;
-  columnsToDisplay = ['name', 'location', 'decoy', 'action', 'is_published'];
+  columnsToDisplay = ['name', 'location', 'decoy', 'action', 'rating', 'is_published'];
   dataSource: any;
 
   // paginator for the material table
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   constructor(
     private titleService: Title,
     private roadService: RoadService,
@@ -41,14 +43,26 @@ export class RoutesDashboardComponent implements OnInit {
     this.roadService.getRoads()
       .subscribe(
         results => {
-            this.roads = results;
-            this.dataSource = new MatTableDataSource(this.roads);
-            this.dataSource.paginator = this.paginator;
-            this.materialSpinner = false;
+          this.roads = results;
+          this.dataSource = new MatTableDataSource(this.roads);
+          this.dataSource.paginator = this.paginator;
+          this.materialSpinner = false;
+          this.dataSource.sort = this.sort;
+          this.dataSource.sortingDataAccessor = (item, property) => {
+            switch(property) {
+              case 'location.name': return item.location.name;
+              case 'is_published': return item.published
+              default: return item[property];
+            }
+          };
+          this.dataSource.filterPredicate = (data, filter) => {
+            const dataStr = data.name + data.decoy + data.location.name;
+            return dataStr.indexOf(filter) != -1;
+          }
         },
         error => {
           this.materialSpinner = false;
-          console.error('the error is', error)
+          console.error('the error is', error);
           let errorSnackbar = this._snackBar.open("An error occur, please reload the page", "Reload", {
             duration: 60000,
           });
@@ -59,11 +73,11 @@ export class RoutesDashboardComponent implements OnInit {
       )
   }
 
-  openMapDialog(location){
+  openMapDialog(location) {
     // set the geolocation
-    let lat = location.latitude
-    let lng = location.longitude
-    console.log(location)
+    let lat = location.latitude;
+    let lng = location.longitude;
+    console.log(location);
     const dialogRef = this.dialog.open(MapmodalComponent, {
       data: {
         lat: lat,
@@ -73,7 +87,6 @@ export class RoutesDashboardComponent implements OnInit {
   }
 
   filterTable(filterValue: string){
-    console.log(filterValue)
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 }

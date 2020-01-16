@@ -13,3 +13,69 @@ table {
   }
 }
 
+@media screen and (max-width: 960px) {
+  .description-container{
+    display: none;
+  }
+
+
+  .mat-table {
+    border: 0;
+    vertical-align: middle
+  }
+
+  .mat-table caption {
+    font-size: 1em;
+  }
+
+ .mat-table .mat-row {
+    border-bottom: 5px solid #ddd;
+    display: block;
+  }
+
+  .mat-table .mat-cell {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: 1em;
+    min-height:30px;
+    margin-bottom: 4%;
+  }
+  .mat-table .mat-cell:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: normal;
+
+    font-size: .85em;
+  }
+  .mat-table .mat-cell:last-child {
+    border-bottom: 0;
+  }
+  .mat-table .mat-cell:first-child {
+    margin-top: 4%;
+  }
+
+  tr.mat-row.ng-star-inserted {
+    width: 90vw;
+    height: 100%;
+    font-style: unset;
+    /* font-weight: 100; */
+  }
+
+  tr.mat-header-row.ng-star-inserted {
+    display: none;
+  }
+
+  td.mat-cell.cdk-column-description.mat-column-description.ng-star-inserted {
+    display: none;
+  }
+
+  td.mat-cell.cdk-column-location.mat-column-location.ng-star-inserted {
+    padding-left: 24px;
+  }
+
+  .action-buttons {
+    padding-left: 18px;
+  }
+
+}

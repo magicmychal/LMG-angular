@@ -20,18 +20,18 @@
       </mat-form-field>
     </div>
     <div class="mat-elevation-z8">
-      <table [dataSource]="dataSource" mat-table>
+      <table [dataSource]="dataSource" mat-table matSort>
         <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
         <tr *matRowDef="let dataSource; columns: columnsToDisplay" mat-row></tr>
         <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell>Name</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Name</th>
           <td *matCellDef="let point" mat-cell> {{point.name}} </td>
         </ng-container>
         <ng-container matColumnDef="location">
-          <th *matHeaderCellDef mat-header-cell>Location</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="location.name">Location</th>
           <td *matCellDef="let point" mat-cell> {{point.location['name']}} </td>
         </ng-container>
-        <ng-container class="description-column" matColumnDef="description">
+        <ng-container class="description-column" matColumnDef="description" class="description-container">
           <th *matHeaderCellDef class="description-column" mat-header-cell>Description</th>
           <td *matCellDef="let point" mat-cell> {{point.description | slice:0:140}}...</td>
         </ng-container>

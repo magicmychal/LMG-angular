@@ -16,12 +16,19 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable } from 'rxjs';
 
 import { AuthenticationService } from '../_services';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(
+    private authenticationService: AuthenticationService
+  ) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    if (!request.url.includes(environment.apiUrl)){
+      return next.handle(request);
+    }
+
     // add authorization header with jwt auth_token if available
     let currentUser = this.authenticationService.currentUserValue;
     if (currentUser && currentUser.auth_token) {

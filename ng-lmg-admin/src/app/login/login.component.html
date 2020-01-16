@@ -1,35 +1,85 @@
+<div id="body">
 <div class="container-fluid">
   <div class="row justify-content-md-center">
-    <div class="col6">
-      <div *ngIf="error" class="alert alert-danger">{{error}}</div>
-      <h2>Login</h2>
+    <mat-card class="centered">
+      <mat-card-title>
+        <svg data-name="Layer 1" id="Layer_1" viewBox="0 0 52.71 52.62" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <style>.cls-1 {
+              fill: none;
+            }
 
+            .cls-2 {
+              fill: #00afec;
+            }
+
+            .cls-3 {
+              fill: #0a4795;
+            }
+
+            .cls-4 {
+              clip-path: url(#clip-path);
+            }
+
+            .cls-5 {
+              fill: #900d1c;
+            }
+
+            .cls-6 {
+              fill: #db001e;
+            }</style>
+            <clipPath id="clip-path" transform="translate(0 0)">
+              <path class="cls-1"
+                    d="M34.63,31.92A11.84,11.84,0,0,1,32,30.73Q29.47,29.44,27,28.06a1.05,1.05,0,0,0-1.12,0Q22.44,29.87,19,31.6c-.24.13-.47.37-.83.18,1.34-2.34,2.67-4.69,4-7,1.24-2.15,2.52-4.28,3.76-6.43.27-.48.41-.69.77-.06C29.33,22.78,31.94,27.28,34.63,31.92Z"/>
+            </clipPath>
+          </defs>
+          <title>Let Me Guide logo</title>
+          <path class="cls-2"
+                d="M0,26.15c1.51-.47,2.84-.89,4.18-1.28s2.6-.72,3.9-1.06a.83.83,0,0,0,.63-.74A17.05,17.05,0,0,1,12.47,15a.63.63,0,0,0,0-.9h0c-.73-1.11-1.46-2.22-2.18-3.33-.16-.24-.27-.49-.45-.83.7.06,1.08.53,1.55.81.95.55,1.85,1.17,2.76,1.78a.6.6,0,0,0,.84-.05,17.86,17.86,0,0,1,6.88-3.48c.81-.21,1.64-.33,2.46-.48.56-.1.85.06.83.72,0,1.45,0,2.91,0,4.36a.76.76,0,0,1-.63.86h-.11c-4.6.72-7.63,3.4-9.41,7.59a7.65,7.65,0,0,0-.7,3.53c.06.74-.33.88-.93.88H7.22c-2,0-4,0-6,0A3.23,3.23,0,0,1,0,26.15Z"
+                transform="translate(0 0)"/>
+          <path class="cls-2"
+                d="M52.71,26.43c-.88.29-1.75.6-2.64.87-1.82.53-3.64,1.06-5.47,1.55a.71.71,0,0,0-.57.65,16.57,16.57,0,0,1-3.63,8,.87.87,0,0,0-.06,1.24l0,0c.78,1.07,1.48,2.18,2.19,3.29.1.16.4.39.16.6s-.4-.07-.6-.2C41,41.67,39.8,41,38.69,40.16a.67.67,0,0,0-.94,0l0,0a17.12,17.12,0,0,1-6.55,3.37,10.63,10.63,0,0,1-3.06.53c-.43,0-.54-.13-.54-.54,0-1.54,0-3.08,0-4.62,0-.53.26-.58.69-.66a12,12,0,0,0,8.57-5.83,9.75,9.75,0,0,0,1.58-5.32c0-.66.18-.9.9-.89,4.16,0,8.32,0,12.48,0h.87Z"
+                transform="translate(0 0)"/>
+          <path class="cls-3"
+                d="M26.25,52.62c-.76-2.57-1.54-5.14-2.27-7.72a1.22,1.22,0,0,0-1.11-1A16.85,16.85,0,0,1,15,40.1c-.41-.36-.68-.15-1,0-1.08.7-2.15,1.42-3.22,2.13l-.72.46c-.28-.37.07-.51.19-.7.7-1.11,1.41-2.22,2.15-3.3a.87.87,0,0,0,0-1.22.08.08,0,0,1,0,0,16.41,16.41,0,0,1-3.65-8.1c-.27-1.89-.25-1.89,1.66-1.89,1.08,0,2.16,0,3.23,0,.46,0,.64.11.71.62A12.12,12.12,0,0,0,24.69,38.3c1.7.21,1.7.21,1.7,2,0,3.87,0,7.73,0,11.6a6.36,6.36,0,0,1-.08.75Z"
+                transform="translate(0 0)"/>
+          <path class="cls-3"
+                d="M26.5,0c.77,2.6,1.57,5.2,2.3,7.82a1.19,1.19,0,0,0,1.06,1,16,16,0,0,1,7.52,3.42,1.2,1.2,0,0,0,1.67.06A32.57,32.57,0,0,1,43,9.87l-1.62,2.52c-.44.67-1.13,1.3-1.26,2s.79,1.26,1.2,1.9a18.8,18.8,0,0,1,2.9,7.61c.16,1.1.13,1.13-1,1.12-1.4,0-2.79,0-4.19,0-.42,0-.57-.09-.64-.56A12,12,0,0,0,30,14.73a9.84,9.84,0,0,0-3-.52c-.46,0-.73-.12-.73-.7,0-4.5,0-9,0-13.51Z"
+                transform="translate(0 0)"/>
+          <g class="cls-4">
+            <rect class="cls-5" height="23.89" width="15.16" x="26.31" y="15.63"/>
+            <rect class="cls-6" height="23.89" width="15.16" x="11.15" y="14.45"/>
+          </g>
+        </svg>
+        <br>
+        Login to Let Me Guide
+      </mat-card-title>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-
-        <input placeholder="E-mail" type="text" formControlName="email" class="form-control" id="txtEmailSignup"
-               [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
-        <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-          <div *ngIf="f.email.errors.required">E-mail is required</div>
-          <div *ngIf="f.email.errors.email">E-mail must be a valid e-mail address</div>
+        <div class="parent">
+        <mat-form-field appearance="outline">
+          <input formControlName="email" matInput type="email" placeholder="Email"  required>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <input formControlName="password" matInput type="password" placeholder="Password" required>
+        </mat-form-field>
+        <div>
+          <span class="mat-error" *ngIf="this.invalid" >Oh no, something went wrong. Please check credentials and try again.</span>
         </div>
-
-        <input placeholder="Password" type="password" formControlName="password" class="form-control"
-               id="txtPasswordSignup"
-               [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
-        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-          <div *ngIf="f.password.errors.required">Password is required</div>
-          <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        <mat-card-actions>
+          <button type="submit" mat-raised-button color="primary">Login</button>
+        </mat-card-actions>
+        <mat-card-footer>
+          <p>
+            This area is restricted only for the administrators.
+            Download the app if you want to use Let Me Guide.
+          </p>
+        </mat-card-footer>
         </div>
-
-        <div class="form-group">
-          <button [disabled]="loading" id="btnSignup" class="btn btn-primary">Log in</button>
-        </div>
-
       </form>
-    </div>
+
+    </mat-card>
+    <app-mat-spinner-overlay *ngIf="spinner" overlay="true"></app-mat-spinner-overlay>
   </div>
 </div>
-<ngx-spinner [fullScreen]="true" type="cube-transition" size="medium">
-  <p class="loading">Logging in</p>
-</ngx-spinner>
+</div>

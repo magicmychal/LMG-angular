@@ -10,6 +10,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 
 import {MatDialog} from "@angular/material/dialog";
 import {MapmodalComponent} from "../../addons/mapmodal/mapmodal.component";
+import {MatSort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-points-dashboard',
@@ -29,14 +30,15 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   // paginator for the material table
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   constructor(
     private titleService: Title,
     private cdRef: ChangeDetectorRef,
     private pointsService: PointsService,
     private _snackBar: MatSnackBar,
     public dialog: MatDialog
-  ) {
-  }
+  ) { }
 
 
 
@@ -52,6 +54,17 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
           this.dataSource = new MatTableDataSource(this.points);
           this.dataSource.paginator = this.paginator;
           this.materialSpinner = false;
+          this.dataSource.sort = this.sort;
+          this.dataSource.sortingDataAccessor = (item, property) => {
+            switch(property) {
+              case 'location.name': return item.location.name;
+              default: return item[property];
+            }
+          };
+          this.dataSource.filterPredicate = (data, filter) => {
+            const dataStr = data.name + data.location.name + data.description;
+            return dataStr.indexOf(filter) != -1;
+          }
         },
         error => {
           this.materialSpinner = false;
@@ -81,8 +94,11 @@ export class PointsDashboardComponent implements OnInit, AfterViewInit {
   }
 
   filterTable(filterValue: string){
-    console.log(filterValue)
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    //console.log(this.dataSource)
+    //this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+
+
   }
 
   ngAfterViewInit() {

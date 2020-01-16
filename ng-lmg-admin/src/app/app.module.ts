@@ -56,6 +56,9 @@ import { PointsSelectorComponent } from './addons/points-selector/points-selecto
 import { PointsSelectorModalComponent } from './addons/points-selector-modal/points-selector-modal.component';
 import { TargetModifyModalComponent } from './addons/target-modify-modal/target-modify-modal.component';
 import { TargetModifyComponent } from './addons/target-modify/target-modify.component';
+import {BarRatingModule} from "ngx-bar-rating";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 @NgModule({
   declarations: [
@@ -117,12 +120,15 @@ import { TargetModifyComponent } from './addons/target-modify/target-modify.comp
     MatDividerModule,
     MatExpansionModule,
     MatTooltipModule,
+    BarRatingModule,
+    FontAwesomeModule,
+    MatToolbarModule,
+    MatSortModule
   ],
   entryComponents: [
     MapmodalComponent,
     ActionConfirmModalComponent,
-    PointsSelectorModalComponent,
-    TargetModifyModalComponent
+    PointsSelectorModalComponent
   ],
   providers: [
 
