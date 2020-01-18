@@ -177,6 +177,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
 
+    console.log('sending', )
     if (this.roadsForm.invalid) {
       this._snackbar.open('Form invalid. Check the form for any mistakes', 'Dismiss', {
         duration: 3500
@@ -196,8 +197,6 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       }
     }
 
-    // sort targets and add them to the form
-    console.log(this.targetsArray);
     for (let index in this.targetsArray) {
       if (this.targetsArray[Number(index) + 1] !== undefined) {
         this.targetsArray[index]['next_target_id'] = this.targetsArray[Number(index) + 1]['id']
@@ -317,11 +316,8 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     pointsSelectionDialog.afterClosed().subscribe(
       result => {
         // trigger a new stepper in a dialog
-        console.log(this.targetsArray)
-        for (let newTarget of result.data.values()){
-
-        }
-
+        let newTargetsArray = Array.from(result.data.values())
+        this.triggerTargetAddModal(newTargetsArray)
       }
     )
   }
@@ -344,12 +340,38 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     )
   }
 
+  triggerTargetAddModal(targets: any[]){
+    let targetsAddModal = this.dialog.open(TargetModifyModalComponent, {
+      data: {
+        "type": "new",
+        "targets": targets
+      }
+    });
+    targetsAddModal.afterClosed().subscribe(
+      results => {
+        this.addNewTargets(results.modifiedTarget.targets.value)
+        // add results to the array
+      }
+    )
+  }
+
+  addNewTargets(targets){
+    console.log('new targets', targets)
+    for (let target of targets){
+      this.targetsArray.push({
+        "point": target['point'],
+        "road_id": this.roadId,
+        "explore_tip": target['sightseeing'],
+        "challenge_tip": target['challenge'],
+        "nextTargetId": null,
+        "hierarchy": null
+      })
+    }
+    console.log('new array', this.targetsArray)
+  }
+
   updateTargetInArray(target, index){
-    console.log('new target', target)
     this.targetsArray[index]['challenge_tip'] = target['modifiedTarget']['challenge'];
     this.targetsArray[index]['explore_tip'] = target['modifiedTarget']['sightseeing']
-    // update target
-    console.log('updating', index)
-    console.log('updating ', this.targetsArray)
   }
 }

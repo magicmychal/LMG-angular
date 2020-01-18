@@ -1,8 +1,14 @@
-<h1 mat-dialog-title>Edit details for ...</h1>
+<h1 *ngIf="data.type == 'edit'" mat-dialog-title>Edit target details</h1>
+<h1 *ngIf="data.type == 'new'" mat-dialog-title>Add new targets</h1>
 <div mat-dialog-content>
-  <app-target-modify #targetModifyComponent [target]="data.target" *ngIf="data.type == 'edit' " ></app-target-modify>
+  <app-target-modify #targetModifyComponent *ngIf="data.type == 'edit'" [target]="data.target"></app-target-modify>
+  <app-target-stepper #targetStepperForm *ngIf="data.type == 'new'" [targets]="data.targets"></app-target-stepper>
 </div>
 <div mat-dialog-actions>
-  <button mat-flat-button color="primary" cdkFocusInitial (click)="confirm()">Modify</button>
-  <button mat-button (click)="close()">Cancel</button>
+  <button (click)="confirmEdit()" *ngIf="data.type == 'edit'" cdkFocusInitial color="primary" mat-flat-button>Modify
+  </button>
+  <button (click)="confirmAdd()" *ngIf="data.type == 'new'" cdkFocusInitial color="primary" mat-flat-button>Add new
+    targets
+  </button>
+  <button (click)="close()" mat-button>Cancel</button>
 </div>

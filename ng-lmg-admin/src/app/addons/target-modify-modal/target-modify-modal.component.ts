@@ -13,6 +13,7 @@ export class TargetModifyModalComponent implements OnInit, OnDestroy {
   originalTitle: string;
 
   @ViewChild('targetModifyComponent', {static: false}) targetModifyComponent;
+  @ViewChild('targetStepperForm', {static: false}) targetStepperForm;
 
   constructor(
     private titleService: Title,
@@ -25,14 +26,14 @@ export class TargetModifyModalComponent implements OnInit, OnDestroy {
     this.spinner = true;
     this.originalTitle = this.titleService.getTitle();
     this.titleService.setTitle('Modify target(s)');
-
+    console.log('data', this.data)
   }
 
   ngOnDestroy() {
     this.titleService.setTitle(this.originalTitle)
   }
 
-  confirm() {
+  confirmEdit() {
     let modifiedTarget = {
       'sightseeing': this.targetModifyComponent.targetForm.controls.sightseeing.value,
       'challenge': this.targetModifyComponent.targetForm.controls.challenge.value,
@@ -42,6 +43,15 @@ export class TargetModifyModalComponent implements OnInit, OnDestroy {
       confirm: true,
       type: "edit",
       modifiedTarget: modifiedTarget
+    })
+  }
+
+  confirmAdd() {
+    let newTargetsForm = this.targetStepperForm.stepperForm.controls;
+    this.dialogRef.close({
+      confirm: true,
+      type: "new",
+      modifiedTarget: newTargetsForm
     })
   }
 

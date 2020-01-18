@@ -42,7 +42,7 @@
           <hr>
           <h2 #targets id="targets">Targets</h2>
           <p>Please move the targets in order the user will go.</p>
-          <button (click)="this.triggerPointsSelectorModal()" color="primary" mat-button type="button">Add new targets
+          <button (click)="this.triggerPointsSelectorModal()" color="primary" mat-stroked-button type="button">Add new targets
           </button>
           <mat-accordion (cdkDropListDropped)="moveTarget($event)" cdkDropList class="example-headers-align">
             <mat-expansion-panel *ngFor="let target of targetsArray; let i = index " cdkDrag>
@@ -88,6 +88,7 @@
   <app-mat-spinner-overlay *ngIf="spinner" overlay="true"></app-mat-spinner-overlay>
 </div>
 <div id="buttons-array">
+
   <div class="container">
     <div class="align-left">
       <button (click)="onSubmit()" color="accent" color="accent" mat-flat-button type="submit">Save changes</button>

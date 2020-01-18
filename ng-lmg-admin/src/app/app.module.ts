@@ -59,6 +59,7 @@ import { TargetModifyComponent } from './addons/target-modify/target-modify.comp
 import {BarRatingModule} from "ngx-bar-rating";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import { TargetStepperComponent } from './addons/target-stepper/target-stepper.component';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     PointsSelectorModalComponent,
     TargetModifyModalComponent,
     TargetModifyComponent,
+    TargetStepperComponent,
   ],
   imports: [
     BrowserModule,
