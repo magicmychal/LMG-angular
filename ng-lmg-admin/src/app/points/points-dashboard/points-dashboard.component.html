@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <button color="primary" mat-raised-button routerLink="/points/add">Add new point</button>
+      <button color="accent" mat-flat-button routerLink="/points/add">Add new point</button>
     </div>
   </div>
   <hr>
@@ -39,8 +39,8 @@
           <th *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let point" mat-cell>
             <div class="action-buttons">
-            <button (click)="openMapDialog(point.location)" color="accent" mat-flat-button>Show on map</button>
-            <button [routerLink]="['edit', point.id]" color="accent" mat-flat-button>Edit</button>
+            <button (click)="openMapDialog(point.location)" color="primary" mat-flat-button>Show on map</button>
+            <button [routerLink]="['edit', point.id]" color="primary" mat-flat-button>Edit</button>
             </div>
           </td>
         </ng-container>

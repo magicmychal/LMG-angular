@@ -7,7 +7,8 @@ $main-material-accent: mat-palette($mat-amber, 300, 500, A100);
 $main-material-warn: mat-palette($mat-red);*/
 
 $main-material-primary: mat-palette($mat-grey, 900);
-$main-material-accent: mat-palette($mat-cyan, A100);
+//$main-material-accent: mat-palette($mat-cyan, A100);
+$main-material-accent: mat-palette($mat-light-blue, A100);
 $main-material-warn: mat-palette($mat-red);
 /*
 Remember to update colors both above and below.

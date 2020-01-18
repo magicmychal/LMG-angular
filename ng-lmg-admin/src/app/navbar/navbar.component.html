@@ -52,26 +52,30 @@
   </div>
   <hr>
   <mat-nav-list *ngIf="currentUser" class="navbar">
-    <a [routerLink]="'/'" class="nav-item nav-link" mat-list-item>
+    <mat-list-item [routerLinkActive]="['active']">
+    <a [routerLink]="'/home'" class="nav-item nav-link" mat-list-item>
       <mat-icon>dashboard</mat-icon>
       Dashboard
     </a>
-    <a [routerLink]="'/points'" class="nav-item nav-link" mat-list-item routerLinkActive="active">
+    </mat-list-item>
+    <mat-list-item [routerLinkActive]="['active']">
+    <a [routerLink]="'/points'" class="nav-item nav-link" mat-list-item>
       <mat-icon>outlined_flag</mat-icon>
       Points
     </a>
-    <a [routerLink]="'/roads'" class="nav-item nav-link" mat-list-item routerLinkActive="active-link">
+    </mat-list-item>
+    <mat-list-item [routerLinkActive]="['active']">
+    <a [routerLink]="'/roads'" class="nav-item nav-link" mat-list-item>
       <mat-icon>near_me</mat-icon>
       Roads
     </a>
-    <a *ngIf="!currentUser" [routerLink]="'/login'" class="nav-item nav-link" mat-list-item>
-      <mat-icon>near_me</mat-icon>
-      Login
-    </a>
+    </mat-list-item>
+    <mat-list-item [routerLinkActive]="['active']">
     <a (click)="logout()" *ngIf="currentUser" class="nav-item nav-link" mat-list-item>
       <mat-icon>exit_to_app</mat-icon>
       Logout
     </a>
+    </mat-list-item>
   </mat-nav-list>
   <hr>
 </div>

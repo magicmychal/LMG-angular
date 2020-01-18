@@ -28,3 +28,19 @@ mat-panel-title {
 #loop-checkbox{
   margin: 10px 0 0 0;
 }
+
+#buttons-array{
+  background-color: black;
+  position: fixed;
+  bottom: 0;
+  width: 80vw;
+  background-color: white;
+
+  clear: both;
+  .align-left {
+    float: left;
+  }
+  .align-right {
+    float: right;
+  }
+}

@@ -25,7 +25,7 @@ mat-nav-list{
 }
 
 .active, .active-link{
-  background: $primary400;
+  background: $accent500;
   color: black;
 }
 
@@ -34,4 +34,11 @@ mat-nav-list{
   svg{
     max-width: 100px;
   }
+}
+
+mat-nav-list{
+  mat-list-item:hover{
+    background-color: $accent500;
+  }
+
 }
