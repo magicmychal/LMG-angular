@@ -12,6 +12,8 @@ export class TargetModifyModalComponent implements OnInit, OnDestroy {
   spinner: boolean = false;
   originalTitle: string;
 
+  isButtonDisabled: boolean = false;
+
   @ViewChild('targetModifyComponent', {static: false}) targetModifyComponent;
   @ViewChild('targetStepperForm', {static: false}) targetStepperForm;
 
@@ -47,6 +49,9 @@ export class TargetModifyModalComponent implements OnInit, OnDestroy {
   }
 
   confirmAdd() {
+    if (this.targetStepperForm.stepperForm.invalid) {
+      return;
+    }
     let newTargetsForm = this.targetStepperForm.stepperForm.controls;
     this.dialogRef.close({
       confirm: true,

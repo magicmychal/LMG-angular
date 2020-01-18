@@ -37,9 +37,6 @@ export class TargetStepperComponent implements OnInit {
         }))
       }
     }
-
-    console.log('targets array controls', this.targetsArray.controls)
-    console.log('passed targets', this.targets)
   }
 
 }

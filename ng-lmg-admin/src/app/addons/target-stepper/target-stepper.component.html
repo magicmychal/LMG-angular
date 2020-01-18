@@ -1,7 +1,7 @@
 <!--        Stepper for each point-->
 <form action=""></form>
 <mat-vertical-stepper #stepper>
-<mat-step *ngFor="let target of targetsArray.controls; let i = index" [stepControl]="stepperForm">
+<mat-step *ngFor="let target of targetsArray.controls; let i = index">
   <div [formGroup]="target" class="form-row">
     <ng-template matStepLabel>Details for {{this.targets[i]['name']}}</ng-template>
     <mat-form-field appearance="outline" class="width-max">
