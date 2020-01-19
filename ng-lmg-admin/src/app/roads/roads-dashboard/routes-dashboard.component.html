@@ -24,23 +24,23 @@
         <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
         <tr *matRowDef="let dataSource; columns: columnsToDisplay" mat-row></tr>
         <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Name</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="name"><b>Name</b></th>
           <td *matCellDef="let road" mat-cell> {{road.name}} </td>
         </ng-container>
         <ng-container matColumnDef="location">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header="location.name">Location</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="location.name"><b>Location</b></th>
           <td *matCellDef="let road" mat-cell> {{road.location['name']}} </td>
         </ng-container>
         <ng-container class="description-column" matColumnDef="decoy">
-          <th *matHeaderCellDef class="description-column" mat-header-cell>Decoy</th>
+          <th *matHeaderCellDef class="description-column" mat-header-cell><b>Catchphrase</b></th>
           <td *matCellDef="let road" mat-cell> {{road.description | slice:0:140}}...</td>
         </ng-container>
         <ng-container matColumnDef="action">
-          <th *matHeaderCellDef mat-header-cell>Action</th>
+          <th *matHeaderCellDef mat-header-cell><b>Actions</b></th>
           <td *matCellDef="let road" mat-cell>
             <div class="action-buttons">
-              <button (click)="openMapDialog(road.location)" color="primary" mat-flat-button>Show on map</button>
-              <button [routerLink]="['edit', road.id]" color="primary" mat-flat-button >Edit</button>
+              <button (click)="openMapDialog(road.location)" color="primary" mat-stroked-button>Show on map</button>
+              <button [routerLink]="['edit', road.id]" color="primary" mat-stroked-button>Edit</button>
             </div>
           </td>
         </ng-container>

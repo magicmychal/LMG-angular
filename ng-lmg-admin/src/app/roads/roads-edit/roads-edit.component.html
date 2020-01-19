@@ -17,8 +17,8 @@
         </div>
         <div>
           <mat-form-field appearance="outline">
-            <mat-label>Decoy</mat-label>
-            <input #decoy autofocus formControlName="decoy" matInput placeholder="Decoy">
+            <mat-label>Catchphrase</mat-label>
+            <input #decoy autofocus formControlName="decoy" matInput placeholder="Catchphrase">
             <mat-hint>Something that will attract tourist to click.</mat-hint>
             <mat-hint align="end">{{decoy.value?.length || 0}}/250</mat-hint>
           </mat-form-field>
@@ -40,9 +40,9 @@
         </div>
         <div class="w-90 targets">
           <hr>
-          <h2 #targets id="targets">Targets</h2>
+          <h2 #targets id="targets">Attractions in the road</h2>
           <p>Please move the targets in order the user will go.</p>
-          <button (click)="this.triggerPointsSelectorModal()" color="primary" mat-stroked-button type="button">Add new targets
+          <button (click)="this.triggerPointsSelectorModal()" color="primary" mat-stroked-button type="button">Add new attractions
           </button>
           <mat-accordion (cdkDropListDropped)="moveTarget($event)" cdkDropList class="example-headers-align">
             <mat-expansion-panel *ngFor="let target of targetsArray; let i = index " cdkDrag>

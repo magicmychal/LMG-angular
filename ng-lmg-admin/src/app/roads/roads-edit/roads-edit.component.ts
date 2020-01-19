@@ -235,10 +235,9 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     let removeSnackBar = this._snackbar.open('Point removed from the road', 'Undo', {
       duration: 3500
     });
-    removeSnackBar.onAction().subscribe(null, null, () => {
+    removeSnackBar.onAction().subscribe(() => {
       this.targetsArray.splice(targetIndex, 0, removedTarget)
-    })
-
+    });
   }
 
   publishRoad(withhold?) {
