@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-3">Your roads</h1>
+      <h1 class="display-3">Tours</h1>
       <p class="lead">Routes are collections of roads that together create a trip for the tourists. Routes have two
         distinct categories - sightseeing mode and a challenge mode. Please remember to provide additional description
         for both of the modes. </p>
@@ -9,7 +9,7 @@
   </div>
   <div class="row">
     <div class="col-12">
-      <button color="accent" mat-raised-button routerLink="/roads/add">Add new route</button>
+      <button color="accent" mat-raised-button routerLink="/tours/add">Add new tour</button>
     </div>
   </div>
   <hr>
@@ -54,7 +54,7 @@
           </td>
         </ng-container>
         <ng-container matColumnDef="is_published">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header="is_published"><mat-icon matTooltip="Published roads">public</mat-icon> </th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="is_published"><mat-icon matTooltip="Published tours">public</mat-icon> </th>
           <td *matCellDef="let road" mat-cell>
             <div class="is_published">
               <mat-icon *ngIf="road['published'] == true" color="primary"

@@ -32,7 +32,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'points',
+    path: 'attractions',
     canActivate: [AuthGuard],
     children: [
       {path: '', component: PointsDashboardComponent},
@@ -41,7 +41,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'roads',
+    path: 'tours',
     canActivate: [AuthGuard],
     children: [
       {path: '', component: RoutesDashboardComponent},

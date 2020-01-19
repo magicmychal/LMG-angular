@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-3">Edit a road</h1>
+      <h1 class="display-3">Edit a tour</h1>
     </div>
   </div>
   <div class="row">
@@ -69,19 +69,19 @@
               <mat-action-row>
                 <button (click)="this.triggerTargetEditModal(target, i)" color="warn" mat-button type="button">Edit
                 </button>
-                <button (click)="removeTargetFromRoad(i)" color="warn" mat-button type="button">Remove from the road
+                <button (click)="removeTargetFromRoad(i)" color="warn" mat-button type="button">Remove from the tour
                 </button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
           <div id="loop-checkbox">
-            <mat-checkbox formControlName="loop" matTooltip="Looping gives a user option to start a road
+            <mat-checkbox formControlName="loop" matTooltip="Looping gives a user option to start a tour
           from the middle without going back to the first point">Loop the targets
             </mat-checkbox>
           </div>
         </div>
         <hr>
-        <button (click)="removeRoad()" color="warn" mat-stroked-button type="button">Delete road</button>
+        <button (click)="removeRoad()" color="warn" mat-stroked-button type="button">Delete tour</button>
       </form>
     </div>
   </div>

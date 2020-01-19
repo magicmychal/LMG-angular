@@ -1,21 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-3">Your points</h1>
+      <h1 class="display-3">Attractions</h1>
       <p class="lead">
-        Points of interest are places in your city that tourists usually visit. When adding a new point try to write an
+        Attractions of interest are places in your city that tourists usually visit. When adding a new point try to write an
         interesting, but a short explanation.</p>
     </div>
   </div>
   <div class="row">
-    <div class="col-12">
-      <button color="accent" mat-flat-button routerLink="/points/add">Add new point</button>
+    <div class="col-2">
+      <button color="accent" mat-flat-button routerLink="/attractions/add">Add new attraction</button>
     </div>
   </div>
   <hr>
   <div>
     <div class="search-table">
-      <mat-form-field class="example-full-width">
+      <!--<mat-form-field class="example-full-width">
+        <input matInput placeholder="Type to search..." (keyup)="filterTable($event.target.value)" autocomplete="off">
+      </mat-form-field>-->
+      <mat-form-field>
         <input matInput placeholder="Type to search..." (keyup)="filterTable($event.target.value)" autocomplete="off">
       </mat-form-field>
     </div>
@@ -33,14 +36,14 @@
         </ng-container>
         <ng-container class="description-column" matColumnDef="description" class="description-container">
           <th *matHeaderCellDef class="description-column" mat-header-cell>Description</th>
-          <td *matCellDef="let point" mat-cell> {{point.description | slice:0:140}}...</td>
+          <td *matCellDef="let point" mat-cell> {{point.description | slice:0:100}}...</td>
         </ng-container>
         <ng-container matColumnDef="action">
           <th *matHeaderCellDef mat-header-cell>Action</th>
           <td *matCellDef="let point" mat-cell>
             <div class="action-buttons">
-            <button (click)="openMapDialog(point.location)" color="primary" mat-flat-button>Show on map</button>
-            <button [routerLink]="['edit', point.id]" color="primary" mat-flat-button>Edit</button>
+            <button (click)="openMapDialog(point.location)" color="primary" mat-stroked-button>Show on map</button>
+            <button [routerLink]="['edit', point.id]" color="primary" mat-stroked-button>Edit</button>
             </div>
           </td>
         </ng-container>

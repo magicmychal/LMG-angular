@@ -13,6 +13,10 @@ table {
   }
 }
 
+.search-table{
+//display: inline-block;
+}
+
 @media screen and (max-width: 960px) {
   .description-container{
     display: none;
