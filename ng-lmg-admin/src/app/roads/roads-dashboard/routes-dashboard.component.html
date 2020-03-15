@@ -1,15 +1,13 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-3">Tours</h1>
-      <p class="lead">Routes are collections of roads that together create a trip for the tourists. Routes have two
-        distinct categories - sightseeing mode and a challenge mode. Please remember to provide additional description
-        for both of the modes. </p>
+      <h1 class="display-3">Trasy</h1>
+      <p class="lead">Trasy to zbiór atrakcji dla użytkownika. Dostęne są dwa tryby - zwiedzania oraz wyzwania. </p>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <button color="accent" mat-raised-button routerLink="/tours/add">Add new tour</button>
+      <button color="accent" mat-raised-button routerLink="/tours/add">Dodaj nową trasę</button>
     </div>
   </div>
   <hr>
@@ -24,28 +22,28 @@
         <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
         <tr *matRowDef="let dataSource; columns: columnsToDisplay" mat-row></tr>
         <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header="name"><b>Name</b></th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="name"><b>Nazwa</b></th>
           <td *matCellDef="let road" mat-cell> {{road.name}} </td>
         </ng-container>
         <ng-container matColumnDef="location">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header="location.name"><b>Location</b></th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="location.name"><b>Miejsce</b></th>
           <td *matCellDef="let road" mat-cell> {{road.location['name']}} </td>
         </ng-container>
         <ng-container class="description-column" matColumnDef="decoy">
-          <th *matHeaderCellDef class="description-column" mat-header-cell><b>Catchphrase</b></th>
+          <th *matHeaderCellDef class="description-column" mat-header-cell><b>Chwytliwe hasło</b></th>
           <td *matCellDef="let road" mat-cell> {{road.description | slice:0:140}}...</td>
         </ng-container>
         <ng-container matColumnDef="action">
-          <th *matHeaderCellDef mat-header-cell><b>Actions</b></th>
+          <th *matHeaderCellDef mat-header-cell><b>Czynności</b></th>
           <td *matCellDef="let road" mat-cell>
             <div class="action-buttons">
-              <button (click)="openMapDialog(road.location)" color="primary" mat-stroked-button>Show on map</button>
-              <button [routerLink]="['edit', road.id]" color="primary" mat-stroked-button>Edit</button>
+              <button (click)="openMapDialog(road.location)" color="primary" mat-stroked-button>Pokaż na mapie</button>
+              <button [routerLink]="['edit', road.id]" color="primary" mat-stroked-button>Modyfikuj</button>
             </div>
           </td>
         </ng-container>
         <ng-container matColumnDef="rating">
-          <th *matHeaderCellDef mat-header-cell>Rating</th>
+          <th *matHeaderCellDef mat-header-cell>Ocena</th>
           <td *matCellDef="let road" mat-cell>
             <div class="rating">
               <!--<bar-rating [(rate)]="road['rating']['average']" [max]="5" [readOnly]="true"></bar-rating>-->
@@ -58,7 +56,7 @@
           <td *matCellDef="let road" mat-cell>
             <div class="is_published">
               <mat-icon *ngIf="road['published'] == true" color="primary"
-                        matTooltip="This road is available for the users. Edit the road to change it.">check
+                        matTooltip="Ta trasa jest dostępna dla użytkowników.">check
               </mat-icon>
             </div>
           </td>

@@ -55,7 +55,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle("Edit a road...");
+    this.titleService.setTitle("Modyfikuj a road...");
     this.route.params.subscribe(params => this.roadId = params.id);
 
     this.roadsForm = this._formBuilder.group({
@@ -108,7 +108,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
           this.is_published = response['published'];
 
-          this.titleService.setTitle("Edit a "+response['name']);
+          this.titleService.setTitle("Modyfikuj a "+response['name']);
           this.spinner = false;
         },
         error => {

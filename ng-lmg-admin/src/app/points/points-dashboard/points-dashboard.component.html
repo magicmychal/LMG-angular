@@ -1,15 +1,15 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-3">Attractions</h1>
+      <h1 class="display-3">Atrakcje</h1>
       <p class="lead">
-        Attractions of interest are places in your city that tourists usually visit. When adding a new point try to write an
-        interesting, but a short explanation.</p>
+        Atrakcje to pojedyńcze miejsca, które turyści zazwyczaj odwiedzają. Dodając nową atrakcję pamiętaj aby dołączyć
+      chwytliwy opis!</p>
     </div>
   </div>
   <div class="row">
     <div class="col-2">
-      <button color="accent" mat-flat-button routerLink="/attractions/add">Add new attraction</button>
+      <button color="accent" mat-flat-button routerLink="/attractions/add">Dodaj nową atrakcję</button>
     </div>
   </div>
   <hr>
@@ -27,23 +27,23 @@
         <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
         <tr *matRowDef="let dataSource; columns: columnsToDisplay" mat-row></tr>
         <ng-container matColumnDef="name">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Name</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="name">Nazwa</th>
           <td *matCellDef="let point" mat-cell> {{point.name}} </td>
         </ng-container>
         <ng-container matColumnDef="location">
-          <th *matHeaderCellDef mat-header-cell mat-sort-header="location.name">Location</th>
+          <th *matHeaderCellDef mat-header-cell mat-sort-header="location.name">Lokalizacja</th>
           <td *matCellDef="let point" mat-cell> {{point.location['name']}} </td>
         </ng-container>
         <ng-container class="description-column" matColumnDef="description" class="description-container">
-          <th *matHeaderCellDef class="description-column" mat-header-cell>Description</th>
+          <th *matHeaderCellDef class="description-column" mat-header-cell>Opis</th>
           <td *matCellDef="let point" mat-cell> {{point.description | slice:0:100}}...</td>
         </ng-container>
         <ng-container matColumnDef="action">
-          <th *matHeaderCellDef mat-header-cell>Action</th>
+          <th *matHeaderCellDef mat-header-cell>Czynność</th>
           <td *matCellDef="let point" mat-cell>
             <div class="action-buttons">
-            <button (click)="openMapDialog(point.location)" color="primary" mat-stroked-button>Show on map</button>
-            <button [routerLink]="['edit', point.id]" color="primary" mat-stroked-button>Edit</button>
+            <button (click)="openMapDialog(point.location)" color="primary" mat-stroked-button>Pokaż na mapie</button>
+            <button [routerLink]="['edit', point.id]" color="primary" mat-stroked-button>Modyfikuj</button>
             </div>
           </td>
         </ng-container>

@@ -1,9 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-3">Add a new tour</h1>
-      <p class="lead">Route is a collection of points, which are presented as a trip for the tourist.
-        Make sure that you created points beforehand.
+      <h1 class="display-3">Dodaj nową trasę</h1>
+      <p class="lead">Route is a collection of attractions, which are presented as a trip for the tourist.
+        Make sure that you created attractions beforehand.
         Please follow the three-step process of adding a new route.</p>
     </div>
   </div>
@@ -13,28 +13,28 @@
         <mat-vertical-stepper #stepper [linear]="isLinear">
           <!--        First stepper to fill the basic info-->
           <mat-step [stepControl]="dynamicForm">
-            <ng-template matStepLabel>Fill out basic details</ng-template>
+            <ng-template matStepLabel>Wypełnij podstawowe informacje</ng-template>
             <div>
               <mat-form-field appearance="outline">
-                <mat-label>Name</mat-label>
-                <input autofocus formControlName="name" matInput placeholder="Name of the route">
+                <mat-label>Nazwa</mat-label>
+                <input autofocus formControlName="name" matInput placeholder="Nazwa trasy">
                 <mat-hint>eg. 'Magical Cracow discovery'</mat-hint>
               </mat-form-field>
             </div>
             <div>
               <mat-form-field appearance="outline">
-                <mat-label>Catchphrase</mat-label>
-                <input #decoy autofocus formControlName="decoy" matInput placeholder="Catchphrase">
-                <mat-hint>Something that will attract tourist to click.</mat-hint>
+                <mat-label>Chwytliwe hasło</mat-label>
+                <input #decoy autofocus formControlName="decoy" matInput placeholder="Chwytliwe hasło">
+                <mat-hint>Wpisz tu krótkie hasło, które przyciągnie turystów do tej trasy.</mat-hint>
                 <mat-hint align="end">{{decoy.value?.length || 0}}/250</mat-hint>
               </mat-form-field>
             </div>
             <div>
               <mat-form-field appearance="outline">
-                <mat-label>Description</mat-label>
-                <textarea #description formControlName="description" matInput placeholder="Textarea"></textarea>
+                <mat-label>Opis</mat-label>
+                <textarea #description formControlName="description" matInput placeholder=""></textarea>
                 <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
-                <mat-hint>Description is what should encourage tourist to take the selected route.
+                <mat-hint>Wpisz tu dokładny opis trasy. Zawrzyj najważniejsze informacje.
                 </mat-hint>
               </mat-form-field>
             </div>
@@ -52,58 +52,54 @@
               <input formControlName="locName" type="hidden">
             </div>
             <div class="mt-2">
-              <button mat-button matStepperPrevious type="button">Back</button>
-              <button mat-button matStepperNext type="button">Next</button>
+              <button mat-button matStepperPrevious type="button">Cofnij się</button>
+              <button mat-button matStepperNext type="button">Przejdź dalej</button>
             </div>
           </mat-step>
           <!--        Choose points -->
           <mat-step [stepControl]="dynamicForm">
-            <ng-template matStepLabel>Choose points</ng-template>
+            <ng-template matStepLabel>Wybierz atrakcje</ng-template>
             <div>
-              <span>Points</span>
-              <p>Select the points you want to include in the rout. At this step, the order <b>does not matter.</b></p>
+              <span>Atrakcje</span>
+              <p>Wybierz te punkty, które chcesz dołączyć do trasy. Kolejność nie ma znaczenia.</p>
             </div>
             <!-- Table with all the points -->
             <app-points-selector #pointsSelector></app-points-selector>
             <div class="mt-2">
-              <button mat-button matStepperPrevious type="button">Back</button>
-              <button (click)="initiatePoints()" id="choosepoints" mat-button matStepperNext type="button">Next</button>
+              <button mat-button matStepperPrevious type="button">Cofnij się</button>
+              <button (click)="initiatePoints()" id="choosepoints" mat-button matStepperNext type="button">Przejdź dalej</button>
             </div>
           </mat-step>
           <!--        Stepper for each point-->
           <mat-step *ngFor="let point of pointsArray.controls; let i = index" [stepControl]="dynamicForm">
             <div [formGroup]="point" class="form-row">
-              <ng-template matStepLabel>Details for {{this.selectedArray[i].name}}</ng-template>
+              <ng-template matStepLabel>Szczegóły dla {{this.selectedArray[i].name}}</ng-template>
               <input formControlName="pointId" type="hidden" value="{{this.selectedArray[i].id}}">
               <mat-form-field appearance="outline" class="width-max">
-                <mat-label>Description for sightseeing</mat-label>
+                <mat-label>Podpowiedź dla trybu zwiedzania</mat-label>
                 <textarea #sightseeing autofocus formControlName="sightseeing" matInput
                           placeholder="Textarea"></textarea>
                 <mat-hint align="end">{{sightseeing.value?.length || 0}}/250</mat-hint>
-                <mat-hint>Description is what should encourage tourist to take the selected route.
-                </mat-hint>
               </mat-form-field>
               <mat-form-field appearance="outline" class="width-max">
-                <mat-label>Description for challenge</mat-label>
+                <mat-label>Podpowiedź dla trybu wyzwania</mat-label>
                 <textarea #challenge formControlName="challenge" matInput placeholder="Textarea"></textarea>
                 <mat-hint align="end">{{challenge.value?.length || 0}}/250</mat-hint>
-                <mat-hint>Description is what should encourage tourist to take the selected route.
-                </mat-hint>
               </mat-form-field>
               <div class="mt-2">
-                <button mat-button matStepperPrevious type="button">Back</button>
-                <button id="button{{this.selectedArray[i].id}}" mat-button matStepperNext type="button">Next</button>
+                <button mat-button matStepperPrevious type="button">Cofnij się</button>
+                <button id="button{{this.selectedArray[i].id}}" mat-button matStepperNext type="button">Przejdź dalej</button>
               </div>
             </div>
           </mat-step>
           <!--        Summary stepper-->
           <mat-step [stepControl]="dynamicForm">
-            <ng-template matStepLabel>Summary</ng-template>
+            <ng-template matStepLabel>Podsumowanie</ng-template>
             <mat-card>
-              <mat-card-title>Route: <b>{{this.f.name.value}}</b></mat-card-title>
-              <mat-card-content>Description <b>{{this.f.description.value}}</b></mat-card-content>
+              <mat-card-title>Nazwa trasy: <b>{{this.f.name.value}}</b></mat-card-title>
+              <mat-card-content>Opis: <b>{{this.f.description.value}}</b></mat-card-content>
               <mat-card-content>
-                Points:
+                Atrakcje:
                 <mat-list>
                   <mat-list-item
                     *ngFor="let selectedPoint of this.selectedArray"> {{selectedPoint.name}}
@@ -114,7 +110,7 @@
             </mat-card>
 
             <div class="mt-2">
-              <button mat-button matStepperPrevious type="button">Back</button>
+              <button mat-button matStepperPrevious type="button">Cofnij się</button>
               <button mat-raised-button matStepperNext color="primary" type="submit">Submit</button>
             </div>
           </mat-step>

@@ -55,25 +55,25 @@
     <mat-list-item [routerLinkActive]="['active']">
     <a [routerLink]="'/home'" class="nav-item nav-link" mat-list-item>
       <mat-icon>dashboard</mat-icon>
-      Dashboard
+      Kokpit
     </a>
     </mat-list-item>
     <mat-list-item [routerLinkActive]="['active']">
     <a [routerLink]="'/attractions'" class="nav-item nav-link" mat-list-item>
       <mat-icon>outlined_flag</mat-icon>
-      Attractions
+      Atrakcje
     </a>
     </mat-list-item>
     <mat-list-item [routerLinkActive]="['active']">
     <a [routerLink]="'/tours'" class="nav-item nav-link" mat-list-item>
       <mat-icon>near_me</mat-icon>
-      Tours
+      Trasy
     </a>
     </mat-list-item>
     <mat-list-item [routerLinkActive]="['active']">
     <a (click)="logout()" *ngIf="currentUser" class="nav-item nav-link" mat-list-item>
       <mat-icon>exit_to_app</mat-icon>
-      Logout
+      Wyloguj się
     </a>
     </mat-list-item>
   </mat-nav-list>

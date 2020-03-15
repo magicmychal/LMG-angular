@@ -23,15 +23,15 @@
       </td>
     </ng-container>
     <ng-container matColumnDef="name" class="name-column">
-      <th *matHeaderCellDef mat-header-cell><b>Name</b></th>
+      <th *matHeaderCellDef mat-header-cell><b>Nazwa</b></th>
       <td *matCellDef="let point" mat-cell> {{point.name}} </td>
     </ng-container>
     <ng-container matColumnDef="description">
-      <th *matHeaderCellDef class="description-column" mat-header-cell><b>Description</b></th>
+      <th *matHeaderCellDef class="description-column" mat-header-cell><b>Opis</b></th>
       <td *matCellDef="let point" mat-cell> {{point.description | slice:0:100}}... </td>
     </ng-container>
     <ng-container matColumnDef="code">
-      <th *matHeaderCellDef mat-header-cell><b>Code</b></th>
+      <th *matHeaderCellDef mat-header-cell><b>Kod</b></th>
       <td *matCellDef="let point" mat-cell> {{point.code}} </td>
     </ng-container>
   </table>

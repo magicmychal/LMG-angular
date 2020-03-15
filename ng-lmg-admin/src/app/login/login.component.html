@@ -52,7 +52,7 @@
           </g>
         </svg>
         <br>
-        Login to Let Me Guide
+        Logowanie do Let Me Guide
       </mat-card-title>
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
@@ -61,20 +61,14 @@
           <input formControlName="email" matInput type="email" placeholder="Email"  required>
         </mat-form-field>
         <mat-form-field appearance="outline">
-          <input formControlName="password" matInput type="password" placeholder="Password" required>
+          <input formControlName="password" matInput type="password" placeholder="Hasło" required>
         </mat-form-field>
         <div>
-          <span class="mat-error" *ngIf="this.invalid" >Oh no, something went wrong. Please check credentials and try again.</span>
+          <span class="mat-error" *ngIf="this.invalid" >Ups. Coś poszło nie tak. Sprawdź email i hasło.</span>
         </div>
         <mat-card-actions>
           <button type="submit" mat-raised-button color="accent">Login</button>
         </mat-card-actions>
-        <mat-card-footer>
-          <p>
-            This area is restricted only for the administrators.
-            Download the app if you want to use Let Me Guide.
-          </p>
-        </mat-card-footer>
         </div>
       </form>
 
