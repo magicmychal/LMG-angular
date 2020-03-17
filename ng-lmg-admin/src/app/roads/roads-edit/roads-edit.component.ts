@@ -9,8 +9,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {ActionConfirmModalComponent} from "../../addons/action-confirm-modal/action-confirm-modal.component";
 import {TargetsService} from "../../_services/targets/targets.service";
 import {PointsSelectorModalComponent} from "../../addons/points-selector-modal/points-selector-modal.component";
-import {log} from "util";
 import {Title} from "@angular/platform-browser";
+import {TargetModifyModalComponent} from "../../addons/target-modify-modal/target-modify-modal.component";
 
 @Component({
   selector: 'app-roads-edit',
@@ -55,7 +55,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle("Edit a road...");
+    this.titleService.setTitle("Modyfikuj a road...");
     this.route.params.subscribe(params => this.roadId = params.id);
 
     this.roadsForm = this._formBuilder.group({
@@ -97,13 +97,18 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
           this.onResultClick(position);
           //this.targetsArray = response['targets'];
-          this.targetsArray = this.targetsService.sortHierarchy(response['targets']);
-          this.checkLoop();
-
+          if (response['targets'].length == 0 ){
+            this._snackbar.open('Please remember to add targets', 'Dismiss', {
+              duration: 3500
+            });
+          } else {
+            this.targetsArray = this.targetsService.sortHierarchy(response['targets']);
+            this.checkLoop();
+          }
 
           this.is_published = response['published'];
 
-          this.titleService.setTitle("Edit a "+response['name']);
+          this.titleService.setTitle("Modyfikuj a "+response['name']);
           this.spinner = false;
         },
         error => {
@@ -172,6 +177,7 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
 
   onSubmit() {
 
+    console.log('sending', )
     if (this.roadsForm.invalid) {
       this._snackbar.open('Form invalid. Check the form for any mistakes', 'Dismiss', {
         duration: 3500
@@ -191,8 +197,6 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
       }
     }
 
-    // sort targets and add them to the form
-    console.log(this.targetsArray);
     for (let index in this.targetsArray) {
       if (this.targetsArray[Number(index) + 1] !== undefined) {
         this.targetsArray[index]['next_target_id'] = this.targetsArray[Number(index) + 1]['id']
@@ -231,13 +235,18 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     let removeSnackBar = this._snackbar.open('Point removed from the road', 'Undo', {
       duration: 3500
     });
-    removeSnackBar.onAction().subscribe(null, null, () => {
+    removeSnackBar.onAction().subscribe(() => {
       this.targetsArray.splice(targetIndex, 0, removedTarget)
-    })
-
+    });
   }
 
   publishRoad(withhold?) {
+    if ( this.targetsArray == undefined){
+      this._snackbar.open('Please add targets before publishing the road', 'Dismiss', {
+        duration: 3500
+      });
+      return;
+    }
     if (withhold == true) {
       this.f.is_published.setValue(false);
     } else {
@@ -306,13 +315,62 @@ export class RoadsEditComponent implements OnInit, AfterViewInit {
     pointsSelectionDialog.afterClosed().subscribe(
       result => {
         // trigger a new stepper in a dialog
-        console.log(this.targetsArray)
-        for (let newTarget of result.data.values()){
-
-        }
-
+        let newTargetsArray = Array.from(result.data.values())
+        this.triggerTargetAddModal(newTargetsArray)
       }
     )
   }
 
+  triggerTargetEditModal(target, index){
+    console.log(target)
+    let targetEditDialog = this.dialog.open(TargetModifyModalComponent, {
+      data: {
+        "type": "edit",
+        "target": target
+      }
+    })
+    targetEditDialog.afterClosed().subscribe(
+      result => {
+        if (result.confirm == false) {
+          return
+        }
+        this.updateTargetInArray(result, index)
+      }
+    )
+  }
+
+  triggerTargetAddModal(targets: any[]){
+    let targetsAddModal = this.dialog.open(TargetModifyModalComponent, {
+      data: {
+        "type": "new",
+        "targets": targets
+      }
+    });
+    targetsAddModal.afterClosed().subscribe(
+      results => {
+        this.addNewTargets(results.modifiedTarget.targets.value)
+        // add results to the array
+      }
+    )
+  }
+
+  addNewTargets(targets){
+    console.log('new targets', targets)
+    for (let target of targets){
+      this.targetsArray.push({
+        "point": target['point'],
+        "road_id": this.roadId,
+        "explore_tip": target['sightseeing'],
+        "challenge_tip": target['challenge'],
+        "nextTargetId": null,
+        "hierarchy": null
+      })
+    }
+    console.log('new array', this.targetsArray)
+  }
+
+  updateTargetInArray(target, index){
+    this.targetsArray[index]['challenge_tip'] = target['modifiedTarget']['challenge'];
+    this.targetsArray[index]['explore_tip'] = target['modifiedTarget']['sightseeing']
+  }
 }

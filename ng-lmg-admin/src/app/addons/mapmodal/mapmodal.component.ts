@@ -24,7 +24,7 @@ export class MapmodalComponent implements OnInit {
     this.leafMap = this.mapViewService.setLeafMap();
 
     // @ts-ignore
-    this.leafMap.setView(L.latLng(this.data.lat, this.data.lng), 10)
+    this.leafMap.setView(L.latLng(this.data.lat, this.data.lng), 16)
     // @ts-ignore
     this.leafMarker= L.marker([this.data.lat, this.data.lng]).addTo(this.leafMap);
   }

@@ -1,8 +1,8 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-4" *ngIf="!pointId">Add new point</h1>
-      <h1 class="display-4" *ngIf="pointId">Edit point</h1>
+      <h1 class="display-4" *ngIf="!pointId">Add new attractions</h1>
+      <h1 class="display-4" *ngIf="pointId">Modyfikuj attraction</h1>
       <p class="lead">Please fill all required forms (marked with a
         red star) for the best results</p>
     </div>
@@ -12,17 +12,17 @@
       <div class="col-8">
         <div>
           <mat-form-field appearance="outline" class="width-max">
-            <mat-label>Name</mat-label>
-            <input autofocus formControlName="name" matInput placeholder="Name of the route">
+            <mat-label>Nazwa</mat-label>
+            <input autofocus formControlName="name" matInput placeholder="Nazwa of the route">
             <mat-hint>eg. 'Magical Cracow discovery'</mat-hint>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="outline" class="width-max">
-            <mat-label>Description</mat-label>
+            <mat-label>Opis</mat-label>
             <textarea #description formControlName="description" matInput placeholder="Textarea"></textarea>
             <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
-            <mat-hint>Description is what should encourage tourist to take the selected route.
+            <mat-hint>Opis is what should encourage tourist to take the selected route.
             </mat-hint>
           </mat-form-field>
         </div>
@@ -43,7 +43,8 @@
       </div>
     </div>
     <hr>
-    <button mat-raised-button color="primary">Save</button>
+    <button mat-flat-button color="accent">Zapisz</button>
+    <button [routerLink]="['/attractions']" mat-stroked-button type="button">Anuluj</button>
   </form>
   <app-mat-spinner-overlay *ngIf="materialSpinner" diameter="30" overlay="true"
                            strokeWidth="5"></app-mat-spinner-overlay>

@@ -8,9 +8,14 @@ table {
   width: 30%;
 }
 .action-buttons{
+  text-align: center;
   button{
     margin: 5px;
   }
+}
+
+.search-table{
+//display: inline-block;
 }
 
 @media screen and (max-width: 960px) {

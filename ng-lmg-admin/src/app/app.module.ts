@@ -54,9 +54,12 @@ import { ActionConfirmModalComponent } from './addons/action-confirm-modal/actio
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { PointsSelectorComponent } from './addons/points-selector/points-selector.component';
 import { PointsSelectorModalComponent } from './addons/points-selector-modal/points-selector-modal.component';
+import { TargetModifyModalComponent } from './addons/target-modify-modal/target-modify-modal.component';
+import { TargetModifyComponent } from './addons/target-modify/target-modify.component';
 import {BarRatingModule} from "ngx-bar-rating";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {MatToolbarModule} from "@angular/material/toolbar";
+import { TargetStepperComponent } from './addons/target-stepper/target-stepper.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +82,9 @@ import {MatToolbarModule} from "@angular/material/toolbar";
     ActionConfirmModalComponent,
     PointsSelectorComponent,
     PointsSelectorModalComponent,
+    TargetModifyModalComponent,
+    TargetModifyComponent,
+    TargetStepperComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,7 +130,8 @@ import {MatToolbarModule} from "@angular/material/toolbar";
   entryComponents: [
     MapmodalComponent,
     ActionConfirmModalComponent,
-    PointsSelectorModalComponent
+    PointsSelectorModalComponent,
+    TargetModifyModalComponent
   ],
   providers: [
 

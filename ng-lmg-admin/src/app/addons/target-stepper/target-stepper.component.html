@@ -1,0 +1,24 @@
+<!--        Stepper for each point-->
+<form action=""></form>
+<mat-vertical-stepper #stepper>
+<mat-step *ngFor="let target of targetsArray.controls; let i = index">
+  <div [formGroup]="target" class="form-row">
+    <ng-template matStepLabel>Details for {{this.targets[i]['name']}}</ng-template>
+    <mat-form-field appearance="outline" class="width-max">
+      <mat-label>Opis for sightseeing</mat-label>
+      <textarea #sightseeing autofocus formControlName="sightseeing" matInput
+                placeholder="Textarea"></textarea>
+      <mat-hint align="end">{{sightseeing.value?.length || 0}}/250</mat-hint>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="width-max">
+      <mat-label>Opis for challenge</mat-label>
+      <textarea #challenge formControlName="challenge" matInput placeholder="Textarea"></textarea>
+      <mat-hint align="end">{{challenge.value?.length || 0}}/250</mat-hint>
+    </mat-form-field>
+    <div class="mt-2">
+      <button mat-button matStepperPrevious type="button">Poprzendi target</button>
+      <button id="button{{this.targets[i]['id']}}" mat-button matStepperNext type="button">Następny target</button>
+    </div>
+  </div>
+</mat-step>
+</mat-vertical-stepper>

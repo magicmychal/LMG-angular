@@ -202,7 +202,7 @@
         ["xpath=//div[@id='cdk-step-content-0-0']/div/div[2]/mat-form-field/div/div/div[3]/input", "xpath:idRelative"],
         ["xpath=//div[2]/mat-form-field/div/div/div[3]/input", "xpath:position"]
       ],
-      "value": "Decoy"
+      "value": "Catchphrase"
     }, {
       "id": "c498abfd-23e4-4671-afb8-8bc4f19a4459",
       "comment": "",
@@ -818,7 +818,7 @@
         ["xpath=//div[@id='cdk-step-content-0-0']/div/div[2]/mat-form-field/div/div/div[3]/input", "xpath:idRelative"],
         ["xpath=//div[2]/mat-form-field/div/div/div[3]/input", "xpath:position"]
       ],
-      "value": "Decoy of the route"
+      "value": "Catchphrase of the route"
     }, {
       "id": "203c7a40-add9-41b4-a0d0-ed947cf5da26",
       "comment": "",
@@ -1456,7 +1456,7 @@
         ["xpath=//input[@id='mat-input-1']", "xpath:attributes"],
         ["xpath=//div[2]/mat-form-field/div/div/div[3]/input", "xpath:position"]
       ],
-      "value": "5235 - Decoy changed"
+      "value": "5235 - Catchphrase changed"
     }, {
       "id": "dc1b7d26-51b2-4bd5-aa90-6407a570e369",
       "comment": "",

@@ -22,16 +22,16 @@
         </mat-checkbox>
       </td>
     </ng-container>
-    <ng-container matColumnDef="name">
-      <th *matHeaderCellDef mat-header-cell>Name</th>
+    <ng-container matColumnDef="name" class="name-column">
+      <th *matHeaderCellDef mat-header-cell><b>Nazwa</b></th>
       <td *matCellDef="let point" mat-cell> {{point.name}} </td>
     </ng-container>
     <ng-container matColumnDef="description">
-      <th *matHeaderCellDef class="description-column" mat-header-cell> Description</th>
-      <td *matCellDef="let point" mat-cell> {{point.description | slice:0:140}} </td>
+      <th *matHeaderCellDef class="description-column" mat-header-cell><b>Opis</b></th>
+      <td *matCellDef="let point" mat-cell> {{point.description | slice:0:100}}... </td>
     </ng-container>
     <ng-container matColumnDef="code">
-      <th *matHeaderCellDef mat-header-cell> Code</th>
+      <th *matHeaderCellDef mat-header-cell><b>Kod</b></th>
       <td *matCellDef="let point" mat-cell> {{point.code}} </td>
     </ng-container>
   </table>

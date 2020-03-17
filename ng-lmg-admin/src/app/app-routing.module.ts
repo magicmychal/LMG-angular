@@ -10,7 +10,7 @@ import {RoutesDashboardComponent} from "./roads/roads-dashboard/routes-dashboard
 import {RoutesAddComponent} from "./roads/roads-add/routes-add.component";
 import {MapSearchComponent} from "./maps/map-search/map-search.component";
 import {RoadsEditComponent} from "./roads/roads-edit/roads-edit.component";
-import {PointsSelectorComponent} from "./addons/points-selector/points-selector.component";
+import {TargetModifyComponent} from "./addons/target-modify/target-modify.component";
 
 
 const routes: Routes = [
@@ -32,7 +32,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'points',
+    path: 'attractions',
     canActivate: [AuthGuard],
     children: [
       {path: '', component: PointsDashboardComponent},
@@ -41,7 +41,7 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'roads',
+    path: 'tours',
     canActivate: [AuthGuard],
     children: [
       {path: '', component: RoutesDashboardComponent},
@@ -59,8 +59,8 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'select',
-    component: PointsSelectorComponent
+    path: 'target',
+    component: TargetModifyComponent
   }
 ];
 

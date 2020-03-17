@@ -1,34 +1,34 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <h1 class="display-3">Edit a road</h1>
+      <h1 class="display-3">Modyfikuj trasę</h1>
     </div>
   </div>
   <div class="row">
     <div class="col-12">
-      <h2>Basic information</h2>
+      <h2>Podstawowe informacje</h2>
       <form (ngSubmit)="onSubmit()" [formGroup]="roadsForm">
         <div>
           <mat-form-field appearance="outline">
-            <mat-label>Name</mat-label>
-            <input autofocus formControlName="name" matInput placeholder="Name of the route">
-            <mat-hint>eg. 'Magical Cracow discovery'</mat-hint>
+            <mat-label>Nazwa</mat-label>
+            <input autofocus formControlName="name" matInput placeholder="Nazwa trasy">
+            <mat-hint>np. "Podziemne miasto"</mat-hint>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="outline">
-            <mat-label>Decoy</mat-label>
-            <input #decoy autofocus formControlName="decoy" matInput placeholder="Decoy">
-            <mat-hint>Something that will attract tourist to click.</mat-hint>
+            <mat-label>Chwytliwe hasło</mat-label>
+            <input #decoy autofocus formControlName="decoy" matInput placeholder="Chwytliwe hasło">
+            <mat-hint>Wpisz tu krótkie hasło, które przyciągnie turystów do tej trasy.</mat-hint>
             <mat-hint align="end">{{decoy.value?.length || 0}}/250</mat-hint>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="outline">
-            <mat-label>Description</mat-label>
+            <mat-label>Opis</mat-label>
             <textarea #description formControlName="description" matInput placeholder="Textarea"></textarea>
             <mat-hint align="end">{{description.value?.length || 0}}/250</mat-hint>
-            <mat-hint>Description is what should encourage tourist to take the selected route.
+            <mat-hint>Wpisz tu krótkie hasło, które przyciągnie turystów do tej trasy.
             </mat-hint>
           </mat-form-field>
         </div>
@@ -40,9 +40,10 @@
         </div>
         <div class="w-90 targets">
           <hr>
-          <h2 #targets id="targets">Targets</h2>
-          <p>Please move the targets in order the user will go.</p>
-          <button type="button" (click)="this.triggerPointsSelectorModal()"  mat-button color="primary">Add new targets</button>
+          <h2 #targets id="targets">Atracje w tej trasie</h2>
+          <p>Najedź myszką na punkt, kliknij i przytrzymaj aby przesunąć do góry lub na dół.</p>
+          <button (click)="this.triggerPointsSelectorModal()" color="primary" mat-stroked-button type="button">Dodaj nowe atrakcje do trasy
+          </button>
           <mat-accordion (cdkDropListDropped)="moveTarget($event)" cdkDropList class="example-headers-align">
             <mat-expansion-panel *ngFor="let target of targetsArray; let i = index " cdkDrag>
               <mat-expansion-panel-header>
@@ -55,39 +56,50 @@
               </mat-expansion-panel-header>
               <mat-divider></mat-divider>
 
-              Location:
+              Lokalizacja:
               <div class="target-description">{{target['point']['location']['name']}}</div>
-              Code:
+              Kod:
               <div class="target-description">{{target['point']['code']}}</div>
-              Sightseeing description:
+              Podpowiedź dla trybu zwiedzania:
               <div class="target-description">{{target['explore_tip']}}</div>
-              Challenge description:
+              Podpowiedź dla trybu wyzwania:
               <div class="target-description">{{target['challenge_tip']}}</div>
 
 
               <mat-action-row>
-                <button color="warn" disabled mat-button
-                        tooltip="You can't edit points yet. This feature will appear shortly">Edit
+                <button (click)="this.triggerTargetEditModal(target, i)" color="warn" mat-button type="button">
+                  Modyfikuj
                 </button>
-                <button (click)="removeTargetFromRoad(i)" color="warn" mat-button type="button">Remove from the road
+                <button (click)="removeTargetFromRoad(i)" color="warn" mat-button type="button">
+                  Usuń z trasy (ta opcja nie usuwa wpisu)
                 </button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
           <div id="loop-checkbox">
-            <mat-checkbox formControlName="loop" matTooltip="Looping gives a user option to start a road
-          from the middle without going back to the first point">Loop the targets
+            <mat-checkbox formControlName="loop" matTooltip="
+            Zapętlenie trasy pozwala użytkownikowi na rozpoczęcie trasy
+            od miejsca w którym użytkownik fizycznie się znajduje">Zapętlij trasę
             </mat-checkbox>
           </div>
         </div>
         <hr>
-        <button (click)="publishRoad(this.is_published)" color="primary" mat-stroked-button
-                type="button">{{this.is_published === true ? "Withhold" : "Publish"}}</button>
-        <button color="primary" mat-stroked-button type="submit">Save changes</button>
-        <button (click)="removeRoad()" color="warn" mat-stroked-button type="button">Delete</button>
-        <button [routerLink]="['/roads']" mat-stroked-button type="button">Cancel</button>
+        <button (click)="removeRoad()" color="warn" mat-stroked-button type="button">Usuń trasę</button>
       </form>
     </div>
   </div>
   <app-mat-spinner-overlay *ngIf="spinner" overlay="true"></app-mat-spinner-overlay>
+</div>
+<div id="buttons-array">
+
+  <div class="container">
+    <div class="align-left">
+      <button (click)="onSubmit()" color="accent" color="accent" mat-flat-button type="submit">Zapisz zmiany</button>
+      <button [routerLink]="['/tours']" mat-stroked-button type="button">Anuluj</button>
+    </div>
+    <div class="align-right">
+      <button (click)="publishRoad(this.is_published)" color="primary" color="primary" mat-flat-button
+              type="button">{{this.is_published === true ? "Withhold" : "Publish"}}</button>
+    </div>
+  </div>
 </div>

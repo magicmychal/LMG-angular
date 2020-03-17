@@ -1,0 +1,17 @@
+<form [formGroup]="targetForm">
+<mat-form-field appearance="outline" class="width-max" class="more-space">
+  <mat-label>Opis for sightseeing</mat-label>
+  <textarea #sightseeing autofocus formControlName="sightseeing" matInput
+            placeholder="Textarea"></textarea>
+  <mat-hint align="end">{{sightseeing.value?.length || 0}}/250</mat-hint>
+  <mat-hint>Opis powinien przyciągnąć użytkownika do wybrania trasy.
+  </mat-hint>
+</mat-form-field>
+<mat-form-field appearance="outline" class="width-max" class="more-space">
+  <mat-label>Opis for challenge</mat-label>
+  <textarea #challenge formControlName="challenge" matInput placeholder="Textarea"></textarea>
+  <mat-hint align="end">{{challenge.value?.length || 0}}/250</mat-hint>
+  <mat-hint>Opis powinien przyciągnąć użytkownika do wybrania trasy.
+  </mat-hint>
+</mat-form-field>
+</form>

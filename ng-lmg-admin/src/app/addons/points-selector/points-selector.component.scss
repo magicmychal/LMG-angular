@@ -1,3 +1,15 @@
 table{
   width: 100%;
 }
+
+th.mat-header-cell.cdk-column-select.mat-column-select.ng-star-inserted {
+  width: 8%;
+}
+
+th.mat-header-cell.cdk-column-name.mat-column-name.ng-star-inserted {
+  width: 25%;
+}
+
+th.description-column.mat-header-cell.cdk-column-description.mat-column-description.ng-star-inserted {
+  width: unset;
+}
